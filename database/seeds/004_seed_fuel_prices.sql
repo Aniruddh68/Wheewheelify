@@ -1,0 +1,2 @@
+-- Seed: 004_seed_fuel_prices.sql
+-- TODO: Add INSERT statements here

@@ -1,0 +1,2 @@
+-- Seed: 002_seed_brands.sql
+-- TODO: Add INSERT statements here

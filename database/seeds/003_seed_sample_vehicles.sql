@@ -1,0 +1,2 @@
+-- Seed: 003_seed_sample_vehicles.sql
+-- TODO: Add INSERT statements here

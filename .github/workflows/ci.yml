@@ -1,0 +1,18 @@
+name: Wheelify CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # TODO: Add frontend build check
+  # TODO: Add backend test run
+  # TODO: Add analytics test run
+  placeholder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Placeholder CI
+        run: echo "CI pipeline - to be configured"

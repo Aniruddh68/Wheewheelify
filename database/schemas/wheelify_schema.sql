@@ -1,0 +1,2 @@
+-- Full schema definition
+-- Reference: See Wheelify Synopsis & UI_prompts for complete schema

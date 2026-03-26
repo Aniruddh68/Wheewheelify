@@ -1,0 +1,29 @@
+{
+  "name": "wheelify-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Wheelify - Vehicle Comparison Platform Backend API",
+  "main": "src/server.js",
+  "dependencies": {
+    "express": "^4.x",
+    "pg": "^8.x",
+    "cors": "^2.x",
+    "dotenv": "^16.x",
+    "express-validator": "^7.x",
+    "morgan": "^1.x",
+    "helmet": "^7.x",
+    "axios": "^1.x"
+  },
+  "devDependencies": {
+    "nodemon": "^3.x",
+    "jest": "^29.x",
+    "supertest": "^6.x"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "jest"
+  },
+  "author": "Aniruddh Gupta & Khushbu Jain",
+  "license": "MIT"
+}

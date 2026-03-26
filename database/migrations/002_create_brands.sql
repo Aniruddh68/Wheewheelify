@@ -1,0 +1,2 @@
+-- Migration: 002_create_brands.sql
+-- TODO: Add SQL here

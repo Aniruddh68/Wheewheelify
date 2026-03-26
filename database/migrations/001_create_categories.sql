@@ -1,0 +1,2 @@
+-- Migration: 001_create_categories.sql
+-- TODO: Add SQL here

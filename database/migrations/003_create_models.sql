@@ -1,0 +1,2 @@
+-- Migration: 003_create_models.sql
+-- TODO: Add SQL here

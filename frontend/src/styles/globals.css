@@ -1,0 +1,12 @@
+/* Wheelify Global Styles */
+/* Design system tokens and base styles */
+/* TODO: Add tailwind directives and custom CSS variables */
+
+:root {
+  --color-bg: #0A0A0A;
+  --color-bg-footer: #050505;
+  --color-red: #FF1A1A;
+  --color-white: #FFFFFF;
+  --color-grey: #888888;
+  --color-grey-dark: #555555;
+}

@@ -1,0 +1,2 @@
+-- Seed: 001_seed_categories.sql
+-- TODO: Add INSERT statements here

@@ -1,0 +1,22 @@
+{
+  "name": "wheelify-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Wheelify - Vehicle Comparison Platform Frontend",
+  "dependencies": {
+    "react": "^18.x",
+    "react-dom": "^18.x",
+    "react-router-dom": "^6.x",
+    "chart.js": "^4.x",
+    "react-chartjs-2": "^5.x",
+    "axios": "^1.x",
+    "tailwindcss": "^3.x"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test"
+  },
+  "author": "Aniruddh Gupta & Khushbu Jain",
+  "license": "MIT"
+}

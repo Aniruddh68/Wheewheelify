@@ -1,0 +1,2 @@
+-- Migration: 004_create_variants.sql
+-- TODO: Add SQL here
