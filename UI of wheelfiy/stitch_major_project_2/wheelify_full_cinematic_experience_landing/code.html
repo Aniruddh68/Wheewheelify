@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+          tailwind.config = {
+            darkMode: "class",
+            theme: {
+              extend: {
+                colors: {
+                  "primary": "#FF1A1A",
+                  "background": "#0A0A0A",
+                  "surface": "#0a0a0a",
+                  "surface-container-lowest": "#0e0e0e",
+                  "surface-container-low": "#1c1b1b",
+                  "surface-container": "#201f1f",
+                  "surface-container-high": "#2a2a2a",
+                  "surface-container-highest": "#353534",
+                  "on-background": "#e5e2e1",
+                  "secondary": "#888888",
+                },
+                fontFamily: {
+                  "headline": ["Space Grotesk", "sans-serif"],
+                  "body": ["Inter", "sans-serif"],
+                  "label": ["Inter", "sans-serif"]
+                },
+                borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+              },
+            },
+          }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #E5E2E1;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .grain-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        .text-gradient-fade {
+            background: linear-gradient(to bottom, #ffffff 30%, transparent 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 26, 26, 0.15);
+        }
+        .red-rim-glow {
+            filter: drop-shadow(0 20px 40px rgba(255, 26, 26, 0.25));
+        }
+        .ghost-number {
+            font-family: 'Space Grotesk';
+            font-weight: 900;
+            line-height: 1;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
+            color: transparent;
+            font-size: 20rem;
+        }
+        .drawing-arrow {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: draw 2s ease-out forwards;
+        }
+        @keyframes draw {
+            to { stroke-dashoffset: 0; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary selection:text-white">
+<div class="grain-overlay"></div>
+<!-- 1. TOP NAV BAR -->
+<nav class="fixed top-0 w-full z-50 bg-black/70 backdrop-blur-xl border-b border-white/5 flex justify-between items-center px-8 h-20 shadow-2xl">
+<div class="text-2xl font-black text-white after:content-['.'] after:text-red-600 font-['Space_Grotesk'] uppercase tracking-tighter">Wheelify</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="font-['Space_Grotesk'] font-bold uppercase tracking-tighter text-white border-b-2 border-red-600 pb-1" href="#">Models</a>
+<a class="font-['Space_Grotesk'] font-bold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors" href="#">How it works</a>
+<a class="font-['Space_Grotesk'] font-bold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors" href="#">Why Wheelify</a>
+<a class="font-['Space_Grotesk'] font-bold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors" href="#">About</a>
+</div>
+<button class="bg-primary text-white px-6 py-2 font-['Space_Grotesk'] font-bold uppercase tracking-tighter rounded-sm active:scale-95 transition-transform hover:bg-red-700">
+            Configure
+        </button>
+</nav>
+<main>
+<!-- 2. CINEMATIC HERO SECTION (FROM SCREEN_33) -->
+<section class="relative min-h-screen w-full flex flex-col md:flex-row pt-20 overflow-hidden">
+<div class="w-full md:w-[42%] flex flex-col justify-center px-8 md:pl-16 z-10 py-20">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-highest border border-white/5 rounded-sm mb-6 w-fit">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] font-label font-bold tracking-[0.2em] text-secondary uppercase">INDIA'S #1 VEHICLE INTELLIGENCE PLATFORM</span>
+</div>
+<h1 class="text-6xl md:text-[5.5rem] leading-[0.9] font-headline font-black tracking-tighter uppercase mb-8">
+                    MAKE <br/>
+<span class="text-primary text-[112px] block">SMARTER</span>
+                    DECISIONS.
+                </h1>
+<p class="text-secondary font-body text-lg max-w-md mb-12 leading-relaxed">
+                    The only automotive intelligence platform designed for the Indian road. Compare total cost of ownership, real-world mileage, and performance benchmarks in seconds.
+                </p>
+<div class="flex flex-wrap gap-4">
+<button class="px-8 py-4 bg-primary text-white font-headline font-bold uppercase tracking-tighter rounded-sm hover:shadow-[0_0_20px_rgba(255,26,26,0.4)] transition-all">
+                        Compare Vehicles
+                    </button>
+<button class="px-8 py-4 bg-transparent border-[0.5px] border-secondary/30 text-white font-headline font-bold uppercase tracking-tighter rounded-sm hover:border-primary transition-all flex items-center gap-2 group">
+<span class="material-symbols-outlined text-sm">play_arrow</span>
+                        Watch Demo
+                    </button>
+</div>
+</div>
+<div class="w-full md:w-[58%] relative flex items-center justify-center min-h-[500px]">
+<div class="relative w-full h-full flex items-center justify-center p-12">
+<img alt="Wheelify Flagship" class="w-full h-auto object-contain red-rim-glow z-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2ZbJmzaAujG8uUUeJ8j785dgOJOhrcnS7UeJenlPwHkzoBE-bfEdNmW61ngrYez4HQ0-cZTgssqYFxogWTJNrKOQlbb9V5IsusRrRI4Qi7X0g35eGB8WgB8BIcDCm08EUIkLXWDi37qOpjnyGXWODzFaLaU9ncq2QHuJUcDnAMUNo1kG7OZN5pUVjf6jdxlUHYEBLdvAIMZz1nCID9BOHK53Rjc8sHF3-Rb-0s9FeDDmREIBWiZRa_GtWzKL7OQgt51Sbu_EKUVxm"/>
+<!-- Orbiting Chips -->
+<div class="absolute top-[15%] left-[10%] glass-card p-4 rounded-xl flex flex-col gap-1 w-40 z-20">
+<span class="text-[10px] font-label text-secondary tracking-widest uppercase">Petrol Price</span>
+<div class="flex items-end gap-1">
+<span class="text-xl font-headline font-bold text-white">₹104.2</span>
+<span class="text-xs text-primary pb-1 font-bold">AVG/L</span>
+</div>
+</div>
+<div class="absolute top-[25%] right-[15%] glass-card p-4 rounded-xl flex flex-col gap-1 w-44 z-20">
+<span class="text-[10px] font-label text-secondary tracking-widest uppercase">5-Year TCO</span>
+<div class="flex items-end gap-1">
+<span class="text-xl font-headline font-bold text-white">₹12.4L</span>
+<span class="text-xs text-green-500 pb-1 font-bold">(-12%)</span>
+</div>
+</div>
+<div class="absolute bottom-[20%] left-[20%] glass-card p-4 rounded-xl flex flex-col gap-1 w-36 z-20">
+<span class="text-[10px] font-label text-secondary tracking-widest uppercase">Break-Even</span>
+<div class="flex items-end gap-1">
+<span class="text-xl font-headline font-bold text-white">28 MO.</span>
+</div>
+</div>
+<div class="absolute bottom-[25%] right-[10%] glass-card p-4 rounded-xl flex flex-col gap-1 w-40 z-20">
+<span class="text-[10px] font-label text-secondary tracking-widest uppercase">Real Mileage</span>
+<div class="flex items-end gap-1">
+<span class="text-xl font-headline font-bold text-white">18.4</span>
+<span class="text-xs text-secondary pb-1 font-bold">KM/L</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Stats Banner -->
+<div class="absolute bottom-0 w-full h-[90px] bg-black/40 backdrop-blur-md border-t border-white/10 flex items-center px-16 z-30">
+<div class="grid grid-cols-2 md:grid-cols-4 w-full divide-x divide-white/10">
+<div class="flex flex-col px-8">
+<span class="text-[10px] font-label text-secondary tracking-[0.2em] uppercase">Vehicles Listed</span>
+<span class="text-2xl font-headline font-black text-white">4,280+</span>
+</div>
+<div class="flex flex-col px-8">
+<span class="text-[10px] font-label text-secondary tracking-[0.2em] uppercase">Fuel Types</span>
+<span class="text-2xl font-headline font-black text-white">GAS/EV/HYB</span>
+</div>
+<div class="flex flex-col px-8">
+<span class="text-[10px] font-label text-secondary tracking-[0.2em] uppercase">TCO Analysis</span>
+<span class="text-2xl font-headline font-black text-white">UNLIMITED</span>
+</div>
+<div class="flex flex-col px-8">
+<span class="text-[10px] font-label text-secondary tracking-[0.2em] uppercase">Free to Use</span>
+<span class="text-2xl font-headline font-black text-white">100% OPEN</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. HOW IT WORKS SECTION (FROM SCREEN_9) -->
+<section class="py-32 px-8 md:px-32 relative bg-background overflow-hidden">
+<div class="text-center mb-24 relative z-10">
+<span class="text-primary font-headline font-black tracking-[0.4em] uppercase text-xs mb-4 block">Engineered Workflow</span>
+<h2 class="text-5xl md:text-7xl font-headline font-black tracking-tighter uppercase text-white">The Intelligence Loop</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-24 md:gap-8 relative">
+<!-- Step 1 -->
+<div class="relative group">
+<span class="absolute -top-32 -left-12 ghost-number select-none">01</span>
+<div class="glass-card p-10 rounded-sm relative z-10 hover:border-primary transition-all duration-500 min-h-[320px] flex flex-col justify-end">
+<div class="w-12 h-12 bg-primary rounded-full mb-6 flex items-center justify-center">
+<span class="material-symbols-outlined text-white">input</span>
+</div>
+<h3 class="text-2xl font-headline font-black uppercase text-white mb-4">Input Profile</h3>
+<p class="text-secondary text-sm leading-relaxed">Tell us your daily commute, city constraints, and fuel preferences. We model your specific usage pattern.</p>
+</div>
+</div>
+<!-- Drawing Arrow 1-2 -->
+<div class="hidden md:block absolute top-1/4 left-[28%] w-[12%] z-20">
+<svg class="w-full" fill="none" viewbox="0 0 100 40">
+<path class="drawing-arrow" d="M0 20C30 20 70 0 100 0" stroke="#FF1A1A" stroke-width="2"></path>
+</svg>
+</div>
+<!-- Step 2 -->
+<div class="relative group md:mt-24">
+<span class="absolute -top-32 -left-12 ghost-number select-none">02</span>
+<div class="glass-card p-10 rounded-sm relative z-10 hover:border-primary transition-all duration-500 min-h-[320px] flex flex-col justify-end">
+<div class="w-12 h-12 bg-primary rounded-full mb-6 flex items-center justify-center">
+<span class="material-symbols-outlined text-white">analytics</span>
+</div>
+<h3 class="text-2xl font-headline font-black uppercase text-white mb-4">Deep Compare</h3>
+<p class="text-secondary text-sm leading-relaxed">Our engine simulates 5-year running costs, factoring in maintenance schedules and local fuel volatility.</p>
+</div>
+</div>
+<!-- Drawing Arrow 2-3 -->
+<div class="hidden md:block absolute top-2/3 right-[28%] w-[12%] z-20">
+<svg class="w-full" fill="none" viewbox="0 0 100 40">
+<path class="drawing-arrow" d="M0 0C30 0 70 20 100 20" stroke="#FF1A1A" stroke-width="2"></path>
+</svg>
+</div>
+<!-- Step 3 -->
+<div class="relative group md:mt-48">
+<span class="absolute -top-32 -left-12 ghost-number select-none">03</span>
+<div class="glass-card p-10 rounded-sm relative z-10 hover:border-primary transition-all duration-500 min-h-[320px] flex flex-col justify-end">
+<div class="w-12 h-12 bg-primary rounded-full mb-6 flex items-center justify-center">
+<span class="material-symbols-outlined text-white">verified</span>
+</div>
+<h3 class="text-2xl font-headline font-black uppercase text-white mb-4">Final Verdict</h3>
+<p class="text-secondary text-sm leading-relaxed">Get a ranked list of vehicles with a definitive "True Cost" score. No marketing fluff, just raw data.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. WHY WHEELIFY BENTO GRID (FROM SCREEN_9) -->
+<section class="py-32 px-8 md:px-16 bg-surface">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 h-auto md:h-[600px]">
+<div class="md:col-span-8 bg-surface-container-low p-12 relative overflow-hidden flex flex-col justify-end group">
+<div class="absolute top-0 right-0 w-full h-full opacity-30 grayscale group-hover:grayscale-0 transition-all duration-700">
+<img alt="Technology Dashboard" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIR4II36Kc_EWAjtgp_rCOEE2kM6bOU5xjdRb33XB4tjQUyVePwza2YbOXrysfORSEIGrPJfRTw-0hZHhUuIGfeaDCiw2iuyzDqzE-lCxgeSDqsGk1Z8GywpNs71wVfpFMGqppp_jU6jtunTHAUSRAlAphnu8ecgYulF-ibvBBve1CRXYVyQNaWIIeIdmCY821h6XH4QYNpMJ-f8cd4_UQ66QaAVaWTb6xQpZjgIuwUyja2oNoZRlKZn3sgU-DsqtHwixjCNbXkPEM"/>
+</div>
+<div class="relative z-10">
+<h3 class="text-4xl font-headline font-black tracking-tighter uppercase mb-4 text-white">Precision Intelligence</h3>
+<p class="text-secondary max-w-md">Access proprietary data sets on maintenance costs, residual value, and regional pricing across all 28 Indian states.</p>
+</div>
+</div>
+<div class="md:col-span-4 bg-primary p-12 flex flex-col justify-between group cursor-default">
+<div class="material-symbols-outlined text-6xl text-white group-hover:rotate-12 transition-transform">query_stats</div>
+<div>
+<h3 class="text-3xl font-headline font-black tracking-tighter uppercase text-white mb-4">Market Redline</h3>
+<p class="text-white/80 text-sm">Real-time dealer quote analysis for your specific pin code. No more guessing MSRP vs. Final price.</p>
+</div>
+</div>
+<div class="md:col-span-4 bg-surface-container-high p-8 flex flex-col items-center justify-center text-center border-t border-primary/20">
+<span class="text-5xl font-headline font-black text-white mb-2">0.2s</span>
+<span class="text-[10px] font-label text-secondary tracking-widest uppercase">Comparison Speed</span>
+</div>
+<div class="md:col-span-8 bg-surface-container-low p-8 flex items-center gap-8 border-t border-white/5">
+<div class="w-20 h-20 rounded-full border border-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-3xl">verified</span>
+</div>
+<div>
+<h4 class="font-headline font-bold uppercase tracking-tight text-white">Verified Data Streams</h4>
+<p class="text-sm text-secondary">Aggregating from 200+ sources including OEM spec sheets and real-user logs.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. BUILT WITH PURPOSE (FROM SCREEN_9) -->
+<section class="py-32 px-8 md:px-32 bg-background border-y border-white/5">
+<div class="flex flex-col md:flex-row gap-20 items-center">
+<div class="w-full md:w-1/2">
+<h2 class="text-4xl md:text-6xl font-headline font-black tracking-tighter uppercase text-white mb-8">Built With <br/><span class="text-primary">Purpose.</span></h2>
+<p class="text-secondary text-lg leading-relaxed mb-10 max-w-lg">
+                        Wheelify was founded by automotive engineers and data scientists who realized the car buying process was broken. We don't take commissions from dealers. Our only loyalty is to the data.
+                    </p>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<span class="block text-white font-headline font-bold text-2xl mb-1">20+</span>
+<span class="text-[10px] text-secondary tracking-widest uppercase font-label">Data Scientists</span>
+</div>
+<div>
+<span class="block text-white font-headline font-bold text-2xl mb-1">100%</span>
+<span class="text-[10px] text-secondary tracking-widest uppercase font-label">Independent</span>
+</div>
+</div>
+</div>
+<div class="w-full md:w-1/2 grid grid-cols-2 gap-4">
+<div class="aspect-square bg-surface-container rounded-sm overflow-hidden grayscale hover:grayscale-0 transition-all">
+<img alt="Team member" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaMbkn8IGVnRQTnQwvtN7RmSs-LkNxELzdzpYX_nH5GsZV_I_dw93HWreVKD8sYilqsaOXlugDGoHYCOVbu1Y9PP6GTnSVb9-hooVc_EsnO-xazZW8btG6OwFHkTX6eX_ooJFFXt-swsa7pCc1aZmuFR0Wd0DpeNWw9UDAop666hVWth_4ue35vs2RvdAbqBOAQIuRBTFAHfK6TfXlQzlO3PBJAIH7cPUTA7cbVhVvy4RpmJbg2Dttx5Ua_vqqpsnz9YzaDsQPFD29"/>
+</div>
+<div class="aspect-square bg-surface-container rounded-sm overflow-hidden grayscale hover:grayscale-0 transition-all mt-8">
+<img alt="Team member" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoSt2MnB4xytiF1QmUqD9CpaDFZDcQ2RKOSTlVeMW5PfRyDm-LTbdKmpwjiFgMgd_lWWkfzakvg3kFi3YgNN7x2u1giOT78iZJopXoAn_DGBdcLeVEtPdF-5X0560-a5P2fLbJxu3333oVQPdwRfqTTUglKHmFzKDfN4mfx0VSCeEug6uiM-Ju2Pr2VTO2Y21oLs3sUzdfyZVVpjGYjp2t-Tjf8FsfDudVR7ns_j9mr8dOzGkTOWBlgmvHbeJgcBUKV8Ba9NUkg4JY"/>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- 6. ARCHITECTURAL FOOTER (FROM SCREEN_33/13) -->
+<footer class="relative w-full pt-20 pb-10 bg-[#050505] font-['Space_Grotesk'] uppercase overflow-hidden">
+<div class="h-px bg-red-600 w-full absolute top-0"></div>
+<div class="flex flex-col items-center w-full px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 w-full mb-20 px-8">
+<div class="flex flex-col gap-6">
+<div class="text-2xl font-black text-white after:content-['.'] after:text-red-600 tracking-tighter">Wheelify</div>
+<p class="text-xs text-gray-500 normal-case leading-relaxed font-body">The new benchmark in automotive selection. Engineered for performance, designed for clarity.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="text-white font-bold text-sm tracking-widest">Platform</h5>
+<ul class="flex flex-col gap-2">
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">Intelligence</a></li>
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">Comparison Engine</a></li>
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">TCO Calculator</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="text-white font-bold text-sm tracking-widest">Vehicles</h5>
+<ul class="flex flex-col gap-2">
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">Electric</a></li>
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">High Performance</a></li>
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">Hybrid Systems</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="text-white font-bold text-sm tracking-widest">Legal</h5>
+<ul class="flex flex-col gap-2">
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">Privacy Policy</a></li>
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">Terms of Service</a></li>
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">Press Kit</a></li>
+</ul>
+</div>
+</div>
+<div class="w-full relative py-10">
+<span class="text-[15vw] font-black leading-none tracking-tighter text-white text-center w-full block text-gradient-fade select-none">WHEELIFY</span>
+<div class="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center">
+<span class="text-red-600 font-black tracking-[0.3em] text-sm md:text-lg whitespace-nowrap">Drive Smarter. Decide Better.</span>
+</div>
+</div>
+<div class="w-full flex flex-col md:flex-row justify-between items-center mt-10 text-[10px] text-gray-500 tracking-widest gap-4">
+<p>© 2024 WHEELIFY PERFORMANCE. ALL RIGHTS RESERVED.</p>
+<div class="flex items-center gap-1 font-body normal-case">
+                    Made with <span class="text-red-600">❤️</span> for India
+                </div>
+<div class="flex gap-8">
+<a class="hover:text-white transition-colors" href="#">INSTAGRAM</a>
+<a class="hover:text-white transition-colors" href="#">TWITTER</a>
+<a class="hover:text-white transition-colors" href="#">YOUTUBE</a>
+</div>
+</div>
+</div>
+<div class="h-px bg-red-600 w-full absolute bottom-0"></div>
+</footer>
+</body></html>

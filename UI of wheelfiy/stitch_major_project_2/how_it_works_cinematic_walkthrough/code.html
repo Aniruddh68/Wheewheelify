@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline": "#b08781",
+                        "surface-tint": "#ffb4a9",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "inverse-primary": "#c00009",
+                        "primary": "#ffb4a9",
+                        "secondary": "#c8c6c5",
+                        "outline-variant": "#5f3e3a",
+                        "on-secondary-fixed-variant": "#474746",
+                        "inverse-on-surface": "#313030",
+                        "on-tertiary-fixed": "#410001",
+                        "surface-bright": "#3a3939",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-primary-fixed-variant": "#930005",
+                        "on-surface": "#e5e2e1",
+                        "on-surface-variant": "#eabcb5",
+                        "on-secondary": "#313030",
+                        "surface-dim": "#131313",
+                        "primary-fixed-dim": "#ffb4a9",
+                        "surface-variant": "#353534",
+                        "surface-container-lowest": "#0e0e0e",
+                        "primary-fixed": "#ffdad5",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "tertiary-fixed": "#ffdad5",
+                        "primary-container": "#ff5545",
+                        "surface-container-highest": "#353534",
+                        "surface-container": "#201f1f",
+                        "on-secondary-container": "#b7b5b4",
+                        "tertiary-fixed-dim": "#ffb4a9",
+                        "surface-container-low": "#1c1b1b",
+                        "surface": "#131313",
+                        "on-tertiary-container": "#5c0002",
+                        "on-error": "#690005",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary": "#690002",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-high": "#2a2a2a",
+                        "on-primary-container": "#5c0002",
+                        "on-background": "#e5e2e1",
+                        "on-tertiary": "#690002",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed-variant": "#930005",
+                        "on-primary-fixed": "#410001",
+                        "background": "#0A0A0A",
+                        "tertiary-container": "#ff5545",
+                        "secondary-container": "#474746",
+                        "tertiary": "#ffb4a9"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>.film-grain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.04;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuA6mQvRa8sew0SnXI-jUngEzQ_BakgDQ2F8QH2RCUhJx6HFI8x0OE-MaGzDk5Ho5QQKRXC_jCAlldYSR5m9bYuGqL0GfhbaSmTdPl8HmtK_t4vMOM8mHeZs4lzkSO5kqM7LKXTqpztK9D70UwzgLTdkf_4oRC6Z-zNX1oEwJReiUKVnLSi3vHJqNr9TV5S_ODn0YiZnaNfw0ApJjdBR9PjdiDhyrgUvAvOLo7-QmCMYvF0ndcQsCWiMwHxlSgkpGiZMGLrJBJbOgs9p)
+    }
+.glass-edge {
+    border: 0.5px solid rgba(255, 26, 26, 0.3)
+    }
+.redline-glow {
+    background: linear-gradient(135deg, #FF1A1A 0%, #930005 100%)
+    }</style>
+</head>
+<body class="bg-[#0A0A0A] text-on-surface font-body selection:bg-primary-container/30">
+<div class="film-grain"></div>
+<!-- TopNavBar (Shared Component) -->
+<nav class="fixed top-0 w-full flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto bg-[#0A0A0A]/80 backdrop-blur-xl border-b border-white/5 z-50">
+<div class="text-2xl font-black italic tracking-tighter text-white">KINETIC</div>
+<div class="hidden md:flex gap-8">
+<a class="text-neutral-400 font-medium hover:text-white transition-colors font-['Space_Grotesk'] uppercase tracking-tighter text-sm" href="#">Models</a>
+<a class="text-neutral-400 font-medium hover:text-white transition-colors font-['Space_Grotesk'] uppercase tracking-tighter text-sm" href="#">Performance</a>
+<a class="text-neutral-400 font-medium hover:text-white transition-colors font-['Space_Grotesk'] uppercase tracking-tighter text-sm" href="#">Compare</a>
+<a class="text-neutral-400 font-medium hover:text-white transition-colors font-['Space_Grotesk'] uppercase tracking-tighter text-sm" href="#">About</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-[#FF1A1A] text-white px-5 py-2 font-black italic tracking-tighter text-sm uppercase rounded-sm active:scale-95 transition-transform">GET STARTED</button>
+<span class="material-symbols-outlined text-white cursor-pointer">menu</span>
+</div>
+</nav>
+<main class="relative pt-32 overflow-hidden">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-6 mb-32">
+<h1 class="font-headline font-extrabold text-[80px] md:text-[92px] leading-[0.85] tracking-tighter mb-20 text-white">
+                HOW <span class="text-[#FF1A1A]">IT</span> WORKS
+            </h1>
+<!-- Step Cards Container -->
+<div class="relative grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 items-center">
+<!-- SVG Connecting Arrows (Visual Only) -->
+<div class="absolute inset-0 pointer-events-none hidden md:block">
+<svg class="w-full h-full" fill="none" viewbox="0 0 1200 400">
+<path d="M350 150 Q500 50 650 120" opacity="0.4" stroke="#FF1A1A" stroke-dasharray="8 8" stroke-width="2"></path>
+<path d="M750 120 Q900 200 1050 150" opacity="0.4" stroke="#FF1A1A" stroke-dasharray="8 8" stroke-width="2"></path>
+</svg>
+</div>
+<!-- Step 01 -->
+<div class="relative group h-[480px] bg-surface-container-low glass-edge p-8 flex flex-col justify-between overflow-hidden">
+<span class="absolute -right-8 -top-12 font-headline font-black text-[180px] text-white/[0.05] pointer-events-none">01</span>
+<div>
+<p class="font-headline font-bold text-[#FF1A1A] tracking-widest text-xs mb-2">STEP 01</p>
+<h3 class="font-headline font-bold text-2xl text-white max-w-[200px] leading-tight uppercase">SELECT YOUR VEHICLE</h3>
+</div>
+<div class="relative h-56 mt-auto">
+<img class="w-full h-full object-contain filter grayscale brightness-125" data-alt="High-end metallic sports car 3D wireframe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvYcVRrGTuxHEPLLoX6CTlClm8OH9F4ZxAvq7_-97LX7UL6W80NzqMZwsIfUkFVrZA39x7C6SjRDxPPnAjY2PKWdp5hOJtZTtt1gYfiETKg3cKwrtq93ny2WMq_Jfjfy9rQNftxNNb3WZBP0of0RcWG1NLo2lDNySeKaGfghfPMwe68THK8lDp6jFxICPipbwiYVQHmJVHtjTHcdMj1D8lS-puVaFB2p84yQ9C16z5JKRq_iIin11GvRN1WuoFUbiNlnDjPluULALC"/>
+</div>
+</div>
+<!-- Step 02 - RAISED -->
+<div class="relative group h-[480px] bg-surface-container-low glass-edge p-8 flex flex-col justify-between overflow-hidden md:-translate-y-8 z-10 shadow-2xl shadow-black">
+<span class="absolute -right-8 -top-12 font-headline font-black text-[180px] text-white/[0.05] pointer-events-none">02</span>
+<div>
+<p class="font-headline font-bold text-[#FF1A1A] tracking-widest text-xs mb-2">STEP 02</p>
+<h3 class="font-headline font-bold text-2xl text-white max-w-[200px] leading-tight uppercase">CONFIGURE YOUR TRIP</h3>
+</div>
+<div class="relative h-56 mt-auto flex items-center justify-center">
+<img class="w-full h-full object-contain rotate-12" data-alt="Close up of high-performance car dashboard dial" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_4eX51Zz3JfEdnmRRxCK5k-BDA9jUXj-QPkIoCXKybECw5D0-sZ-IqkfdabL5TPgiqpr416soGjSha-dA4DGddSMl0C4YgwxR_unUzcBm5CvjQZKDBPetwh8d1xnM3paat94ogTSTb-nKlysKWj5dlRbT2L56lO-vLH04ZeGUIwecLV3uF_DNdFssJlVTL2KZ-hN6r42HxAe7h4muxR5ZFG10iv6pxYcen8nRnTG6x6_VWLgA58irR8R48hOWHqcydgA07lngSKup"/>
+</div>
+</div>
+<!-- Step 03 -->
+<div class="relative group h-[480px] bg-surface-container-low glass-edge p-8 flex flex-col justify-between overflow-hidden">
+<span class="absolute -right-8 -top-12 font-headline font-black text-[180px] text-white/[0.05] pointer-events-none">03</span>
+<div>
+<p class="font-headline font-bold text-[#FF1A1A] tracking-widest text-xs mb-2">STEP 03</p>
+<h3 class="font-headline font-bold text-2xl text-white max-w-[200px] leading-tight uppercase">GET YOUR FULL ANALYSIS</h3>
+</div>
+<div class="relative h-56 mt-auto">
+<img class="w-full h-full object-contain mix-blend-screen" data-alt="Futuristic performance chart and data results" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlbucBcXPi1JOBfI7bZOqTt1yd1BR7f12l8Lm-SneOL7-2RHtDmJQRGjjNmYjUaa5GCDETbLhPjAqrqWGGMaRRhDdBSOZ7Etn1SN8XmyLYote0tyx5pl0C1pL7UwHo-bRB0uF3noaLp1OdjkBF2CA5Q1pcWkNJP-7AbDOWVe0AvD36UEJ6Q42StNxQ3QRkIM22q72o1BTFSZ7zf6wgI6IBC-Dm-CPDXx_frLkXT_RYMzTraIx_RZfI8Q475Vd7wmjU-DO_kmYeS3lR"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Bento Grid -->
+<section class="max-w-7xl mx-auto px-6 mb-40">
+<div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-auto md:h-[600px]">
+<!-- Card 1 -->
+<div class="md:col-span-2 md:row-span-1 bg-surface-container p-10 flex flex-col justify-end group hover:bg-[#131313] transition-colors">
+<span class="material-symbols-outlined text-[#FF1A1A] text-4xl mb-4">analytics</span>
+<h4 class="font-headline font-bold text-xl text-white mb-2 uppercase">Predictive Analytics</h4>
+<p class="text-neutral-500 text-sm leading-relaxed max-w-sm">Neural engines processing over 40,000 drive cycles to forecast mechanical fatigue before it happens.</p>
+</div>
+<!-- Card 2 -->
+<div class="md:col-span-1 md:row-span-1 bg-surface-container-high p-10 flex flex-col justify-between">
+<span class="material-symbols-outlined text-white text-2xl">category</span>
+<h4 class="font-headline font-bold text-sm text-white uppercase tracking-widest">Cross-Category</h4>
+</div>
+<!-- Card 3 -->
+<div class="md:col-span-1 md:row-span-2 bg-[#FF1A1A] p-10 flex flex-col justify-between">
+<span class="material-symbols-outlined text-white text-5xl">trending_up</span>
+<div>
+<h4 class="font-headline font-black text-3xl text-white mb-4 uppercase leading-none">5-Year TCO</h4>
+<p class="text-white/80 text-sm">Full lifecycle cost projection including depreciation and fluid maintenance.</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="md:col-span-3 md:row-span-1 bg-surface-container-lowest glass-edge p-10 flex items-center gap-12">
+<div class="flex-1">
+<h4 class="font-headline font-bold text-2xl text-white uppercase mb-2">Break-Even Protocol</h4>
+<p class="text-neutral-400 text-sm">Automated analysis of mileage milestones where your investment transitions to net-positive utility.</p>
+</div>
+<div class="hidden md:block w-32 h-32 border-4 border-white/5 rounded-full flex items-center justify-center">
+<span class="font-headline font-black text-white text-2xl">84%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Team Strip -->
+<section class="border-y border-white/5 bg-surface-container-lowest/50 py-16 mb-40">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12">
+<div class="max-w-sm">
+<p class="font-label text-[#FF1A1A] uppercase tracking-[0.2em] text-[10px] mb-4">THE ARCHITECTS</p>
+<h2 class="font-headline font-bold text-4xl text-white uppercase leading-tight">Engineered by precision.</h2>
+</div>
+<div class="flex flex-col md:flex-row gap-8">
+<div class="flex items-center gap-4 group">
+<div class="w-16 h-16 rounded-full border-2 border-[#FF1A1A] flex items-center justify-center text-white font-headline font-black text-xl group-hover:bg-[#FF1A1A] transition-all">AG</div>
+<div>
+<p class="text-white font-bold uppercase text-sm">Aniruddh Gupta</p>
+<p class="text-neutral-500 text-[10px] uppercase tracking-widest">Chief Systems Officer</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-16 h-16 rounded-full border-2 border-[#FF1A1A] flex items-center justify-center text-white font-headline font-black text-xl group-hover:bg-[#FF1A1A] transition-all">KJ</div>
+<div>
+<p class="text-white font-bold uppercase text-sm">Khushbu Jain</p>
+<p class="text-neutral-500 text-[10px] uppercase tracking-widest">Performance Lead</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="max-w-7xl mx-auto px-6 pb-40 text-center">
+<h2 class="font-headline font-extrabold text-5xl md:text-7xl text-white mb-12 uppercase tracking-tighter">
+                READY TO <span class="text-[#FF1A1A]">DECIDE</span> SMARTER?
+            </h2>
+<div class="flex flex-col md:flex-row justify-center items-center gap-6">
+<button class="redline-glow text-white px-12 py-5 font-headline font-black text-xl uppercase tracking-tighter rounded-sm hover:scale-105 transition-transform active:scale-95">
+                    INITIATE ANALYSIS
+                </button>
+<button class="bg-transparent border border-white/20 text-white px-12 py-5 font-headline font-black text-xl uppercase tracking-tighter rounded-sm hover:border-white transition-colors">
+                    VIEW SPECIFICATIONS
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full px-8 py-12 flex flex-col items-center gap-6 bg-[#0A0A0A] border-t border-white/5">
+<div class="text-lg font-bold text-white tracking-widest uppercase">KINETIC MONOLITH</div>
+<div class="flex gap-8">
+<a class="text-neutral-600 hover:text-[#FF1A1A] transition-colors font-['Inter'] text-[10px] tracking-widest uppercase" href="#">Privacy</a>
+<a class="text-neutral-600 hover:text-[#FF1A1A] transition-colors font-['Inter'] text-[10px] tracking-widest uppercase" href="#">Terms</a>
+<a class="text-neutral-600 hover:text-[#FF1A1A] transition-colors font-['Inter'] text-[10px] tracking-widest uppercase" href="#">API</a>
+<a class="text-neutral-600 hover:text-[#FF1A1A] transition-colors font-['Inter'] text-[10px] tracking-widest uppercase" href="#">Press</a>
+</div>
+<div class="text-neutral-500 font-['Inter'] text-[10px] tracking-widest uppercase">
+            © 2024 KINETIC MONOLITH. ENGINEERED FOR PRECISION.
+        </div>
+</footer>
+</body></html>

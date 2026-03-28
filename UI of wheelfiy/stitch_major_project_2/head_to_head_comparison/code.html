@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Wheelify | Head to Head Comparison</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-variant": "#353534",
+                        "on-tertiary-fixed": "#410001",
+                        "primary-container": "#ff5545",
+                        "inverse-primary": "#c00009",
+                        "surface-container-highest": "#353534",
+                        "background": "#0A0A0A",
+                        "tertiary": "#ffb4a9",
+                        "on-surface-variant": "#eabcb5",
+                        "on-surface": "#e5e2e1",
+                        "on-tertiary": "#690002",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "tertiary-container": "#ff5545",
+                        "surface-container": "#201f1f",
+                        "primary": "#FF1A1A",
+                        "on-primary-container": "#5c0002",
+                        "error-container": "#93000a",
+                        "secondary": "#888888",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary": "#690002",
+                        "on-primary-fixed": "#410001",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#ffb4a9",
+                        "on-secondary-container": "#b7b5b4",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "surface-tint": "#ffb4a9",
+                        "on-secondary": "#313030",
+                        "on-tertiary-container": "#5c0002",
+                        "error": "#ffb4ab",
+                        "on-error": "#690005",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-dim": "#131313",
+                        "on-primary-fixed-variant": "#930005",
+                        "secondary-container": "#474746",
+                        "primary-fixed-dim": "#ffb4a9",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-tertiary-fixed-variant": "#930005",
+                        "surface": "#131313",
+                        "primary-fixed": "#ffdad5",
+                        "tertiary-fixed": "#ffdad5",
+                        "outline-variant": "#5f3e3a",
+                        "outline": "#b08781",
+                        "surface-container-low": "#1c1b1b",
+                        "secondary-fixed": "#e5e2e1",
+                        "surface-bright": "#3a3939",
+                        "inverse-on-surface": "#313030",
+                        "on-background": "#e5e2e1"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+<style>body {
+    background-color: #0A0A0A;
+    color: #e5e2e1;
+    font-family: "Inter", sans-serif;
+    overflow-x: hidden
+    }
+.grain-overlay {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuB_aPYJuM3FzgVovJdiV8TYVZFhtynLXgZu7m9rE9Ix1clzm3TFRR0Hpf1agff4UYOA2XGXs22Y0JKjD6vMPBsftrPhAHvOgOsBy2zsrae8-s5hfUxq1W1zBmBfAH7zCDE9Lg4Wuv0N6rpFFoiy3igrR0HijVfwQ3Vk0PizByZWIGjaJZbytfB_swZBw9uQgdYH7F15Gh_sqaEIBc7LJdYFOqiy5EJrmJZXvMjQ3R0zQf2aAwta0K0f0YiWe-r9FwT9TnMe_6TwQFfE);
+    opacity: 0.04;
+    pointer-events: none
+    }
+.red-fog-left {
+    background: radial-gradient(circle at 0% 50%, rgba(180, 0, 0, 0.15) 0%, transparent 50%)
+    }
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 0.5px solid rgba(255, 26, 26, 0.3)
+    }
+.vs-badge-glow {
+    box-shadow: 0 0 30px rgba(255, 26, 26, 0.6)
+    }
+.spec-row:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02)
+    }
+.winner-glow {
+    box-shadow: inset 0 0 15px rgba(255, 26, 26, 0.2)
+    }
+.headline-stroke {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1)
+    }</style>
+</head>
+<body class="min-h-screen relative selection:bg-primary selection:text-white">
+<div class="fixed inset-0 grain-overlay z-50"></div>
+<div class="fixed inset-0 red-fog-left z-0"></div>
+<!-- Shared TopNavBar -->
+<nav class="fixed top-0 w-full flex justify-between items-center px-8 py-4 bg-black/80 backdrop-blur-md text-red-600 dark:text-red-500 font-['Space_Grotesk'] uppercase tracking-tighter border-b border-white/10 shadow-2xl shadow-black/50 z-50">
+<div class="text-2xl font-black italic text-white tracking-tighter">Wheelify</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-white/70 hover:text-white transition-colors" href="#">Home</a>
+<a class="text-red-600 font-bold border-b-2 border-red-600 pb-1" href="#">Compare</a>
+<a class="text-white/70 hover:text-white transition-colors" href="#">Fuel Calculator</a>
+<a class="text-white/70 hover:text-white transition-colors" href="#">TCO</a>
+<a class="text-white/70 hover:text-white transition-colors" href="#">About</a>
+</div>
+<div class="flex gap-4">
+<button class="bg-primary text-white px-6 py-2 text-sm font-bold scale-95 active:scale-90 transition-transform uppercase">Start Comparing</button>
+<button class="border border-white/20 text-white px-6 py-2 text-sm font-bold scale-95 active:scale-90 transition-transform uppercase hover:bg-white/5">Sign Up</button>
+</div>
+</nav>
+<main class="relative z-10 pt-32 pb-24 px-4 max-w-7xl mx-auto">
+<!-- Header Section -->
+<header class="text-center mb-20">
+<div class="inline-flex items-center gap-2 px-4 py-1 bg-primary/10 border border-primary/30 rounded-full mb-6">
+<span class="text-sm font-bold text-primary tracking-widest uppercase">⚔️ Head to Head Comparison</span>
+</div>
+<h1 class="font-headline font-black leading-none flex flex-col items-center">
+<span class="text-[80px] text-white uppercase tracking-tighter">Head To</span>
+<span class="text-[88px] text-primary uppercase tracking-tighter -mt-4">Head</span>
+</h1>
+</header>
+<!-- Vehicle Selector Row -->
+<div class="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 items-stretch mb-24">
+<!-- Left Vehicle Card -->
+<div class="glass-card rounded-[20px] p-8 border-l-4 border-l-primary relative flex flex-col gap-6">
+<div class="space-y-4">
+<select class="w-full bg-surface-container-low border-b border-secondary/20 text-white font-label text-sm py-2 focus:border-primary outline-none appearance-none cursor-pointer">
+<option>Luxury Sport Sedan</option>
+<option>Electric Performance</option>
+</select>
+<div class="relative">
+<input class="w-full bg-transparent border-b border-secondary/20 text-white font-label text-sm py-2 focus:border-primary outline-none placeholder:text-secondary/40" placeholder="SEARCH VEHICLE..." type="text"/>
+<span class="material-symbols-outlined absolute right-0 top-2 text-secondary/40">search</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center py-8">
+<img class="w-full h-48 object-contain mb-6 transform -scale-x-100" data-alt="Dark grey luxury performance sedan side profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8qe3rwTzrZvTM6SyWYYT09o1cvZOZHGDsgJCW8U4MJMveFQXNx1KarHQvIbsHJeN_JecOiO8sjTTGOGPIbIuWqktW8lwofjRT0hlpQwrgD3HTi3JfCPeCc0irxGDO_BNWlyTnX8BLRe9A09NSO2qD8g7q0QX8I0SJcHsGpoAjqokzpoeDVtOYnLORGI5Sc4I23RjWZbosTPsQjgznvgDjEmUz0Gkre1bEgzGduKc6507OkIDhnT9oOfmAG4pNvlHS-H1t71K0CurK"/>
+<div class="text-center">
+<p class="text-secondary text-[10px] tracking-[0.2em] uppercase font-label">Bavarian Motors</p>
+<h3 class="text-3xl font-headline font-bold text-white uppercase tracking-tighter">M5 CS Performance</h3>
+<p class="text-primary font-headline text-xl font-bold mt-1">$142,000</p>
+</div>
+</div>
+<div class="flex justify-center gap-2">
+<span class="px-3 py-1 bg-surface-container-highest rounded-full text-[10px] font-bold text-secondary uppercase">627 HP</span>
+<span class="px-3 py-1 bg-surface-container-highest rounded-full text-[10px] font-bold text-secondary uppercase">V8 Twin-Turbo</span>
+<span class="px-3 py-1 bg-surface-container-highest rounded-full text-[10px] font-bold text-secondary uppercase">AWD</span>
+</div>
+</div>
+<!-- VS Badge -->
+<div class="flex flex-col items-center justify-center relative min-h-[100px] lg:min-h-full">
+<div class="absolute inset-y-0 w-[2px] bg-gradient-to-b from-transparent via-primary to-transparent"></div>
+<div class="relative z-10 w-18 h-18 lg:w-[72px] lg:h-[72px] rounded-full bg-primary border-4 border-white flex items-center justify-center vs-badge-glow">
+<span class="font-headline font-black text-white text-2xl italic tracking-tighter">VS</span>
+</div>
+</div>
+<!-- Right Vehicle Card -->
+<div class="glass-card rounded-[20px] p-8 border-r-4 border-r-primary relative flex flex-col gap-6">
+<div class="space-y-4">
+<select class="w-full bg-surface-container-low border-b border-secondary/20 text-white font-label text-sm py-2 focus:border-primary outline-none appearance-none cursor-pointer">
+<option>Luxury Sport Sedan</option>
+<option>Internal Combustion</option>
+</select>
+<div class="relative">
+<input class="w-full bg-transparent border-b border-secondary/20 text-white font-label text-sm py-2 focus:border-primary outline-none placeholder:text-secondary/40" placeholder="SEARCH VEHICLE..." type="text"/>
+<span class="material-symbols-outlined absolute right-0 top-2 text-secondary/40">search</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center py-8">
+<img class="w-full h-48 object-contain mb-6" data-alt="Sleek black electric sport performance sedan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaD7TWF_G24NC1d4hjevFBICQs8WDhC-zF_j0G0XD12e1fvlUHviPirV8G9dP0K_qmTJ2YTK9XSnl2TjBF1-msI8pwD_iO3VVtKCt1Zm2jjxYVHtXicDpVKtkDR9xYImikRm2oHN7cgzZwHQ7npVs5mf4BC0ZL4GruQBEmoOckQE9YfqZA0ibBSYJU-MAKoKq4gkBOTLz-7DVOl9PHnd6DOu_eY8883pC3ksxVFmYNR7TY4wo4-tvFytZu0mTtIJRqmnZIBRZ6G4B2"/>
+<div class="text-center">
+<p class="text-secondary text-[10px] tracking-[0.2em] uppercase font-label">Stuttgart Electric</p>
+<h3 class="text-3xl font-headline font-bold text-white uppercase tracking-tighter">Taycan Turbo S</h3>
+<p class="text-primary font-headline text-xl font-bold mt-1">$194,900</p>
+</div>
+</div>
+<div class="flex justify-center gap-2">
+<span class="px-3 py-1 bg-surface-container-highest rounded-full text-[10px] font-bold text-secondary uppercase">750 HP</span>
+<span class="px-3 py-1 bg-surface-container-highest rounded-full text-[10px] font-bold text-secondary uppercase">Dual Motor</span>
+<span class="px-3 py-1 bg-surface-container-highest rounded-full text-[10px] font-bold text-secondary uppercase">EV</span>
+</div>
+</div>
+</div>
+<!-- Comparison Table -->
+<section class="glass-card rounded-[24px] overflow-hidden mb-24">
+<!-- Table Header -->
+<div class="grid grid-cols-3 bg-primary/10 py-6 border-b border-primary/20">
+<div class="px-8 font-headline font-bold text-white/50 text-xs tracking-widest uppercase flex items-center">Technical Specifications</div>
+<div class="text-center font-headline font-bold text-white text-sm uppercase tracking-tighter">M5 CS Performance</div>
+<div class="text-center font-headline font-bold text-white text-sm uppercase tracking-tighter">Taycan Turbo S</div>
+</div>
+<!-- Table Rows -->
+<div class="divide-y divide-white/5">
+<!-- Row 1 -->
+<div class="grid grid-cols-3 py-6 spec-row">
+<div class="px-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-lg">speed</span>
+<span class="text-secondary text-[10px] font-bold tracking-widest uppercase">0-60 MPH</span>
+</div>
+<div class="text-center text-secondary text-sm flex items-center justify-center">2.9 SEC</div>
+<div class="text-center text-white font-bold text-base flex items-center justify-center winner-glow relative">
+<span class="w-1.5 h-1.5 bg-primary rounded-full absolute left-4"></span>
+                        2.4 SEC
+                    </div>
+</div>
+<!-- Row 2 -->
+<div class="grid grid-cols-3 py-6 spec-row">
+<div class="px-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-lg">bolt</span>
+<span class="text-secondary text-[10px] font-bold tracking-widest uppercase">Horsepower</span>
+</div>
+<div class="text-center text-secondary text-sm flex items-center justify-center">627 HP</div>
+<div class="text-center text-white font-bold text-base flex items-center justify-center winner-glow relative">
+<span class="w-1.5 h-1.5 bg-primary rounded-full absolute left-4"></span>
+                        750 HP
+                    </div>
+</div>
+<!-- Row 3 -->
+<div class="grid grid-cols-3 py-6 spec-row">
+<div class="px-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-lg">settings_input_component</span>
+<span class="text-secondary text-[10px] font-bold tracking-widest uppercase">Torque</span>
+</div>
+<div class="text-center text-secondary text-sm flex items-center justify-center">553 LB-FT</div>
+<div class="text-center text-white font-bold text-base flex items-center justify-center winner-glow relative">
+<span class="w-1.5 h-1.5 bg-primary rounded-full absolute left-4"></span>
+                        774 LB-FT
+                    </div>
+</div>
+<!-- Row 4 -->
+<div class="grid grid-cols-3 py-6 spec-row">
+<div class="px-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-lg">weight</span>
+<span class="text-secondary text-[10px] font-bold tracking-widest uppercase">Curb Weight</span>
+</div>
+<div class="text-center text-white font-bold text-base flex items-center justify-center winner-glow relative">
+<span class="w-1.5 h-1.5 bg-primary rounded-full absolute left-4"></span>
+                        4,114 LBS
+                    </div>
+<div class="text-center text-secondary text-sm flex items-center justify-center">5,101 LBS</div>
+</div>
+<!-- Row 5 -->
+<div class="grid grid-cols-3 py-6 spec-row">
+<div class="px-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-lg">local_gas_station</span>
+<span class="text-secondary text-[10px] font-bold tracking-widest uppercase">Range / Fuel</span>
+</div>
+<div class="text-center text-secondary text-sm flex items-center justify-center">15/21 MPG</div>
+<div class="text-center text-white font-bold text-base flex items-center justify-center winner-glow relative">
+<span class="w-1.5 h-1.5 bg-primary rounded-full absolute left-4"></span>
+                        222 MI (EPA)
+                    </div>
+</div>
+<!-- Row 6 -->
+<div class="grid grid-cols-3 py-6 spec-row">
+<div class="px-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-lg">timer</span>
+<span class="text-secondary text-[10px] font-bold tracking-widest uppercase">Top Speed</span>
+</div>
+<div class="text-center text-white font-bold text-base flex items-center justify-center winner-glow relative">
+<span class="w-1.5 h-1.5 bg-primary rounded-full absolute left-4"></span>
+                        190 MPH
+                    </div>
+<div class="text-center text-secondary text-sm flex items-center justify-center">161 MPH</div>
+</div>
+<!-- Row 7 -->
+<div class="grid grid-cols-3 py-6 spec-row">
+<div class="px-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-lg">chair</span>
+<span class="text-secondary text-[10px] font-bold tracking-widest uppercase">Seating</span>
+</div>
+<div class="text-center text-secondary text-sm flex items-center justify-center">4 SEATS</div>
+<div class="text-center text-white font-bold text-base flex items-center justify-center winner-glow relative">
+<span class="w-1.5 h-1.5 bg-primary rounded-full absolute left-4"></span>
+                        4+1 SEATS
+                    </div>
+</div>
+<!-- Row 8 -->
+<div class="grid grid-cols-3 py-6 spec-row">
+<div class="px-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-lg">payments</span>
+<span class="text-secondary text-[10px] font-bold tracking-widest uppercase">MSRP From</span>
+</div>
+<div class="text-center text-white font-bold text-base flex items-center justify-center winner-glow relative">
+<span class="w-1.5 h-1.5 bg-primary rounded-full absolute left-4"></span>
+                        $142,000
+                    </div>
+<div class="text-center text-secondary text-sm flex items-center justify-center">$194,900</div>
+</div>
+</div>
+</section>
+<!-- Winner Strip -->
+<div class="bg-primary flex flex-col md:flex-row items-center justify-between px-12 py-8 rounded-sm mb-24 shadow-[0_0_50px_rgba(255,26,26,0.3)]">
+<div class="flex items-center gap-6 mb-6 md:mb-0">
+<span class="material-symbols-outlined text-5xl text-white" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+<div>
+<p class="text-[10px] font-bold tracking-[0.3em] text-white/60 uppercase">Projected TCO Winner</p>
+<h4 class="text-3xl font-headline font-black text-white uppercase tracking-tighter">Taycan Turbo S</h4>
+</div>
+</div>
+<button class="bg-white text-primary px-10 py-4 font-headline font-black uppercase tracking-tighter text-lg hover:bg-on-surface transition-colors flex items-center gap-3">
+                Calculate Full Ownership Cost
+                <span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<!-- Winner Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
+<div class="glass-card p-8 rounded-[20px] border-t-2 border-primary/40">
+<span class="material-symbols-outlined text-primary text-3xl mb-4">attach_money</span>
+<h5 class="text-white font-headline font-bold uppercase text-lg mb-2">Best Value</h5>
+<p class="text-secondary text-xs font-label uppercase tracking-widest mb-4">M5 CS Performance</p>
+<p class="text-primary font-headline text-2xl font-black">-$52.9K<span class="text-white/40 text-sm ml-2">SAVE</span></p>
+</div>
+<div class="glass-card p-8 rounded-[20px] border-t-2 border-primary/40">
+<span class="material-symbols-outlined text-primary text-3xl mb-4">distance</span>
+<h5 class="text-white font-headline font-bold uppercase text-lg mb-2">Best Mileage</h5>
+<p class="text-secondary text-xs font-label uppercase tracking-widest mb-4">Taycan Turbo S</p>
+<p class="text-primary font-headline text-2xl font-black">+68%<span class="text-white/40 text-sm ml-2">EFFICIENCY</span></p>
+</div>
+<div class="glass-card p-8 rounded-[20px] border-t-2 border-primary/40">
+<span class="material-symbols-outlined text-primary text-3xl mb-4">home_work</span>
+<h5 class="text-white font-headline font-bold uppercase text-lg mb-2">Daily Driver</h5>
+<p class="text-secondary text-xs font-label uppercase tracking-widest mb-4">Taycan Turbo S</p>
+<p class="text-primary font-headline text-2xl font-black">EV-DRIVE<span class="text-white/40 text-sm ml-2">CITY READY</span></p>
+</div>
+</div>
+<!-- Transition Prompt -->
+<div class="text-center group cursor-pointer pb-12">
+<p class="text-secondary text-sm font-label tracking-[0.4em] uppercase mb-2">Want the full picture?</p>
+<div class="flex items-center justify-center gap-3 text-white font-headline font-bold text-xl uppercase group-hover:text-primary transition-colors">
+                See the predicted fuel costs
+                <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</div>
+</div>
+</main>
+<!-- Shared Footer -->
+<footer class="bg-black py-12 border-t border-white/5 relative z-10">
+<div class="w-full max-w-7xl mx-auto flex flex-col items-center gap-6">
+<div class="text-lg font-bold text-white tracking-widest uppercase">Wheelify</div>
+<div class="flex gap-8">
+<a class="text-zinc-500 hover:text-red-500 transition-colors font-['Inter'] text-xs tracking-widest uppercase" href="#">Privacy Policy</a>
+<a class="text-zinc-500 hover:text-red-500 transition-colors font-['Inter'] text-xs tracking-widest uppercase" href="#">Terms of Service</a>
+<a class="text-zinc-500 hover:text-red-500 transition-colors font-['Inter'] text-xs tracking-widest uppercase" href="#">Contact</a>
+</div>
+<p class="text-zinc-500 font-['Inter'] text-[10px] tracking-[0.2em] uppercase opacity-80">© 2024 Wheelify High-Performance Editorial. All Rights Reserved.</p>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed": "#e5e2e1",
+              "on-tertiary-fixed": "#410001",
+              "on-surface-variant": "#eabcb5",
+              "on-primary-fixed-variant": "#930005",
+              "secondary-container": "#474746",
+              "surface-container-highest": "#353534",
+              "error-container": "#93000a",
+              "surface-variant": "#353534",
+              "tertiary-fixed": "#ffdad5",
+              "outline": "#b08781",
+              "tertiary-fixed-dim": "#ffb4a9",
+              "surface-container-high": "#2a2a2a",
+              "secondary-fixed-dim": "#c8c6c5",
+              "primary": "#ffb4a9",
+              "on-tertiary-fixed-variant": "#930005",
+              "on-secondary-fixed": "#1c1b1b",
+              "surface-bright": "#3a3939",
+              "on-tertiary": "#690002",
+              "on-secondary-fixed-variant": "#474746",
+              "on-error-container": "#ffdad6",
+              "surface-tint": "#ffb4a9",
+              "surface": "#131313",
+              "error": "#ffb4ab",
+              "background": "#131313",
+              "on-primary-container": "#5c0002",
+              "on-background": "#e5e2e1",
+              "inverse-surface": "#e5e2e1",
+              "surface-container-lowest": "#0e0e0e",
+              "surface-container-low": "#1c1b1b",
+              "tertiary-container": "#ff5545",
+              "on-secondary-container": "#b7b5b4",
+              "on-primary-fixed": "#410001",
+              "surface-container": "#201f1f",
+              "primary-fixed-dim": "#ffb4a9",
+              "tertiary": "#ffb4a9",
+              "outline-variant": "#5f3e3a",
+              "on-surface": "#e5e2e1",
+              "on-error": "#690005",
+              "on-secondary": "#313030",
+              "surface-dim": "#131313",
+              "primary-container": "#ff5545",
+              "secondary": "#c8c6c5",
+              "inverse-primary": "#c00009",
+              "primary-fixed": "#ffdad5",
+              "inverse-on-surface": "#313030",
+              "on-tertiary-container": "#5c0002",
+              "on-primary": "#690002"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .cockpit-glow {
+            box-shadow: 0 0 50px -12px rgba(255, 26, 26, 0.2);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 0.5px solid rgba(255, 26, 26, 0.2);
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            height: 2px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 12px;
+            width: 12px;
+            background: #FF1A1A;
+            border-radius: 0px;
+            cursor: pointer;
+            box-shadow: 0 0 10px #FF1A1A;
+        }
+    </style>
+</head>
+<body class="bg-[#0A0A0A] text-on-surface font-body selection:bg-primary-container selection:text-white min-h-screen overflow-x-hidden">
+<!-- Top Navigation Anchor -->
+<nav class="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-red-900/20">
+<div class="flex justify-between items-center px-6 py-4 max-w-[1920px] mx-auto">
+<div class="text-2xl font-black italic tracking-tighter text-white font-headline">WHEELIFY</div>
+<div class="hidden md:flex gap-8">
+<a class="font-headline uppercase tracking-tighter font-bold text-sm text-gray-400 hover:text-white transition-colors" href="#">Models</a>
+<a class="font-headline uppercase tracking-tighter font-bold text-sm text-gray-400 hover:text-white transition-colors" href="#">Intelligence</a>
+<a class="font-headline uppercase tracking-tighter font-bold text-sm text-gray-400 hover:text-white transition-colors" href="#">Compare</a>
+<a class="font-headline uppercase tracking-tighter font-bold text-sm text-red-500 border-b-2 border-red-500 pb-1" href="#">Insights</a>
+</div>
+<button class="font-headline uppercase tracking-tighter font-bold text-sm text-white bg-red-600 px-6 py-2 rounded-sm active:scale-95 transition-all">Sign In</button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-12 px-6 lg:px-12 max-w-[1920px] mx-auto min-h-screen grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Background Ambient Decor -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+<div class="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-red-900/10 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-red-900/5 blur-[120px] rounded-full"></div>
+</div>
+<!-- Left Column: Curved Controls (Arc Layout) -->
+<section class="lg:col-span-5 relative z-10 flex flex-col gap-10">
+<header>
+<span class="font-label text-xs tracking-[0.2em] text-secondary-fixed uppercase">Cockpit Configuration</span>
+<h1 class="font-headline text-5xl lg:text-7xl font-black italic tracking-tighter text-white mt-2 leading-none">EFFICIENCY<br/><span class="text-red-600">CALCULATOR</span></h1>
+</header>
+<div class="flex flex-col gap-12 relative">
+<!-- Instrument Arc Effect Decoration -->
+<div class="absolute -left-10 top-0 bottom-0 w-24 border-l border-white/5 rounded-l-[100px] hidden lg:block"></div>
+<!-- Control: Distance -->
+<div class="group relative pl-4 lg:pl-8">
+<div class="flex justify-between items-end mb-4">
+<label class="font-label text-[10px] tracking-widest text-secondary uppercase">Annual Distance</label>
+<span class="font-headline text-2xl font-bold text-white">15,000 <span class="text-xs text-secondary">KM</span></span>
+</div>
+<input class="w-full cursor-pointer" max="50000" min="1000" step="1000" type="range" value="15000"/>
+<div class="flex justify-between mt-2 font-label text-[8px] text-gray-600">
+<span>1K</span>
+<span>50K</span>
+</div>
+</div>
+<!-- Control: Fuel Efficiency -->
+<div class="group relative pl-4 lg:pl-12">
+<div class="flex justify-between items-end mb-4">
+<label class="font-label text-[10px] tracking-widest text-secondary uppercase">Current Fuel Consumption</label>
+<span class="font-headline text-2xl font-bold text-white">8.5 <span class="text-xs text-secondary">L/100KM</span></span>
+</div>
+<input class="w-full cursor-pointer" max="25" min="3" step="0.1" type="range" value="8.5"/>
+<div class="flex justify-between mt-2 font-label text-[8px] text-gray-600">
+<span>3.0</span>
+<span>25.0</span>
+</div>
+</div>
+<!-- Fuel Type Grid -->
+<div class="pl-4 lg:pl-16">
+<label class="font-label text-[10px] tracking-widest text-secondary uppercase mb-6 block">Propulsion Variant</label>
+<div class="grid grid-cols-2 gap-4">
+<button class="bg-surface-container-low p-6 flex flex-col gap-3 group border-l-2 border-red-600 transition-all">
+<span class="material-symbols-outlined text-red-600 text-xl" data-icon="local_gas_station">local_gas_station</span>
+<span class="font-headline text-sm font-bold uppercase tracking-widest">Premium Petrol</span>
+<span class="font-body text-[10px] text-gray-500">$1.85 / L</span>
+</button>
+<button class="bg-surface-container-low p-6 flex flex-col gap-3 group border-l-2 border-transparent hover:border-white/20 transition-all">
+<span class="material-symbols-outlined text-gray-400 text-xl" data-icon="ev_station">ev_station</span>
+<span class="font-headline text-sm font-bold uppercase tracking-widest text-gray-400">Electric Grid</span>
+<span class="font-body text-[10px] text-gray-500">$0.22 / KWH</span>
+</button>
+<button class="bg-surface-container-low p-6 flex flex-col gap-3 group border-l-2 border-transparent hover:border-white/20 transition-all">
+<span class="material-symbols-outlined text-gray-400 text-xl" data-icon="oil_barrel">oil_barrel</span>
+<span class="font-headline text-sm font-bold uppercase tracking-widest text-gray-400">Diesel Bio</span>
+<span class="font-body text-[10px] text-gray-500">$1.72 / L</span>
+</button>
+<button class="bg-surface-container-low p-6 flex flex-col gap-3 group border-l-2 border-transparent hover:border-white/20 transition-all">
+<span class="material-symbols-outlined text-gray-400 text-xl" data-icon="eco">eco</span>
+<span class="font-headline text-sm font-bold uppercase tracking-widest text-gray-400">Hydrogen H2</span>
+<span class="font-body text-[10px] text-gray-500">$12.50 / KG</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column: Results Dashboard -->
+<section class="lg:col-span-7 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 h-full content-center">
+<!-- Hero Results Card -->
+<div class="md:col-span-2 glass-panel p-8 rounded-sm relative overflow-hidden cockpit-glow">
+<div class="absolute top-0 right-0 p-4">
+<span class="material-symbols-outlined text-red-600 text-3xl opacity-50" data-icon="speed" data-weight="fill" style="font-variation-settings: 'FILL' 1;">speed</span>
+</div>
+<label class="font-label text-[10px] tracking-[0.2em] text-secondary uppercase mb-2 block">Projected Monthly Expenditure</label>
+<div class="flex items-baseline gap-2">
+<span class="font-headline text-7xl lg:text-9xl font-black italic tracking-tighter text-white">$231</span>
+<span class="font-headline text-2xl font-bold text-red-600">.25</span>
+</div>
+<div class="mt-6 flex gap-8 items-center border-t border-white/5 pt-6">
+<div>
+<span class="font-label text-[9px] text-gray-500 block uppercase mb-1">Annual Total</span>
+<span class="font-headline text-xl font-bold text-white">$2,775</span>
+</div>
+<div class="h-8 w-px bg-white/10"></div>
+<div>
+<span class="font-label text-[9px] text-gray-500 block uppercase mb-1">Per Kilometer</span>
+<span class="font-headline text-xl font-bold text-white">$0.18</span>
+</div>
+</div>
+</div>
+<!-- Comparison Chart Module -->
+<div class="bg-surface-container-low p-6 rounded-sm flex flex-col justify-between">
+<div>
+<label class="font-label text-[10px] tracking-widest text-secondary uppercase mb-4 block">Fleet Comparison</label>
+<div class="space-y-4">
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] font-bold uppercase mb-1">
+<span>Wheelify Kinetic (EV)</span>
+<span class="text-red-500">-$182</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 overflow-hidden">
+<div class="h-full bg-red-600 w-1/4"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] font-bold uppercase mb-1">
+<span>Standard ICE Vehicle</span>
+<span>Baseline</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 overflow-hidden">
+<div class="h-full bg-gray-500 w-full"></div>
+</div>
+</div>
+</div>
+</div>
+<button class="mt-8 font-headline text-[10px] font-bold uppercase tracking-widest text-red-500 flex items-center gap-2 hover:translate-x-1 transition-transform">
+                    View Fleet Efficiency Report <span class="material-symbols-outlined text-xs" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Visual Asset / Interactive Map Hint -->
+<div class="bg-surface-container-low rounded-sm relative overflow-hidden group">
+<img alt="Telemetry" class="absolute inset-0 w-full h-full object-cover opacity-30 grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="High-resolution digital car dashboard telemetry display" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3TktxGv9PzpIz54B8zjMyNFB38rkUxmQX4Y0mUMhtVc_QsBh1_XlX9lFwtsBedzGRHDniRPvhtLz3tYrcB-VB9NL9IeloKOwxwyC4hEAqUJpKCKeVQrAa-6NoeqJTje8N-fAOzle-NNevVSD9-vbVlPti3u5ZA7FVTzs-3BDQHrgSpGrkR08fH9s0utZDXb7ClhIilNMT6Ixj_u1AgmLsNvX0MMb7_EUvy522gmLXLrgiRCDfpwbQZZFoXdCZ4xVwpNpdMyFU-gTw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6">
+<span class="font-label text-[10px] tracking-widest text-white uppercase block mb-1">Operational Range</span>
+<span class="font-headline text-lg font-bold text-red-500">842 KM Radius</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Anchor -->
+<footer class="w-full border-t border-white/5 pt-12 pb-8 bg-[#0E0E0E]">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 gap-4 max-w-[1920px] mx-auto">
+<div class="text-lg font-black text-white font-headline italic tracking-tighter">WHEELIFY</div>
+<div class="flex gap-6">
+<a class="font-label text-[10px] tracking-widest uppercase font-medium text-gray-600 hover:text-red-500 transition-colors" href="#">Privacy</a>
+<a class="font-label text-[10px] tracking-widest uppercase font-medium text-gray-600 hover:text-red-500 transition-colors" href="#">Terms</a>
+<a class="font-label text-[10px] tracking-widest uppercase font-medium text-gray-600 hover:text-red-500 transition-colors" href="#">API</a>
+<a class="font-label text-[10px] tracking-widest uppercase font-medium text-gray-600 hover:text-red-500 transition-colors" href="#">Fleet</a>
+<a class="font-label text-[10px] tracking-widest uppercase font-medium text-gray-600 hover:text-red-500 transition-colors" href="#">Press</a>
+</div>
+<div class="font-label text-[10px] tracking-widest uppercase font-medium text-gray-500">
+                © 2024 WHEELIFY KINETIC. ENGINEERED FOR PRECISION.
+            </div>
+</div>
+</footer>
+</body></html>

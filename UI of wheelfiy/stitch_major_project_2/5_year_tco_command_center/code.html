@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VELOCITY | TCO Analysis Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container": "#201f1f",
+              "primary-container": "#ff5545",
+              "surface-container-lowest": "#0e0e0e",
+              "primary": "#FF1A1A",
+              "on-error-container": "#ffdad6",
+              "secondary-fixed-dim": "#c8c6c5",
+              "primary-fixed": "#ffdad5",
+              "outline-variant": "#5f3e3a",
+              "surface-container-low": "#1c1b1b",
+              "primary-fixed-dim": "#ffb4a9",
+              "surface-container-high": "#2a2a2a",
+              "on-tertiary-fixed": "#410001",
+              "on-primary": "#690002",
+              "on-secondary-fixed": "#1c1b1b",
+              "on-secondary-fixed-variant": "#474746",
+              "outline": "#b08781",
+              "on-secondary-container": "#b7b5b4",
+              "surface-bright": "#3a3939",
+              "inverse-primary": "#c00009",
+              "on-primary-fixed-variant": "#930005",
+              "surface-tint": "#ffb4a9",
+              "surface": "#131313",
+              "error-container": "#93000a",
+              "on-error": "#690005",
+              "surface-dim": "#131313",
+              "surface-variant": "#353534",
+              "on-surface": "#e5e2e1",
+              "secondary-fixed": "#e5e2e1",
+              "secondary": "#c8c6c5",
+              "inverse-surface": "#e5e2e1",
+              "on-background": "#e5e2e1",
+              "secondary-container": "#474746",
+              "inverse-on-surface": "#313030",
+              "tertiary-fixed": "#ffdad5",
+              "tertiary-fixed-dim": "#ffb4a9",
+              "surface-container-highest": "#353534",
+              "on-secondary": "#313030",
+              "on-primary-container": "#5c0002",
+              "tertiary": "#ffb4a9",
+              "tertiary-container": "#ff5545",
+              "on-tertiary-container": "#5c0002",
+              "error": "#ffb4ab",
+              "on-tertiary-fixed-variant": "#930005",
+              "on-tertiary": "#690002",
+              "on-primary-fixed": "#410001",
+              "on-surface-variant": "#eabcb5",
+              "background": "#0A0A0A"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px);
+        border: 0.5px solid rgba(255, 26, 26, 0.2);
+      }
+      .redline-gradient {
+        background: linear-gradient(135deg, #FF1A1A 0%, #930005 100%);
+      }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-[#0A0A0A] text-on-surface font-body min-h-screen selection:bg-primary selection:text-white">
+<!-- TopNavBar Implementation -->
+<nav class="bg-[#0A0A0A] border-b border-[#353534]/30 sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-black italic tracking-tighter text-[#FF1A1A] font-headline">
+                VELOCITY
+            </div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-[#888888] font-headline uppercase tracking-tighter font-bold hover:text-white transition-colors duration-200" href="#">Dashboard</a>
+<a class="text-[#888888] font-headline uppercase tracking-tighter font-bold hover:text-white transition-colors duration-200" href="#">Analytics</a>
+<a class="text-[#FF1A1A] border-b-2 border-[#FF1A1A] pb-1 font-headline uppercase tracking-tighter font-bold transition-colors duration-200" href="#">TCO Analysis</a>
+<a class="text-[#888888] font-headline uppercase tracking-tighter font-bold hover:text-white transition-colors duration-200" href="#">Portfolio</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#888888] hover:text-white transition-colors duration-200 active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-[#888888] hover:text-white transition-colors duration-200 active:scale-95">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="User profile avatar placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-XtszPk1SoLQetQ4w5r50ElcPg7606kGofzw3x7ykqMuny_XI87kp4QEEBD4xTEjH_-MvGbt9hSKP5dmu0yUzAuhDZ7bznAVu4yC_WR2GpX33t43idsJZwA642_GyDi_paO1k5LLk_uPaez1L3cehgUpAtF8mnMfN0ufUF5gABGNn48W_7BLzbnWRC3WLR7JVzD90X5M5vRDYgUN5DVWlYakHw-helAuUIGACZx_p4L3t0uP--dAKeUTOaXeLD6wQjWqPHFHwL4vI"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-[1440px] mx-auto px-6 py-10 space-y-12">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row justify-between items-end gap-6">
+<div class="space-y-2">
+<h1 class="font-headline font-black text-5xl md:text-7xl leading-none tracking-tighter">
+                    TOTAL COST <br/>
+<span class="text-primary italic">OF OWNERSHIP</span>
+</h1>
+<p class="text-secondary max-w-md font-body text-sm leading-relaxed">
+                    Comprehensive 5-year financial projection model for fleet acquisition and private vehicle logistics. Calculated with real-time fuel volatility indices.
+                </p>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-low px-4 py-2 rounded-full border border-surface-container-highest">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="directions_car">directions_car</span>
+<span class="text-xs font-bold uppercase tracking-widest text-secondary">PROJECT: NEXON EV PRIME v. SWIFT DZIRE</span>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+</div>
+</header>
+<!-- Bento Grid Top Row -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Total Cost Card -->
+<div class="md:col-span-5 bg-surface-container-low p-8 rounded-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<div class="relative z-10 space-y-4">
+<span class="text-[0.6875rem] font-label text-secondary tracking-[0.2em] uppercase">TOTAL 5-YEAR COST</span>
+<div class="flex items-baseline gap-2">
+<span class="text-primary font-headline text-6xl font-black">₹ 6,42,000</span>
+<span class="text-secondary text-xs uppercase tracking-tighter font-bold">Projected</span>
+</div>
+<div class="pt-4">
+<svg class="w-full h-8 overflow-visible" viewbox="0 0 400 30">
+<path d="M0 25 L40 22 L80 24 L120 18 L160 20 L200 12 L240 15 L280 8 L320 10 L360 2 L400 5" fill="none" stroke="#FF1A1A" stroke-width="2"></path>
+<circle cx="400" cy="5" fill="#FF1A1A" r="3"></circle>
+</svg>
+<p class="text-[0.6rem] text-primary/60 font-label tracking-widest mt-2 uppercase">Aggressive Cost Trajectory</p>
+</div>
+</div>
+</div>
+<!-- Fuel Cost Card -->
+<div class="md:col-span-3 bg-surface-container-low p-8 rounded-sm">
+<div class="space-y-4">
+<span class="text-[0.6875rem] font-label text-secondary tracking-[0.2em] uppercase">5-YEAR FUEL COST</span>
+<h3 class="text-on-surface font-headline text-4xl font-bold">₹ 1,94,400</h3>
+<div class="pt-6">
+<svg class="w-full h-8" viewbox="0 0 200 30">
+<path d="M0 28 L20 25 L40 22 L60 26 L80 20 L100 22 L120 18 L140 20 L160 15 L180 18 L200 12" fill="none" stroke="#FFFFFF" stroke-width="1.5"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- Maintenance Card -->
+<div class="md:col-span-4 bg-surface-container-low p-8 rounded-sm border-r-4 border-primary/20">
+<div class="space-y-4">
+<span class="text-[0.6875rem] font-label text-secondary tracking-[0.2em] uppercase">MAINTENANCE</span>
+<h3 class="text-on-surface font-headline text-4xl font-bold">₹ 85,000</h3>
+<div class="pt-6">
+<svg class="w-full h-8" viewbox="0 0 200 30">
+<path d="M0 28 L20 28 L40 25 L60 25 L80 22 L100 22 L120 18 L140 18 L160 12 L180 12 L200 8" fill="none" stroke="#888888" stroke-dasharray="4 2" stroke-width="1.5"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<!-- Horizontal Accent Strip -->
+<div class="bg-surface-container-low border-y border-surface-container-highest py-6 px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="flex flex-col">
+<span class="text-[0.625rem] font-label text-secondary tracking-[0.15em] uppercase">Insurance</span>
+<span class="text-lg font-headline font-bold text-white">₹ 42,600 <span class="text-[0.6rem] text-primary">FIXED</span></span>
+</div>
+<div class="flex flex-col">
+<span class="text-[0.625rem] font-label text-secondary tracking-[0.15em] uppercase">Depreciation</span>
+<span class="text-lg font-headline font-bold text-white">₹ 2,12,000 <span class="text-[0.6rem] text-secondary">34% YoY</span></span>
+</div>
+<div class="flex flex-col">
+<span class="text-[0.625rem] font-label text-secondary tracking-[0.15em] uppercase">Registration</span>
+<span class="text-lg font-headline font-bold text-white">₹ 1,08,000 <span class="text-[0.6rem] text-secondary">ONE-TIME</span></span>
+</div>
+<div class="flex flex-col">
+<span class="text-[0.625rem] font-label text-secondary tracking-[0.15em] uppercase">Running Cost</span>
+<span class="text-lg font-headline font-bold text-white">₹ 1.2 / KM <span class="text-[0.6rem] text-primary">OPTIMIZED</span></span>
+</div>
+</div>
+<!-- Main Area Chart -->
+<div class="bg-surface-container-low p-8 rounded-sm space-y-8 relative">
+<div class="flex justify-between items-center">
+<div>
+<h2 class="text-[1.75rem] font-headline font-bold uppercase tracking-tight">YEAR-BY-YEAR COST BREAKDOWN</h2>
+<p class="text-secondary text-xs font-label">Cumulative expenditure across all verticals</p>
+</div>
+<div class="flex gap-6">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-primary"></span>
+<span class="text-[0.6875rem] font-label text-white uppercase font-bold">Total</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-[1.5px] bg-white"></span>
+<span class="text-[0.6875rem] font-label text-secondary uppercase">Fuel</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-[1.5px] bg-secondary dashed"></span>
+<span class="text-[0.6875rem] font-label text-secondary uppercase">Service</span>
+</div>
+</div>
+</div>
+<div class="h-[400px] w-full relative border-l border-b border-surface-container-highest">
+<!-- Chart Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between py-2">
+<div class="border-t border-surface-container-highest/30 w-full"></div>
+<div class="border-t border-surface-container-highest/30 w-full"></div>
+<div class="border-t border-surface-container-highest/30 w-full"></div>
+<div class="border-t border-surface-container-highest/30 w-full"></div>
+<div class="border-t border-surface-container-highest/30 w-full"></div>
+</div>
+<!-- Visualization -->
+<svg class="absolute inset-0 w-full h-full preserve-3d" preserveaspectratio="none" viewbox="0 0 1000 400">
+<!-- Area Fill -->
+<path d="M0 400 L0 360 L200 320 L400 240 L600 160 L800 100 L1000 40 L1000 400 Z" fill="url(#chartGradient)" opacity="0.15"></path>
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#FF1A1A"></stop>
+<stop offset="100%" stop-color="#FF1A1A" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Lines -->
+<polyline fill="none" points="0,360 200,320 400,240 600,160 800,100 1000,40" stroke="#FF1A1A" stroke-linejoin="round" stroke-width="4"></polyline>
+<polyline fill="none" points="0,380 200,360 400,330 600,300 800,260 1000,210" stroke="#FFFFFF" stroke-dasharray="1 1" stroke-width="2"></polyline>
+<polyline fill="none" points="0,390 200,385 400,375 600,360 800,340 1000,310" stroke="#888888" stroke-width="1.5"></polyline>
+</svg>
+<!-- X Axis Labels -->
+<div class="absolute -bottom-8 left-0 right-0 flex justify-between text-[0.625rem] font-label text-secondary tracking-widest uppercase">
+<span>Year 1</span>
+<span>Year 2</span>
+<span>Year 3</span>
+<span>Year 4</span>
+<span>Year 5 (Projected)</span>
+</div>
+</div>
+</div>
+<!-- Comparison Strip -->
+<div class="grid grid-cols-1 md:grid-cols-11 gap-4 items-center">
+<!-- Petrol Vehicle Card -->
+<div class="md:col-span-5 bg-surface-container-low p-6 rounded-sm border-l-2 border-secondary/20">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="text-[0.625rem] font-label text-secondary tracking-widest uppercase mb-1 block">PETROL VEHICLE</span>
+<h4 class="text-xl font-headline font-extrabold uppercase">Maruti Swift Dzire</h4>
+</div>
+<span class="material-symbols-outlined text-secondary" data-icon="local_gas_station">local_gas_station</span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs py-2 border-b border-white/5">
+<span class="text-secondary">Fuel (60k km)</span>
+<span class="font-mono text-white">₹ 4,80,000</span>
+</div>
+<div class="flex justify-between text-xs py-2">
+<span class="text-secondary">Service Index</span>
+<span class="font-mono text-white">₹ 72,400</span>
+</div>
+</div>
+</div>
+<!-- VS Vertical Badge -->
+<div class="md:col-span-1 flex justify-center">
+<div class="glass-card w-12 h-20 rounded-full flex items-center justify-center border-primary/50 shadow-[0_0_20px_rgba(255,26,26,0.1)]">
+<span class="font-headline font-black text-xl italic text-primary">VS</span>
+</div>
+</div>
+<!-- EV Vehicle Card -->
+<div class="md:col-span-5 bg-surface-container-low p-6 rounded-sm border-r-2 border-primary">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="text-[0.625rem] font-label text-secondary tracking-widest uppercase mb-1 block">ELECTRIC VEHICLE</span>
+<h4 class="text-xl font-headline font-extrabold uppercase">Tata Nexon EV</h4>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="material-symbols-outlined text-primary" data-icon="electric_bolt" style="font-variation-settings: 'FILL' 1;">electric_bolt</span>
+<span class="bg-primary text-[0.6rem] text-white px-2 py-0.5 font-bold rounded-sm tracking-tighter">YOU SAVE ₹ 1,10,400</span>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs py-2 border-b border-primary/10">
+<span class="text-secondary">Charging (60k km)</span>
+<span class="font-mono text-primary">₹ 62,000</span>
+</div>
+<div class="flex justify-between text-xs py-2">
+<span class="text-secondary">Service Index</span>
+<span class="font-mono text-primary">₹ 14,000</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Savings Banner -->
+<div class="redline-gradient p-1 w-full rounded-sm">
+<div class="bg-[#0A0A0A] p-10 flex flex-col md:flex-row items-center justify-between gap-8 rounded-[1px]">
+<div class="space-y-1 text-center md:text-left">
+<h2 class="font-headline font-black text-4xl md:text-5xl uppercase tracking-tighter">Switch to <span class="text-primary">Electric.</span></h2>
+<p class="text-secondary font-body max-w-lg">
+                        The break-even point for your profile is 34 months. Current projections show a 17% IRR on the price premium.
+                    </p>
+</div>
+<button class="bg-primary text-white font-headline font-black uppercase tracking-widest px-10 py-5 rounded-sm hover:brightness-125 transition-all active:scale-95 text-lg">
+                    See Break-Even Analysis
+                </button>
+</div>
+</div>
+</main>
+<!-- Footer Implementation -->
+<footer class="bg-[#0E0E0E] mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-8 py-12 gap-4 max-w-[1440px] mx-auto">
+<div class="font-['Inter'] text-[0.6875rem] tracking-[0.1em] text-[#888888] font-bold">
+                © 2024 VELOCITY KINETIC SYSTEMS. ALL RIGHTS RESERVED.
+            </div>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-[0.6875rem] tracking-[0.1em] text-[#888888] hover:text-[#FF1A1A] transition-colors duration-300" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-[0.6875rem] tracking-[0.1em] text-[#888888] hover:text-[#FF1A1A] transition-colors duration-300" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-[0.6875rem] tracking-[0.1em] text-[#888888] hover:text-[#FF1A1A] transition-colors duration-300" href="#">Financial Disclosure</a>
+<a class="font-['Inter'] text-[0.6875rem] tracking-[0.1em] text-[#888888] hover:text-[#FF1A1A] transition-colors duration-300" href="#">Support</a>
+</div>
+</div>
+</footer>
+</body></html>

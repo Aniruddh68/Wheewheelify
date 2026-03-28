@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WHEELIFY | Fuel Cost Calculator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;900&amp;family=Inter:wght@400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface": "#131313",
+              "error": "#ffb4ab",
+              "surface-container-high": "#2a2a2a",
+              "primary-container": "#ff5545",
+              "secondary": "#888888",
+              "secondary-fixed-dim": "#c8c6c5",
+              "on-secondary-container": "#b7b5b4",
+              "on-tertiary": "#690002",
+              "background": "#0A0A0A",
+              "on-secondary-fixed-variant": "#474746",
+              "secondary-container": "#474746",
+              "on-error-container": "#ffdad6",
+              "on-secondary-fixed": "#1c1b1b",
+              "surface-container-highest": "#353534",
+              "outline": "#b08781",
+              "error-container": "#93000a",
+              "on-background": "#e5e2e1",
+              "tertiary-fixed-dim": "#ffb4a9",
+              "tertiary": "#ffb4a9",
+              "secondary-fixed": "#e5e2e1",
+              "on-tertiary-fixed-variant": "#930005",
+              "inverse-primary": "#c00009",
+              "on-tertiary-fixed": "#410001",
+              "surface-container": "#201f1f",
+              "primary": "#FF1A1A",
+              "on-surface-variant": "#eabcb5",
+              "surface-tint": "#ffb4a9",
+              "inverse-surface": "#e5e2e1",
+              "surface-container-low": "#1c1b1b",
+              "surface-variant": "#353534",
+              "on-surface": "#FFFFFF",
+              "primary-fixed-dim": "#ffb4a9",
+              "on-primary-fixed": "#410001",
+              "surface-bright": "#3a3939",
+              "primary-fixed": "#ffdad5",
+              "tertiary-fixed": "#ffdad5",
+              "on-primary": "#FFFFFF",
+              "surface-dim": "#131313",
+              "surface-container-lowest": "#0E0E0E",
+              "on-secondary": "#313030",
+              "on-primary-container": "#5c0002",
+              "inverse-on-surface": "#313030",
+              "on-error": "#690005",
+              "outline-variant": "#5f3e3a",
+              "on-tertiary-container": "#5c0002",
+              "on-primary-fixed-variant": "#930005",
+              "tertiary-container": "#ff5545"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #0A0A0A; color: #FFFFFF; font-family: 'Inter', sans-serif; }
+        .grain {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.04;
+            pointer-events: none;
+        }
+        .text-condensed { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.05em; }
+        .custom-slider::-webkit-slider-runnable-track { background: #353534; height: 4px; }
+        .custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            background: #FF1A1A;
+            margin-top: -6px;
+            border-radius: 0;
+            box-shadow: 0 0 10px rgba(255, 26, 26, 0.5);
+        }
+        .glass-red {
+            background: rgba(255, 26, 26, 0.05);
+            backdrop-filter: blur(12px);
+            border: 0.5px solid rgba(255, 26, 26, 0.3);
+        }
+        .red-glow {
+            box-shadow: 0 0 30px rgba(255, 26, 26, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen relative overflow-x-hidden">
+<div class="fixed inset-0 grain z-50"></div>
+<!-- Top Nav Bar -->
+<nav class="flex justify-between items-center w-full px-6 h-16 max-w-[1920px] mx-auto border-b border-[#353534] bg-[#0A0A0A] relative z-40">
+<div class="text-2xl font-black tracking-tighter text-[#FF1A1A] font-['Space_Grotesk'] uppercase">WHEELIFY</div>
+<div class="hidden md:flex gap-8 items-center font-['Space_Grotesk'] uppercase tracking-tighter font-bold">
+<a class="text-[#888888] hover:text-white transition-colors" href="#">Home</a>
+<a class="text-[#888888] hover:text-white transition-colors" href="#">Compare</a>
+<a class="text-[#FF1A1A] border-b-2 border-[#FF1A1A] pb-1" href="#">Fuel Calc</a>
+<a class="text-[#888888] hover:text-white transition-colors" href="#">TCO</a>
+<a class="text-[#888888] hover:text-white transition-colors" href="#">About</a>
+</div>
+<div class="flex gap-4 items-center">
+<span class="material-symbols-outlined text-[#888888] hover:text-white cursor-pointer transition-transform scale-95 active:scale-90">settings</span>
+<span class="material-symbols-outlined text-[#888888] hover:text-white cursor-pointer transition-transform scale-95 active:scale-90">account_circle</span>
+</div>
+</nav>
+<main class="relative z-10 max-w-[1920px] mx-auto px-8 py-12 min-h-[calc(100vh-64px)] flex flex-col justify-center">
+<!-- Section Glows -->
+<div class="absolute top-1/2 left-1/4 -translate-y-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="absolute top-1/2 left-3/4 -translate-y-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+<!-- Header -->
+<header class="mb-16 text-center md:text-left">
+<div class="inline-flex items-center px-3 py-1 bg-primary text-white text-[0.6875rem] font-bold tracking-[0.1em] rounded-full mb-6">
+                ⛽ FUEL COST ESTIMATOR
+            </div>
+<h1 class="flex flex-col leading-[0.85]">
+<span class="text-white text-[80px] font-black font-headline uppercase tracking-tighter">FUEL COST</span>
+<span class="text-primary text-[88px] font-black font-headline uppercase tracking-tighter">CALCULATOR</span>
+</h1>
+</header>
+<div class="flex flex-col lg:flex-row gap-8 items-stretch">
+<!-- Left Panel (Cockpit) -->
+<section class="w-full lg:w-[48%] bg-white/[0.05] border border-primary/40 p-8 md:p-12 flex flex-col gap-10 relative">
+<div class="flex flex-col gap-2">
+<label class="text-secondary text-[0.6875rem] font-bold tracking-[0.1em] uppercase">Daily Travel Distance</label>
+<div class="flex items-baseline gap-2">
+<span class="text-64px text-white font-black font-headline text-6xl md:text-7xl">45</span>
+<span class="text-primary font-black font-headline text-2xl md:text-3xl">KM</span>
+</div>
+<input class="w-full custom-slider appearance-none bg-transparent cursor-pointer mt-4" max="500" min="1" type="range" value="45"/>
+</div>
+<div class="flex flex-col gap-4">
+<label class="text-secondary text-[0.6875rem] font-bold tracking-[0.1em] uppercase">Fuel Type Selector</label>
+<div class="grid grid-cols-2 gap-4">
+<button class="bg-primary text-white font-headline font-bold uppercase py-4 text-xl tracking-tighter transition-all duration-200 active:scale-95">Petrol</button>
+<button class="bg-surface-container-highest text-secondary font-headline font-bold uppercase py-4 text-xl tracking-tighter hover:text-white transition-all duration-200 active:scale-95">Diesel</button>
+<button class="bg-surface-container-highest text-secondary font-headline font-bold uppercase py-4 text-xl tracking-tighter hover:text-white transition-all duration-200 active:scale-95">CNG</button>
+<button class="bg-surface-container-highest text-secondary font-headline font-bold uppercase py-4 text-xl tracking-tighter hover:text-white transition-all duration-200 active:scale-95">Electric</button>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-secondary text-[0.6875rem] font-bold tracking-[0.1em] uppercase">Current Fuel Price</label>
+<div class="flex items-baseline gap-2">
+<span class="text-white font-black font-headline text-6xl md:text-7xl">104.2</span>
+<span class="text-primary font-black font-headline text-2xl md:text-3xl">/L</span>
+</div>
+<input class="w-full custom-slider appearance-none bg-transparent cursor-pointer mt-4" max="150" min="60" type="range" value="104"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-secondary text-[0.6875rem] font-bold tracking-[0.1em] uppercase">Vehicle Mileage</label>
+<div class="flex items-baseline gap-2">
+<span class="text-white font-black font-headline text-6xl md:text-7xl">18.5</span>
+<span class="text-primary font-black font-headline text-2xl md:text-3xl">KMPL</span>
+</div>
+<input class="w-full custom-slider appearance-none bg-transparent cursor-pointer mt-4" max="40" min="5" type="range" value="18"/>
+</div>
+<button class="w-full bg-primary py-6 text-white font-headline font-black text-2xl uppercase tracking-tighter mt-auto rounded-full hover:shadow-[0_0_20px_rgba(255,26,26,0.4)] transition-all active:scale-95">
+                    CALCULATE FUEL COST →
+                </button>
+</section>
+<!-- Right Panel (Readout) -->
+<section class="w-full lg:w-[48%] bg-surface-container-low p-8 md:p-12 flex flex-col gap-12 border border-white/5">
+<div class="flex flex-col gap-2">
+<label class="text-secondary text-[0.6875rem] font-bold tracking-[0.1em] uppercase">MONTHLY FUEL COST</label>
+<div class="text-white font-black font-headline text-[80px] leading-none tracking-tighter">
+                        ₹ 7,612
+                    </div>
+</div>
+<div class="flex flex-col md:flex-row gap-12 border-t border-white/5 pt-8">
+<div class="flex flex-col gap-1">
+<label class="text-secondary text-[0.6875rem] font-bold tracking-[0.1em] uppercase">YEARLY COST</label>
+<div class="text-primary font-black font-headline text-4xl uppercase tracking-tighter">₹ 91,344</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-secondary text-[0.6875rem] font-bold tracking-[0.1em] uppercase">COST PER KM</label>
+<div class="text-white font-black font-headline text-4xl uppercase tracking-tighter">₹ 5.63</div>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<label class="text-secondary text-[0.6875rem] font-bold tracking-[0.1em] uppercase">Monthly Comparison</label>
+<div class="space-y-6">
+<!-- Petrol (Active) -->
+<div class="space-y-2">
+<div class="flex justify-between text-[0.6875rem] font-bold">
+<span>PETROL</span>
+<span>₹ 7,612</span>
+</div>
+<div class="h-3 bg-surface-container-highest w-full relative">
+<div class="absolute top-0 left-0 h-full bg-primary w-[90%] red-glow"></div>
+</div>
+</div>
+<!-- Diesel -->
+<div class="space-y-2">
+<div class="flex justify-between text-[0.6875rem] font-bold text-secondary">
+<span>DIESEL</span>
+<span>₹ 6,240</span>
+</div>
+<div class="h-3 bg-surface-container-highest w-full">
+<div class="h-full bg-secondary w-[75%]"></div>
+</div>
+</div>
+<!-- CNG -->
+<div class="space-y-2">
+<div class="flex justify-between text-[0.6875rem] font-bold text-secondary">
+<span>CNG</span>
+<span>₹ 3,120</span>
+</div>
+<div class="h-3 bg-surface-container-highest w-full">
+<div class="h-full bg-secondary w-[40%]"></div>
+</div>
+</div>
+<!-- Electric -->
+<div class="space-y-2">
+<div class="flex justify-between text-[0.6875rem] font-bold text-secondary">
+<span>ELECTRIC</span>
+<span>₹ 980</span>
+</div>
+<div class="h-3 bg-surface-container-highest w-full">
+<div class="h-full bg-secondary w-[15%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="glass-red p-6 mt-4 flex items-center gap-6">
+<div class="w-12 h-12 bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white font-bold" data-icon="electric_bolt" style="font-variation-settings: 'FILL' 1;">electric_bolt</span>
+</div>
+<div>
+<div class="text-[0.6875rem] font-bold text-primary tracking-widest uppercase mb-1">EV INSIGHT</div>
+<p class="text-white text-sm font-body">Switching to Electric could save you <span class="text-primary font-bold">₹ 6,632</span> every month.</p>
+</div>
+</div>
+<button class="w-full bg-primary py-6 text-white font-headline font-black text-2xl uppercase tracking-tighter mt-auto rounded-full hover:shadow-[0_0_20px_rgba(255,26,26,0.4)] transition-all active:scale-95">
+                    View 5-Year Ownership Cost →
+                </button>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="flex flex-col md:flex-row justify-between items-center px-8 w-full border-t border-[#353534] bg-[#0A0A0A] py-12 relative z-40">
+<div class="font-['Inter'] text-[0.6875rem] tracking-[0.1em] text-[#888888] uppercase mb-4 md:mb-0">
+            © 2024 WHEELIFY KINETIC MONOLITH. ALL RIGHTS RESERVED.
+        </div>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-[0.6875rem] tracking-[0.1em] text-[#888888] hover:text-[#FF1A1A] transition-colors uppercase" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-[0.6875rem] tracking-[0.1em] text-[#888888] hover:text-[#FF1A1A] transition-colors uppercase" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-[0.6875rem] tracking-[0.1em] text-[#888888] hover:text-[#FF1A1A] transition-colors uppercase" href="#">Contact Support</a>
+<a class="font-['Inter'] text-[0.6875rem] tracking-[0.1em] text-[#888888] hover:text-[#FF1A1A] transition-colors uppercase" href="#">Press Kit</a>
+</div>
+</footer>
+<!-- Background Decoration -->
+<div class="fixed top-0 right-0 p-12 opacity-5 pointer-events-none z-0">
+<span class="text-[300px] font-black font-headline text-white leading-none tracking-tighter select-none">FUEL</span>
+</div>
+</body></html>

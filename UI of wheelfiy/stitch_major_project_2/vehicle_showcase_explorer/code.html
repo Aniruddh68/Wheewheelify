@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MONOLITH | Wheelify 3D Showcase</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container": "#201f1f",
+              "tertiary-fixed-dim": "#ffb3ae",
+              "on-primary": "#690002",
+              "secondary-container": "#474746",
+              "on-secondary-fixed-variant": "#474746",
+              "surface": "#0A0A0A",
+              "secondary-fixed": "#e4e2e1",
+              "surface-container-highest": "#353534",
+              "on-secondary-fixed": "#1b1c1c",
+              "tertiary-fixed": "#ffdad7",
+              "on-tertiary-fixed": "#410004",
+              "surface-container-lowest": "#0e0e0e",
+              "on-surface": "#e5e2e1",
+              "on-surface-variant": "#eabcb5",
+              "secondary-fixed-dim": "#c8c6c5",
+              "outline": "#b08781",
+              "surface-container-high": "#2a2a2a",
+              "primary-fixed-dim": "#ffb4a9",
+              "on-error": "#690005",
+              "inverse-on-surface": "#313030",
+              "surface-variant": "#353534",
+              "tertiary-container": "#ff5352",
+              "on-tertiary": "#68000b",
+              "on-secondary": "#303030",
+              "on-primary-fixed-variant": "#930005",
+              "on-primary-container": "#5c0002",
+              "error": "#ffb4ab",
+              "outline-variant": "#5f3e3a",
+              "background": "#0A0A0A",
+              "surface-tint": "#ffb4a9",
+              "surface-bright": "#3a3939",
+              "on-secondary-container": "#b6b5b4",
+              "tertiary": "#ffb3ae",
+              "surface-dim": "#0A0A0A",
+              "on-tertiary-container": "#5c0008",
+              "error-container": "#93000a",
+              "primary": "#FF1A1A",
+              "surface-container-low": "#1c1b1b",
+              "on-primary-fixed": "#410001",
+              "inverse-surface": "#e5e2e1",
+              "on-background": "#e5e2e1",
+              "inverse-primary": "#c00009",
+              "secondary": "#c8c6c5",
+              "primary-fixed": "#ffdad5",
+              "on-error-container": "#ffdad6",
+              "primary-container": "#ff5545",
+              "on-tertiary-fixed-variant": "#930014"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>body {
+    background-color: #0A0A0A;
+    color: #E5E2E1;
+    overflow-x: hidden
+    }
+.engine-grain {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuA9HruES5T2ip4EozKgn71v4N1nmnqsPxCXhTGh_OjMNx5uOIwlzu4V8olyNWGJtJbzrSOw2O41jbQ0bZ7Kdp1SLNvwe5MdZ37Q8TdA5XLBjghxeu-n8NZ0GJwjiVdg8g7BZNO3pR0ppphvpBUxGGIW3J1-VTXb3vYfZfKbYhytcQI6hDiFx-5-zMWN6CRX_4_Es3b5lRNujABTiJ3Yiw3uZr6kPMK6Lmdkn8iErswYtWJHib9LjfAKM2uRvC_zleckU7o7GrXc81kG);
+    opacity: 0.04;
+    pointer-events: none
+    }
+.volumetric-glow {
+    background: radial-gradient(circle at 30% 50%, rgba(255, 26, 26, 0.08) 0%, transparent 60%)
+    }
+.bobbing {
+    animation: bob 4s ease-in-out infinite
+    }
+@keyframes bob {
+    0%, 100% {
+        transform: translateY(0);
+        } 50% {
+        transform: translateY(-20px);
+        }
+    }
+.glass-panel {
+    background: rgba(42, 42, 42, 0.4);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 26, 26, 0.1)
+    }
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }</style>
+</head>
+<body class="font-body selection:bg-primary selection:text-white">
+<!-- Global Grain Overlay -->
+<div class="fixed inset-0 engine-grain z-[100]"></div>
+<!-- Atmospheric Lighting -->
+<div class="fixed inset-0 volumetric-glow z-0"></div>
+<!-- Top Navigation (Shared Component Shell) -->
+<header class="fixed top-0 w-full z-50 bg-black/70 backdrop-blur-xl border-b border-white/10 flex justify-between items-center px-8 h-20 w-full">
+<div class="text-2xl font-black tracking-tighter text-white">MONOLITH</div>
+<nav class="hidden md:flex items-center space-x-8 font-['Inter'] font-black uppercase tracking-tighter">
+<a class="text-gray-400 hover:text-white transition-colors" href="#">Showroom</a>
+<a class="text-red-600 border-b-2 border-red-600 pb-1" href="#">Performance</a>
+<a class="text-gray-400 hover:text-white transition-colors" href="#">Heritage</a>
+<a class="text-gray-400 hover:text-white transition-colors" href="#">Design</a>
+<a class="text-gray-400 hover:text-white transition-colors" href="#">Atelier</a>
+</nav>
+<div class="flex items-center space-y-0">
+<button class="material-symbols-outlined text-white hover:text-red-500 transition-all duration-300 scale-95 active:scale-90 transition-transform">menu</button>
+</div>
+</header>
+<main class="relative min-h-screen flex flex-col justify-center pt-20 px-8 md:px-20">
+<!-- Category Pills -->
+<div class="absolute top-28 left-1/2 -translate-x-1/2 z-40 flex space-x-4">
+<button class="px-6 py-2 rounded-full border border-white/10 text-zinc-500 font-bold uppercase tracking-widest text-[10px] hover:text-white transition-all">Two-Wheeler</button>
+<button class="px-6 py-2 rounded-full bg-primary text-white font-bold uppercase tracking-widest text-[10px] shadow-[0_0_15px_rgba(255,26,26,0.4)]">Sedan/SUV</button>
+<button class="px-6 py-2 rounded-full border border-white/10 text-zinc-500 font-bold uppercase tracking-widest text-[10px] hover:text-white transition-all">Electric</button>
+<button class="px-6 py-2 rounded-full border border-white/10 text-zinc-500 font-bold uppercase tracking-widest text-[10px] hover:text-white transition-all">Commercial</button>
+</div>
+<!-- Background Typography Depth -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden select-none">
+<h2 class="font-headline font-black text-[320px] leading-none opacity-[0.07] text-white tracking-tighter">
+                SEDAN
+            </h2>
+</div>
+<!-- Content Grid -->
+<div class="grid grid-cols-12 gap-8 items-center relative z-10 w-full max-w-7xl mx-auto">
+<!-- Left Info Panel -->
+<div class="col-span-12 md:col-span-4 flex flex-col space-y-6">
+<div class="space-y-1">
+<span class="text-primary font-black tracking-[0.3em] text-sm uppercase">Maruti Suzuki</span>
+<h1 class="text-6xl md:text-8xl font-headline font-black tracking-tighter text-white leading-[0.9]">Swift Dzire</h1>
+</div>
+<div class="flex items-baseline space-x-2">
+<span class="text-zinc-500 font-light text-xl">Starting at</span>
+<span class="text-primary text-4xl font-black">₹ 6.57 Lakh</span>
+</div>
+<div class="flex flex-wrap gap-3">
+<div class="glass-panel px-4 py-2 rounded-lg flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">local_gas_station</span>
+<span class="text-[10px] font-bold tracking-widest uppercase">Petrol</span>
+</div>
+<div class="glass-panel px-4 py-2 rounded-lg flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">speed</span>
+<span class="text-[10px] font-bold tracking-widest uppercase">22 kmpl</span>
+</div>
+<div class="glass-panel px-4 py-2 rounded-lg flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">settings_input_component</span>
+<span class="text-[10px] font-bold tracking-widest uppercase">1197 cc</span>
+</div>
+</div>
+<button class="w-fit mt-8 bg-primary text-white px-10 py-4 rounded-full font-black uppercase tracking-tighter shadow-[0_0_20px_rgba(255,26,26,0.3)] hover:scale-105 transition-transform active:scale-95">
+                    Configure Vehicle
+                </button>
+</div>
+<!-- Central 3D Asset -->
+<div class="col-span-12 md:col-span-5 relative flex justify-center items-center">
+<div class="bobbing">
+<img alt="3D Vehicle Performance Sedan" class="w-full max-w-[600px] h-auto object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.8)] mix-blend-screen brightness-110" data-alt="Side profile of a modern white performance sedan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAD7VrjDiE4mKlGydCyxrR58lIWxuglJ6MS5jjRlTz8SpwwALZ1yWQTH4BzQn0mpHsZmfQjoFpg51aPuZ9IvHSbdIRFP9rZ5755hnuoBlUocf2i5JBmehjn3y_N5qg4ozdLnjd8yF57qfZvJzzg3sSMPR4bk9ZaxSEOcck4kKh0PtLPMkqaNNPkIlJZWphqmVm_bf_xRCLwE_9mlm9Tr1HUFRvEmG0x6WQdA4UMxIKUwW5rfQ67fUHxUb2PT243zksgIQOkut2QIZYr"/>
+</div>
+</div>
+<!-- Right Data Chips -->
+<div class="col-span-12 md:col-span-3 flex flex-col space-y-4 md:items-end">
+<!-- Chip 1 -->
+<div class="glass-panel p-6 rounded-2xl w-full max-w-[240px] border-l-2 border-primary/40 group hover:border-primary transition-all duration-500">
+<p class="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-1">Fuel Type</p>
+<div class="flex justify-between items-center">
+<span class="text-xl font-headline font-black text-white">Petrol/CNG</span>
+<span class="material-symbols-outlined text-primary opacity-50 group-hover:opacity-100 transition-opacity">ev_station</span>
+</div>
+</div>
+<!-- Chip 2 -->
+<div class="glass-panel p-6 rounded-2xl w-full max-w-[240px] border-l-2 border-primary/40 group hover:border-primary transition-all duration-500">
+<p class="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-1">5-Year TCO</p>
+<div class="flex justify-between items-center">
+<span class="text-xl font-headline font-black text-white">₹ 3.8 Lakh</span>
+<span class="material-symbols-outlined text-primary opacity-50 group-hover:opacity-100 transition-opacity">payments</span>
+</div>
+</div>
+<!-- Chip 3 -->
+<div class="glass-panel p-6 rounded-2xl w-full max-w-[240px] border-l-2 border-primary/40 group hover:border-primary transition-all duration-500">
+<p class="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-1">Mileage</p>
+<div class="flex justify-between items-center">
+<span class="text-xl font-headline font-black text-white">22.4 kmpl</span>
+<span class="material-symbols-outlined text-primary opacity-50 group-hover:opacity-100 transition-opacity">eco</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Vehicle Nav (Bottom) -->
+<div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-40 flex items-center space-x-12">
+<button class="material-symbols-outlined text-zinc-600 hover:text-primary transition-colors text-3xl">arrow_back_ios_new</button>
+<div class="flex space-x-3">
+<div class="w-12 h-[2px] bg-primary"></div>
+<div class="w-12 h-[2px] bg-zinc-800 hover:bg-zinc-600 transition-colors cursor-pointer"></div>
+<div class="w-12 h-[2px] bg-zinc-800 hover:bg-zinc-600 transition-colors cursor-pointer"></div>
+<div class="w-12 h-[2px] bg-zinc-800 hover:bg-zinc-600 transition-colors cursor-pointer"></div>
+</div>
+<button class="material-symbols-outlined text-zinc-600 hover:text-primary transition-colors text-3xl">arrow_forward_ios</button>
+</div>
+</main>
+<!-- Footer (Shared Component Shell) -->
+<footer class="bg-black w-full py-12 flex flex-col items-center justify-center space-y-6 w-full mt-auto relative z-10">
+<div class="bg-gradient-to-r from-transparent via-zinc-800 to-transparent h-[1px] mb-8 w-full max-w-4xl"></div>
+<div class="text-lg font-black text-white tracking-tighter">KINETIC MONOLITH</div>
+<div class="flex space-x-8 font-['Inter'] font-light text-[10px] tracking-[0.2em] uppercase text-zinc-600">
+<a class="hover:text-red-600 transition-colors" href="#">Privacy</a>
+<a class="hover:text-red-600 transition-colors" href="#">Technical Specs</a>
+<a class="hover:text-red-600 transition-colors" href="#">Retailers</a>
+<a class="hover:text-red-600 transition-colors" href="#">Contact</a>
+</div>
+<p class="font-['Inter'] font-light text-[10px] tracking-[0.2em] uppercase text-zinc-800">
+            © 2024 KINETIC MONOLITH. ENGINEERED PRECISION.
+        </p>
+</footer>
+</body></html>

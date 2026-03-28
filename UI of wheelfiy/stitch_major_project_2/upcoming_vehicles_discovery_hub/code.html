@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WHEELIFY | Upcoming Vehicles Discovery Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-container": "#ff5545",
+                        "on-secondary": "#313030",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "on-secondary-container": "#b7b5b4",
+                        "secondary-container": "#474746",
+                        "on-primary": "#690002",
+                        "on-tertiary-fixed": "#410001",
+                        "tertiary-fixed-dim": "#ffb4a9",
+                        "surface-variant": "#353534",
+                        "on-primary-fixed-variant": "#930005",
+                        "on-error": "#690005",
+                        "tertiary": "#ffb4a9",
+                        "primary-fixed-dim": "#ffb4a9",
+                        "outline-variant": "#5f3e3a",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#131313",
+                        "primary-fixed": "#ffdad5",
+                        "on-tertiary-fixed-variant": "#930005",
+                        "on-secondary-fixed-variant": "#474746",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-primary-container": "#5c0002",
+                        "inverse-primary": "#c00009",
+                        "surface-container": "#201f1f",
+                        "surface": "#131313",
+                        "primary": "#ffb4a9",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "outline": "#b08781",
+                        "surface-bright": "#3a3939",
+                        "tertiary-container": "#ff5545",
+                        "on-tertiary": "#690002",
+                        "background": "#131313",
+                        "inverse-on-surface": "#313030",
+                        "surface-tint": "#ffb4a9",
+                        "on-surface": "#e5e2e1",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-surface-variant": "#eabcb5",
+                        "tertiary-fixed": "#ffdad5",
+                        "on-primary-fixed": "#410001",
+                        "on-background": "#e5e2e1",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary-container": "#5c0002",
+                        "secondary": "#c8c6c5",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container-highest": "#353534",
+                        "inverse-surface": "#e5e2e1",
+                        "brand-red": "#FF1A1A",
+                        "void-black": "#0A0A0A"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>body {
+    background-color: #0A0A0A;
+    color: #FFF;
+    font-family: "Inter", sans-serif
+    }
+.film-grain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.05;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCdPlL-9x4fpG26Hb0TGhCqWTUAMAzXmXNwurucnWItpJ-ndBTXMSXI3UEhsT53j0KbRFR0ibyUyTr_5_Q6zDX6ByMnm_29pcSkLd0TnflvoqK1oSdr6adbWfZJWxKZh3LlM0_Qb53edlVhAvKJof8F3oCpXYSoo5_3sDe2VczIgTMxrZDstScq2xysUi79G7Fsknwi_a0CAyPbJFcbrVNLEjctE4tDmanXlqr2yhNWhlNA3P6C21YyMeshAyL35otlxEmi7zwhXzIS)
+    }
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 0.5px solid rgba(255, 26, 26, 0.3)
+    }
+.text-glow {
+    text-shadow: 0 0 15px rgba(255, 26, 26, 0.6)
+    }
+.red-glow-border:hover {
+    box-shadow: 0 0 20px rgba(255, 26, 26, 0.2)
+    }
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }</style>
+</head>
+<body class="selection:bg-brand-red selection:text-white overflow-x-hidden">
+<div class="film-grain"></div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full flex justify-between items-center px-6 h-16 bg-black/80 backdrop-blur-md z-50">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black italic text-[#FF1A1A] tracking-tighter font-['Space_Grotesk'] uppercase">WHEELIFY</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="font-['Space_Grotesk'] uppercase tracking-tighter text-[#FF1A1A] font-bold hover:text-white transition-colors duration-300" href="#">Launching Soon</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-tighter text-[#888888] hover:text-white transition-colors duration-300" href="#">Expected</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-tighter text-[#888888] hover:text-white transition-colors duration-300" href="#">Just Announced</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#888888] scale-75">search</span>
+<input class="bg-[#131313] border-none text-[10px] tracking-widest font-bold uppercase py-2 pl-10 pr-4 w-48 focus:ring-1 focus:ring-[#FF1A1A] rounded-sm" placeholder="SEARCH MODELS" type="text"/>
+</div>
+<button class="text-[#888888] hover:text-white transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-[#888888] hover:text-white transition-colors"><span class="material-symbols-outlined">person</span></button>
+</div>
+</header>
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden lg:flex flex-col fixed left-0 top-0 h-full py-8 w-64 bg-[#0A0A0A] border-r border-[#FF1A1A]/10 z-40 mt-16">
+<div class="px-6 mb-10">
+<h2 class="text-xl font-black text-[#FF1A1A] font-['Space_Grotesk'] tracking-tighter">WHEELIFY</h2>
+<p class="text-[10px] uppercase tracking-widest text-[#888888] font-bold mt-1">High-Performance Hub</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-4 px-6 py-4 text-[#FF1A1A] border-r-4 border-[#FF1A1A] bg-gradient-to-r from-[#FF1A1A]/10 to-transparent transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-['Space_Grotesk'] uppercase text-xs tracking-widest font-bold">Launching Soon</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-[#888888] hover:bg-[#131313] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-['Space_Grotesk'] uppercase text-xs tracking-widest font-bold">Expected</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-[#888888] hover:bg-[#131313] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">new_releases</span>
+<span class="font-['Space_Grotesk'] uppercase text-xs tracking-widest font-bold">Just Announced</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 text-[#888888] hover:bg-[#131313] hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">visibility_off</span>
+<span class="font-['Space_Grotesk'] uppercase text-xs tracking-widest font-bold">Spy Shots</span>
+</a>
+</nav>
+<div class="px-6 pb-8">
+<button class="w-full bg-[#FF1A1A] text-white font-bold uppercase text-[10px] tracking-widest py-4 rounded-sm hover:brightness-110 active:scale-95 transition-all">
+                Get Launch Alerts
+            </button>
+</div>
+</aside>
+<main class="lg:ml-64 pt-24 pb-20 px-6 lg:px-12">
+<!-- Hero Section -->
+<section class="mb-16">
+<h1 class="text-6xl md:text-8xl lg:text-9xl font-black font-headline tracking-tighter leading-none mb-8 text-white uppercase italic">
+                WHAT'S <span class="text-[#FF1A1A]">COMING</span> NEXT
+            </h1>
+<!-- Editorial Tabs -->
+<div class="flex gap-8 border-b border-white/10 mb-12 overflow-x-auto no-scrollbar">
+<button class="pb-4 text-xs font-bold uppercase tracking-widest text-white border-b-2 border-[#FF1A1A]">All Upcoming</button>
+<button class="pb-4 text-xs font-bold uppercase tracking-widest text-[#888888] border-b-2 border-transparent hover:text-white transition-colors">Launching Soon</button>
+<button class="pb-4 text-xs font-bold uppercase tracking-widest text-[#888888] border-b-2 border-transparent hover:text-white transition-colors">Expected</button>
+<button class="pb-4 text-xs font-bold uppercase tracking-widest text-[#888888] border-b-2 border-transparent hover:text-white transition-colors">Just Announced</button>
+<button class="pb-4 text-xs font-bold uppercase tracking-widest text-[#888888] border-b-2 border-transparent hover:text-white transition-colors">Spy Shots</button>
+</div>
+<!-- Hero Feature Card -->
+<div class="relative w-full h-[500px] bg-[#0D0D0D] overflow-hidden group cursor-pointer border border-white/5">
+<div class="absolute inset-0 flex items-center justify-center opacity-10 select-none pointer-events-none">
+<span class="text-[20vw] font-black font-headline tracking-tighter text-white">NEXON EV</span>
+</div>
+<div class="absolute inset-0 flex flex-col md:flex-row items-center justify-between p-8 lg:p-16 z-10">
+<div class="max-w-xl text-center md:text-left">
+<span class="bg-[#FF1A1A] text-[10px] font-bold tracking-widest px-3 py-1 uppercase rounded-sm mb-4 inline-block">LAUNCHING Q1 2026</span>
+<h2 class="text-4xl md:text-6xl font-black font-headline text-white mb-4 italic uppercase">NEXON EV <span class="text-outline text-transparent" style="-webkit-text-stroke: 1px white;">ULTRA</span></h2>
+<p class="text-[#888888] text-sm md:text-lg mb-8 max-w-md">Redefining high-performance electric mobility with a surgical focus on aerodynamics and instantaneous torque delivery.</p>
+<div class="flex flex-wrap gap-4 justify-center md:justify-start">
+<button class="bg-[#FF1A1A] text-white font-bold uppercase text-[12px] tracking-widest px-8 py-4 rounded-full hover:shadow-[0_0_20px_rgba(255,26,26,0.5)] transition-all active:scale-95">Notify Me</button>
+<button class="border border-white/20 text-white font-bold uppercase text-[12px] tracking-widest px-8 py-4 rounded-full hover:bg-white hover:text-black transition-all">View Specs</button>
+</div>
+</div>
+<div class="relative w-full md:w-1/2 h-64 md:h-full flex items-center justify-center">
+<img alt="Nexon EV Ultra" class="w-full h-full object-contain drop-shadow-[0_0_50px_rgba(255,26,26,0.3)] transition-transform duration-700 group-hover:scale-105" data-alt="Modern sleek electric SUV in matte dark grey with glowing red rim lights and futuristic aerodynamic lines against a black studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUr_dYQBJx3EzRiOAvgauyQEg-A92pehDAI6vxD6yT4NbQCW9Vg9xe3F3NYrPuUV3Sg7l1BkLkLQX-dm_TaOoeL3psLDVoLtRMrvhh2yI9TKdLVguKYaiHJarZvbmAJFqAklOpkIyZnhUafXwdczWr-Gvn2xyN9tTeBEBM7gV0t9D_FAYwKHMpZBqytOr9bKiPUirWpVSBbjGLaUcXpUZzmyLR57IorhMSfdH2iqC7jShdVkSVScNGA9GBnGsU_U_l_3q-m2Mo-lWY"/>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#FF1A1A] to-transparent opacity-50"></div>
+</div>
+</section>
+<!-- Horizontal Timeline -->
+<section class="mb-20">
+<div class="flex items-center gap-4 mb-8">
+<span class="text-[10px] font-bold tracking-[0.3em] text-[#888888] uppercase">LAUNCH SCHEDULE</span>
+<div class="h-px flex-1 bg-white/10"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="p-6 bg-[#131313] border-l-2 border-[#FF1A1A]">
+<span class="text-[10px] font-black text-[#FF1A1A] uppercase tracking-widest">Q1 2026</span>
+<h4 class="text-white font-headline text-xl mt-2">ELECTRIC SURGE</h4>
+<p class="text-[#888888] text-[10px] uppercase mt-1 tracking-widest font-bold">3 Models Confirmed</p>
+</div>
+<div class="p-6 bg-[#131313] border-l-2 border-[#353534]">
+<span class="text-[10px] font-black text-[#888888] uppercase tracking-widest">Q2 2026</span>
+<h4 class="text-white font-headline text-xl mt-2">HYBRID EVOLUTION</h4>
+<p class="text-[#888888] text-[10px] uppercase mt-1 tracking-widest font-bold">2 Models Expected</p>
+</div>
+<div class="p-6 bg-[#131313] border-l-2 border-[#353534]">
+<span class="text-[10px] font-black text-[#888888] uppercase tracking-widest">Q3 2026</span>
+<h4 class="text-white font-headline text-xl mt-2">LUXURY PERFORMANCE</h4>
+<p class="text-[#888888] text-[10px] uppercase mt-1 tracking-widest font-bold">Spy Shots Emerging</p>
+</div>
+<div class="p-6 bg-[#131313] border-l-2 border-[#353534]">
+<span class="text-[10px] font-black text-[#888888] uppercase tracking-widest">Q4 2026</span>
+<h4 class="text-white font-headline text-xl mt-2">THE FINALE</h4>
+<p class="text-[#888888] text-[10px] uppercase mt-1 tracking-widest font-bold">Flagship Reveals</p>
+</div>
+</div>
+</section>
+<!-- Vehicle Grid -->
+<section class="mb-24">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1: Confirmed -->
+<div class="glass-card flex flex-col group red-glow-border transition-all duration-300">
+<div class="relative h-64 overflow-hidden bg-black">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Side profile of a red high-performance sports sedan with black alloy wheels in a minimalist concrete setting with dramatic shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRdPYh1PLhOUHfdKY7Ehp5ZXsERmJLlPdiOP1Cc8pJ_C3DPy5K03jV_Bf96el3n1ZLxhod9aPzqoY6q9b4vFy4Ri1WZmHCO7UM6pPj1nXKFGMBcKKugYVXh0DI6XM2e9bVUvfB_jAAE68A-Xn2ENjPEeEuNDk_5BetxXGhSyerRPL7yextvvcNkEbHVrB96iphAtptFCQjUCLYzvyhTpU8nSAgP9_7tLnGG0FOgK5XJw3evJKdSuJUsyvOYa3WLbDLcSGJVrCzPnWH"/>
+<div class="absolute top-4 left-4 bg-[#FF1A1A] text-[9px] font-black tracking-widest px-2 py-1 uppercase rounded-sm">CONFIRMED</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+</div>
+<div class="p-6">
+<span class="text-[10px] text-[#888888] font-bold uppercase tracking-widest">PERFORMANCE SEDAN</span>
+<h3 class="text-2xl font-black font-headline text-white mt-1 italic">VELOCITY GT</h3>
+<div class="flex justify-between items-center mt-6 pt-6 border-t border-white/5">
+<div>
+<p class="text-[9px] text-[#888888] font-bold uppercase tracking-widest">POWER</p>
+<p class="text-lg font-headline font-bold text-white">450 BHP</p>
+</div>
+<div>
+<p class="text-[9px] text-[#888888] font-bold uppercase tracking-widest">0-100</p>
+<p class="text-lg font-headline font-bold text-white">3.4 SEC</p>
+</div>
+<button class="text-[#FF1A1A] hover:text-white transition-colors">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2: Spy Shot -->
+<div class="glass-card flex flex-col group transition-all duration-300">
+<div class="relative h-64 overflow-hidden bg-black grayscale group-hover:grayscale-0">
+<img class="w-full h-full object-cover blur-[8px] group-hover:blur-0 transition-all duration-700" data-alt="Close up of a prototype car covered in black and white camouflage patterns, visible headlights and aggressive front grille details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAJPPuFwGvmcQuQvEtQZuysEnSsIX45FiM3ySSRA7ueNlj4JWZjwjeUc4gWkbWx99ZOU7inL-NvSfiIWzdMo-TRXgelB_q3AMHqJW9LM04aqYb-NFbgHK-dVvh8woFshLXGLhWMY7QZFeLRm3ibGRBSnD58nkGopjC1SladkdivX326KCT7NNqp_K7RFNE-NG88aEjxQcdnPPX-p5gsjCQJ3owMweOeVTHhcEhCAXG0Ls9t78cMaNT2GBpqZTec9hOlRn-GUZTy9Qm"/>
+<div class="absolute top-4 left-4 bg-[#353534] text-[9px] font-black tracking-widest px-2 py-1 uppercase rounded-sm">SPY SHOT</div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-[10px] font-black text-white bg-black/80 px-4 py-2 uppercase tracking-[0.2em]">REVEAL IMMINENT</span>
+</div>
+</div>
+<div class="p-6">
+<span class="text-[10px] text-[#888888] font-bold uppercase tracking-widest">ADVENTURE SUV</span>
+<h3 class="text-2xl font-black font-headline text-white mt-1 italic">NOMAD X4</h3>
+<div class="flex justify-between items-center mt-6 pt-6 border-t border-white/5">
+<div>
+<p class="text-[9px] text-[#888888] font-bold uppercase tracking-widest">EXPECTED</p>
+<p class="text-lg font-headline font-bold text-white">OCT 2026</p>
+</div>
+<button class="border border-[#FF1A1A]/30 text-[#FF1A1A] text-[10px] font-bold uppercase tracking-widest px-4 py-2 hover:bg-[#FF1A1A] hover:text-white transition-all">
+                                SUBSCRIBE
+                            </button>
+</div>
+</div>
+</div>
+<!-- Card 3: Just Announced -->
+<div class="glass-card flex flex-col group transition-all duration-300">
+<div class="relative h-64 overflow-hidden bg-black">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Abstract cinematic shot of a car's taillight glowing bright red in a dark rainy night with reflections on the wet asphalt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUAB81aQpCI8Dyighn_YqAyD6TZKOJZ25ZPRWgyCqx-HmSmZqnqWAmiK1W9pZsPKht7R-_xOLgYTB6Uh_fsLItRCeuaqKsxkhqBEEl6E9nAf07zb5ZXuq6IODl9GJRzQKBaErgy_a6etKdmnQaUpvG0J7jsvD2dJ5JhhTsJomLdDUFCrIAcAnrNj2uK68LUYQVvrR2UL-wId7LLKTepFytfQMuiBceME1gwtpQxfrCxa0YvYwx4zODVvpCnECVGlwLPuSU6nbFtFjk"/>
+<div class="absolute top-4 left-4 bg-white text-black text-[9px] font-black tracking-widest px-2 py-1 uppercase rounded-sm">NEW TEASER</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+</div>
+<div class="p-6">
+<span class="text-[10px] text-[#888888] font-bold uppercase tracking-widest">URBAN COMPACT</span>
+<h3 class="text-2xl font-black font-headline text-white mt-1 italic">CITY PULSE</h3>
+<div class="flex justify-between items-center mt-6 pt-6 border-t border-white/5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#FF1A1A] text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<p class="text-sm font-bold text-white uppercase tracking-widest">FULL ELECTRIC</p>
+</div>
+<button class="text-white hover:text-[#FF1A1A] transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter Section -->
+<section class="w-full py-20 border-t border-white/5 bg-[#0D0D0D]">
+<div class="max-w-4xl mx-auto text-center">
+<h2 class="text-4xl md:text-5xl font-black font-headline text-white uppercase italic mb-4">NEVER MISS A LAUNCH</h2>
+<p class="text-[#888888] text-sm uppercase tracking-widest font-bold mb-10">Get surgical precision launch dates and spy shots delivered directly to your hub.</p>
+<div class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+<input class="flex-1 bg-black border-none border-b-2 border-[#888888]/20 focus:border-[#FF1A1A] text-white text-[12px] tracking-widest font-bold uppercase py-4 transition-all" placeholder="ENTER PERFORMANCE EMAIL" type="email"/>
+<button class="bg-[#FF1A1A] text-white font-bold uppercase text-[12px] tracking-widest px-8 py-4 rounded-sm hover:brightness-110 transition-all active:scale-95">
+                        Get Launch Alerts
+                    </button>
+</div>
+<p class="mt-6 text-[9px] text-[#888888] uppercase tracking-widest font-medium">By subscribing, you agree to our Kinetic Editorial Guidelines.</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full flex flex-col items-center gap-6 px-8 py-12 border-t border-[#131313] bg-black">
+<div class="flex flex-col md:flex-row justify-between w-full max-w-7xl items-center gap-8">
+<span class="text-lg font-black text-white font-['Space_Grotesk'] tracking-tighter uppercase italic">WHEELIFY <span class="text-[#FF1A1A]">KINETIC</span></span>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-[10px] tracking-widest text-[#888888] uppercase hover:text-white transition-colors duration-300" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-[10px] tracking-widest text-[#888888] uppercase hover:text-white transition-colors duration-300" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-[10px] tracking-widest text-[#888888] uppercase hover:text-white transition-colors duration-300" href="#">Contact</a>
+<a class="font-['Inter'] text-[10px] tracking-widest text-[#888888] uppercase hover:text-white transition-colors duration-300" href="#">Newsroom</a>
+</div>
+</div>
+<p class="font-['Inter'] text-[10px] tracking-[0.4em] text-[#353534] uppercase font-black">© 2024 WHEELIFY KINETIC EDITORIAL</p>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-4 pb-safe bg-[#0A0A0A]/95 backdrop-blur-xl border-t border-white/5 z-50">
+<a class="flex flex-col items-center justify-center text-[#FF1A1A] drop-shadow-[0_0_8px_rgba(255,26,26,0.4)]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-['Inter'] text-[8px] uppercase font-bold tracking-widest mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#888888] hover:text-white" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-['Inter'] text-[8px] uppercase font-bold tracking-widest mt-1">Discover</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#888888] hover:text-white" href="#">
+<span class="material-symbols-outlined">timeline</span>
+<span class="font-['Inter'] text-[8px] uppercase font-bold tracking-widest mt-1">Timeline</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#888888] hover:text-white" href="#">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-['Inter'] text-[8px] uppercase font-bold tracking-widest mt-1">Alerts</span>
+</a>
+</nav>
+<!-- FAB -->
+<button class="fixed bottom-24 right-6 lg:bottom-8 lg:right-8 bg-[#FF1A1A] text-white w-14 h-14 rounded-full shadow-[0_10px_40px_rgba(255,26,26,0.3)] flex items-center justify-center z-50 hover:scale-110 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-2xl">compare_arrows</span>
+</button>
+</body></html>

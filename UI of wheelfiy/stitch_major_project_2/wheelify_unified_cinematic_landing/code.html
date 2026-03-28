@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-container": "#b7b5b4",
+              "on-tertiary-fixed": "#410001",
+              "surface-tint": "#ffb4a9",
+              "primary-container": "#ff5545",
+              "on-primary-fixed": "#410001",
+              "tertiary-fixed": "#ffdad5",
+              "surface-container-lowest": "#0e0e0e",
+              "on-error": "#690005",
+              "surface-container-low": "#1c1b1b",
+              "background": "#0a0a0a",
+              "on-primary": "#690002",
+              "primary": "#FF1A1A",
+              "tertiary-fixed-dim": "#ffb4a9",
+              "surface-bright": "#3a3939",
+              "on-secondary-fixed": "#1c1b1b",
+              "on-primary-container": "#5c0002",
+              "secondary-container": "#474746",
+              "secondary": "#888888",
+              "primary-fixed": "#ffdad5",
+              "outline-variant": "#5f3e3a",
+              "tertiary-container": "#ff5545",
+              "on-error-container": "#ffdad6",
+              "inverse-on-surface": "#313030",
+              "inverse-primary": "#c00009",
+              "primary-fixed-dim": "#ffb4a9",
+              "on-primary-fixed-variant": "#930005",
+              "surface": "#0a0a0a",
+              "inverse-surface": "#e5e2e1",
+              "surface-variant": "#353534",
+              "secondary-fixed": "#e5e2e1",
+              "outline": "#b08781",
+              "error-container": "#93000a",
+              "error": "#ffb4ab",
+              "surface-dim": "#0a0a0a",
+              "on-secondary-fixed-variant": "#474746",
+              "surface-container-highest": "#353534",
+              "on-tertiary-container": "#5c0002",
+              "on-tertiary": "#690002",
+              "on-surface-variant": "#eabcb5",
+              "secondary-fixed-dim": "#c8c6c5",
+              "on-secondary": "#313030",
+              "surface-container": "#201f1f",
+              "on-tertiary-fixed-variant": "#930005",
+              "on-background": "#e5e2e1",
+              "surface-container-high": "#2a2a2a",
+              "on-surface": "#e5e2e1",
+              "tertiary": "#ffb4a9"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #E5E2E1;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .grain-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        .text-gradient-fade {
+            background: linear-gradient(to bottom, #ffffff 30%, transparent 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 0.5px solid rgba(255, 26, 26, 0.2);
+        }
+        .red-rim-glow {
+            filter: drop-shadow(0 20px 30px rgba(255, 26, 26, 0.3));
+        }
+        .step-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw 2s ease-out forwards;
+        }
+        @keyframes draw {
+            to { stroke-dashoffset: 0; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary selection:text-white">
+<div class="grain-overlay"></div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-black/70 backdrop-blur-xl border-b border-white/10 flex justify-between items-center px-8 h-20 w-full shadow-2xl">
+<div class="text-2xl font-black text-white after:content-['.'] after:text-red-600 font-['Space_Grotesk'] font-bold uppercase tracking-tighter">Wheelify</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="font-['Space_Grotesk'] font-bold uppercase tracking-tighter text-white border-b-2 border-red-600 pb-1" href="#">Models</a>
+<a class="font-['Space_Grotesk'] font-bold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors" href="#">Performance</a>
+<a class="font-['Space_Grotesk'] font-bold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors" href="#">Technology</a>
+<a class="font-['Space_Grotesk'] font-bold uppercase tracking-tighter text-gray-400 hover:text-white transition-colors" href="#">Heritage</a>
+</div>
+<button class="bg-primary text-white px-6 py-2 font-['Space_Grotesk'] font-bold uppercase tracking-tighter rounded-sm active:scale-95 transition-transform hover:bg-red-700">
+        Configure
+    </button>
+</nav>
+<main>
+<!-- 1. HERO SECTION -->
+<section class="relative min-h-screen w-full flex flex-col md:flex-row pt-20 overflow-hidden">
+<!-- Left Column -->
+<div class="w-full md:w-[42%] flex flex-col justify-center px-8 md:pl-16 z-10 py-20">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-highest border border-white/5 rounded-sm mb-6 w-fit">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] font-label font-bold tracking-[0.2em] text-secondary uppercase">INDIA'S #1 VEHICLE INTELLIGENCE PLATFORM</span>
+</div>
+<h1 class="text-6xl md:text-[5.5rem] leading-[0.9] font-headline font-black tracking-tighter uppercase mb-8">
+                MAKE <br/>
+<span class="text-primary text-[112px] block">SMARTER</span>
+                DECISIONS.
+            </h1>
+<p class="text-secondary font-body text-lg max-w-md mb-12 leading-relaxed">
+                The only automotive intelligence platform designed for the Indian road. Compare total cost of ownership, real-world mileage, and performance benchmarks in seconds.
+            </p>
+<div class="flex flex-wrap gap-4">
+<button class="px-8 py-4 bg-primary text-white font-headline font-bold uppercase tracking-tighter rounded-sm hover:shadow-[0_0_20px_rgba(255,26,26,0.4)] transition-all">
+                    Compare Vehicles
+                </button>
+<button class="px-8 py-4 bg-transparent border-[0.5px] border-secondary/30 text-white font-headline font-bold uppercase tracking-tighter rounded-sm hover:border-primary transition-all flex items-center gap-2 group">
+<span class="material-symbols-outlined text-sm">play_arrow</span>
+                    Watch Demo
+                </button>
+</div>
+</div>
+<!-- Right Column -->
+<div class="w-full md:w-[58%] relative flex items-center justify-center min-h-[500px]">
+<div class="relative w-full h-full flex items-center justify-center p-12">
+<img alt="Wheelify Flagship" class="w-full h-auto object-contain red-rim-glow z-0" data-alt="3D photorealistic dark gray luxury sedan side profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2ZbJmzaAujG8uUUeJ8j785dgOJOhrcnS7UeJenlPwHkzoBE-bfEdNmW61ngrYez4HQ0-cZTgssqYFxogWTJNrKOQlbb9V5IsusRrRI4Qi7X0g35eGB8WgB8BIcDCm08EUIkLXWDi37qOpjnyGXWODzFaLaU9ncq2QHuJUcDnAMUNo1kG7OZN5pUVjf6jdxlUHYEBLdvAIMZz1nCID9BOHK53Rjc8sHF3-Rb-0s9FeDDmREIBWiZRa_GtWzKL7OQgt51Sbu_EKUVxm"/>
+<!-- Orbiting Chips -->
+<div class="absolute top-[15%] left-[10%] glass-card p-4 rounded-xl flex flex-col gap-1 w-40 z-20">
+<span class="text-[10px] font-label text-secondary tracking-widest uppercase">Petrol Price</span>
+<div class="flex items-end gap-1">
+<span class="text-xl font-headline font-bold text-white">₹104.2</span>
+<span class="text-xs text-primary pb-1 font-bold">AVG/L</span>
+</div>
+</div>
+<div class="absolute top-[25%] right-[15%] glass-card p-4 rounded-xl flex flex-col gap-1 w-44 z-20">
+<span class="text-[10px] font-label text-secondary tracking-widest uppercase">5-Year TCO</span>
+<div class="flex items-end gap-1">
+<span class="text-xl font-headline font-bold text-white">₹12.4L</span>
+<span class="text-xs text-green-500 pb-1 font-bold">(-12%)</span>
+</div>
+</div>
+<div class="absolute bottom-[20%] left-[20%] glass-card p-4 rounded-xl flex flex-col gap-1 w-36 z-20">
+<span class="text-[10px] font-label text-secondary tracking-widest uppercase">Break-Even</span>
+<div class="flex items-end gap-1">
+<span class="text-xl font-headline font-bold text-white">28 MO.</span>
+</div>
+</div>
+<div class="absolute bottom-[25%] right-[10%] glass-card p-4 rounded-xl flex flex-col gap-1 w-40 z-20">
+<span class="text-[10px] font-label text-secondary tracking-widest uppercase">Real Mileage</span>
+<div class="flex items-end gap-1">
+<span class="text-xl font-headline font-bold text-white">18.4</span>
+<span class="text-xs text-secondary pb-1 font-bold">KM/L</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Stats Banner -->
+<div class="absolute bottom-0 w-full h-[90px] glass-card border-x-0 border-b-0 flex items-center px-16 z-30">
+<div class="grid grid-cols-2 md:grid-cols-4 w-full divide-x divide-white/10">
+<div class="flex flex-col px-8">
+<span class="text-[10px] font-label text-secondary tracking-[0.2em] uppercase">Vehicles Listed</span>
+<span class="text-2xl font-headline font-black text-white">4,280+</span>
+</div>
+<div class="flex flex-col px-8">
+<span class="text-[10px] font-label text-secondary tracking-[0.2em] uppercase">Fuel Types</span>
+<span class="text-2xl font-headline font-black text-white">GAS/EV/HYB</span>
+</div>
+<div class="flex flex-col px-8">
+<span class="text-[10px] font-label text-secondary tracking-[0.2em] uppercase">TCO Analysis</span>
+<span class="text-2xl font-headline font-black text-white">UNLIMITED</span>
+</div>
+<div class="flex flex-col px-8">
+<span class="text-[10px] font-label text-secondary tracking-[0.2em] uppercase">Free to Use</span>
+<span class="text-2xl font-headline font-black text-white">100% OPEN</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. HOW IT WORKS SECTION -->
+<section class="relative py-32 px-8 md:px-16 bg-surface overflow-hidden">
+<div class="mb-20 text-center">
+<h2 class="text-5xl md:text-7xl font-headline font-black tracking-tighter uppercase mb-4">THE PROCESS</h2>
+<div class="h-1 w-20 bg-primary mx-auto"></div>
+</div>
+<div class="relative max-w-6xl mx-auto flex flex-col gap-32 md:gap-0 md:h-[800px]">
+<!-- SVG Connector Lines -->
+<svg class="absolute top-0 left-0 w-full h-full pointer-events-none hidden md:block" fill="none" viewbox="0 0 1000 800">
+<path class="step-path" d="M300 150 C450 150, 450 400, 600 400" stroke="#FF1A1A" stroke-dasharray="8 8" stroke-width="2"></path>
+<path class="step-path" d="M600 450 C450 450, 450 700, 300 700" stroke="#FF1A1A" stroke-dasharray="8 8" stroke-width="2"></path>
+</svg>
+<!-- Step 1 -->
+<div class="relative z-10 md:absolute md:top-0 md:left-0 w-full md:w-[400px] group">
+<span class="absolute -top-16 -left-10 text-[10rem] font-black text-white/5 select-none leading-none">01</span>
+<div class="glass-card p-10 rounded-sm transform group-hover:-translate-y-2 transition-transform duration-500">
+<div class="w-12 h-12 bg-primary flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-white">directions_car</span>
+</div>
+<h3 class="text-2xl font-headline font-black uppercase tracking-tighter mb-4">Select Vehicles</h3>
+<p class="text-secondary text-sm leading-relaxed">Browse our curated database of current Indian models across fuel types, from budget hatches to luxury performance.</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 md:absolute md:top-[300px] md:right-0 w-full md:w-[400px] group">
+<span class="absolute -top-16 -right-10 text-[10rem] font-black text-white/5 select-none leading-none">02</span>
+<div class="glass-card p-10 rounded-sm transform group-hover:-translate-y-2 transition-transform duration-500 border-primary/40">
+<div class="w-12 h-12 bg-primary flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-white">tune</span>
+</div>
+<h3 class="text-2xl font-headline font-black uppercase tracking-tighter mb-4">Configure Scenario</h3>
+<p class="text-secondary text-sm leading-relaxed">Input your daily commute, state of registration, and ownership duration for a personalized TCO projection.</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 md:absolute md:bottom-0 md:left-0 w-full md:w-[400px] group">
+<span class="absolute -top-16 -left-10 text-[10rem] font-black text-white/5 select-none leading-none">03</span>
+<div class="glass-card p-10 rounded-sm transform group-hover:-translate-y-2 transition-transform duration-500">
+<div class="w-12 h-12 bg-primary flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-white">analytics</span>
+</div>
+<h3 class="text-2xl font-headline font-black uppercase tracking-tighter mb-4">Analyse Truth</h3>
+<p class="text-secondary text-sm leading-relaxed">Review deep comparisons of real-world mileage, service costs, and break-even points vs. alternative fuel types.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. FEATURE HIGHLIGHTS & STATS -->
+<section class="py-32 px-8 md:px-16 bg-surface-container-lowest">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 h-auto md:h-[600px]">
+<div class="md:col-span-8 bg-surface-container-low p-12 relative overflow-hidden flex flex-col justify-end group">
+<div class="absolute top-0 right-0 w-full h-full opacity-30 grayscale group-hover:grayscale-0 transition-all duration-700">
+<img alt="Technology Dashboard" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIR4II36Kc_EWAjtgp_rCOEE2kM6bOU5xjdRb33XB4tjQUyVePwza2YbOXrysfORSEIGrPJfRTw-0hZHhUuIGfeaDCiw2iuyzDqzE-lCxgeSDqsGk1Z8GywpNs71wVfpFMGqppp_jU6jtunTHAUSRAlAphnu8ecgYulF-ibvBBve1CRXYVyQNaWIIeIdmCY821h6XH4QYNpMJ-f8cd4_UQ66QaAVaWTb6xQpZjgIuwUyja2oNoZRlKZn3sgU-DsqtHwixjCNbXkPEM"/>
+</div>
+<div class="relative z-10">
+<h3 class="text-4xl font-headline font-black tracking-tighter uppercase mb-4">Precision Intelligence</h3>
+<p class="text-secondary max-w-md">Access proprietary data sets on maintenance costs, residual value, and regional pricing across all 28 Indian states.</p>
+</div>
+</div>
+<div class="md:col-span-4 bg-primary p-12 flex flex-col justify-between">
+<div class="material-symbols-outlined text-6xl text-white">query_stats</div>
+<div>
+<h3 class="text-3xl font-headline font-black tracking-tighter uppercase text-white mb-4">Market Redline</h3>
+<p class="text-white/80">Real-time dealer quote analysis for your specific pin code. No more guessing MSRP vs. Final price.</p>
+</div>
+</div>
+<!-- 4. TCO & FUEL INSIGHTS CARDS -->
+<div class="md:col-span-4 bg-surface-container-high p-8 flex flex-col items-center justify-center text-center border-t border-primary/20">
+<span class="text-5xl font-headline font-black text-white mb-2">0.2s</span>
+<span class="text-[10px] font-label text-secondary tracking-widest uppercase">Comparison Speed</span>
+</div>
+<div class="md:col-span-8 bg-surface-container-low p-8 flex items-center gap-8 border-t border-white/5">
+<div class="w-20 h-20 rounded-full border border-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-3xl">verified</span>
+</div>
+<div>
+<h4 class="font-headline font-bold uppercase tracking-tight text-white">Verified Data Streams</h4>
+<p class="text-sm text-secondary">Aggregating from 200+ sources including OEM spec sheets and real-user logs.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. TEAM & ABOUT SECTION -->
+<section class="py-32 px-8 md:px-16 bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end gap-10 mb-20">
+<div class="max-w-2xl">
+<h2 class="text-4xl md:text-6xl font-headline font-black tracking-tighter uppercase mb-6">Engineered by <span class="text-primary">Optimists</span>.</h2>
+<p class="text-secondary text-lg">We are a small team of automotive enthusiasts and data scientists dedicated to fixing the broken vehicle buying experience in India.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<!-- Founder 1 -->
+<div class="flex gap-8 group">
+<div class="w-40 h-56 grayscale group-hover:grayscale-0 transition-all duration-500 shrink-0 border border-white/10">
+<img alt="Aniruddh" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo9-BOfWw7z0E7S6qA-C8Z8C1S3-B-3E_D_3-C_E-F_G_H_I_J_K_L_M_N_O_P_Q_R_S_T_U_V_W_X_Y_Z"/>
+</div>
+<div class="flex flex-col justify-center">
+<h4 class="text-2xl font-headline font-bold uppercase tracking-tighter mb-1">Aniruddh</h4>
+<span class="text-primary text-xs font-bold tracking-widest uppercase mb-4">Co-Founder / Engineering</span>
+<p class="text-secondary text-sm leading-relaxed italic">"Buying a car shouldn't feel like a gamble. We're providing the math that OEMs won't."</p>
+</div>
+</div>
+<!-- Founder 2 -->
+<div class="flex gap-8 group">
+<div class="w-40 h-56 grayscale group-hover:grayscale-0 transition-all duration-500 shrink-0 border border-white/10">
+<img alt="Khushbu" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-p1C2E3F4G5H6I7J8K9L0M1N2O3P4Q5R6S7T8U9V0W1X2Y3Z"/>
+</div>
+<div class="flex flex-col justify-center">
+<h4 class="text-2xl font-headline font-bold uppercase tracking-tighter mb-1">Khushbu</h4>
+<span class="text-primary text-xs font-bold tracking-widest uppercase mb-4">Co-Founder / Product</span>
+<p class="text-secondary text-sm leading-relaxed italic">"Design is how it works. We're simplifying the most complex purchase of your life."</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-24 bg-primary flex flex-col items-center text-center px-8">
+<h2 class="text-4xl md:text-6xl font-headline font-black tracking-tighter uppercase text-white mb-8">Ready to outsmart the market?</h2>
+<button class="bg-black text-white px-12 py-5 font-headline font-bold uppercase tracking-tighter hover:bg-white hover:text-black transition-colors rounded-sm text-xl">
+            Start Your Analysis
+        </button>
+</section>
+</main>
+<!-- 6. ARCHITECTURAL FOOTER -->
+<footer class="relative w-full pt-20 pb-10 bg-[#050505] font-['Space_Grotesk'] uppercase overflow-hidden">
+<div class="h-px bg-red-600 w-full absolute top-0"></div>
+<div class="flex flex-col items-center w-full px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 w-full mb-20 px-8">
+<div class="flex flex-col gap-6">
+<div class="text-2xl font-black text-white after:content-['.'] after:text-red-600 tracking-tighter">Wheelify</div>
+<p class="text-xs text-gray-500 normal-case leading-relaxed font-body">The new benchmark in automotive selection. Engineered for performance, designed for clarity.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="text-white font-bold text-sm tracking-widest">Platform</h5>
+<ul class="flex flex-col gap-2">
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">Intelligence</a></li>
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">Comparison Engine</a></li>
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">TCO Calculator</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="text-white font-bold text-sm tracking-widest">Vehicles</h5>
+<ul class="flex flex-col gap-2">
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">Electric</a></li>
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">High Performance</a></li>
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">Hybrid Systems</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="text-white font-bold text-sm tracking-widest">Legal</h5>
+<ul class="flex flex-col gap-2">
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">Privacy Policy</a></li>
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">Terms of Service</a></li>
+<li><a class="text-gray-500 hover:text-red-600 transition-colors text-xs" href="#">Press Kit</a></li>
+</ul>
+</div>
+</div>
+<div class="w-full relative py-10">
+<span class="text-[15vw] font-black leading-none tracking-tighter text-white text-center w-full block text-gradient-fade select-none">WHEELIFY</span>
+<div class="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center">
+<span class="text-red-600 font-black tracking-[0.3em] text-sm md:text-lg whitespace-nowrap">Drive Smarter. Decide Better.</span>
+</div>
+</div>
+<div class="w-full flex flex-col md:flex-row justify-between items-center mt-10 text-[10px] text-gray-500 tracking-widest gap-4">
+<p>© 2024 WHEELIFY PERFORMANCE. ALL RIGHTS RESERVED.</p>
+<div class="flex items-center gap-1 font-body normal-case">
+                Made with <span class="text-red-600">❤️</span> for India
+            </div>
+<div class="flex gap-8">
+<a class="hover:text-white transition-colors" href="#">INSTAGRAM</a>
+<a class="hover:text-white transition-colors" href="#">TWITTER</a>
+<a class="hover:text-white transition-colors" href="#">YOUTUBE</a>
+</div>
+</div>
+</div>
+<div class="h-px bg-red-600 w-full absolute bottom-0"></div>
+</footer>
+</body></html>

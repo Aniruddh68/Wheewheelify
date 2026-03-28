@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-container": "#ff5545",
+              "on-secondary": "#313030",
+              "inverse-on-surface": "#313030",
+              "background": "#0A0A0A",
+              "surface-container-lowest": "#0e0e0e",
+              "secondary-fixed-dim": "#c8c6c5",
+              "secondary-fixed": "#e5e2e1",
+              "primary": "#FF1A1A",
+              "on-secondary-fixed-variant": "#474746",
+              "tertiary-fixed": "#ffdad5",
+              "surface-variant": "#353534",
+              "on-primary": "#690002",
+              "surface-container-low": "#1c1b1b",
+              "surface-bright": "#3a3939",
+              "primary-fixed-dim": "#ffb4a9",
+              "secondary": "#888888",
+              "primary-fixed": "#ffdad5",
+              "on-surface": "#e5e2e1",
+              "surface-dim": "#131313",
+              "outline": "#b08781",
+              "on-primary-fixed": "#410001",
+              "on-primary-container": "#5c0002",
+              "on-background": "#e5e2e1",
+              "surface-container-highest": "#353534",
+              "error-container": "#93000a",
+              "tertiary-fixed-dim": "#ffb4a9",
+              "surface-container-high": "#2a2a2a",
+              "surface-container": "#201f1f",
+              "error": "#ffb4ab",
+              "on-tertiary-fixed-variant": "#930005",
+              "on-primary-fixed-variant": "#930005",
+              "outline-variant": "#5f3e3a",
+              "on-secondary-fixed": "#1c1b1b",
+              "surface-tint": "#ffb4a9",
+              "on-tertiary": "#690002",
+              "on-secondary-container": "#b7b5b4",
+              "inverse-surface": "#e5e2e1",
+              "secondary-container": "#474746",
+              "on-tertiary-container": "#5c0002",
+              "tertiary": "#ffb4a9",
+              "inverse-primary": "#c00009",
+              "surface": "#0A0A0A",
+              "tertiary-container": "#ff5545",
+              "on-surface-variant": "#eabcb5",
+              "on-error": "#690005",
+              "on-tertiary-fixed": "#410001",
+              "on-error-container": "#ffdad6"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 0.5px solid rgba(255, 26, 26, 0.3)
+    }
+.text-outline-red {
+    -webkit-text-stroke: 1.5px #FF1A1A;
+    color: transparent
+    }
+.film-grain {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    opacity: 0.05;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAnXsbxTFvv-l_hywnT4WDa0H9qN71fj9RIv4Krhjs9Om_crDpIICdM2zB5aVLfypSM5543EQJCqA59lsnjjVDYp4ov3dJeZ0r2f704Tq80VcQDY-oRchqX-RdIy0Jvtgv2ZVX9kUpuxNP9sKzV6E73zpTwvKrFkrB2FCDioFJ2nFISCsyg07-qpvXaijHaiulv-8Qa_An1fDdt1X9LPYn7Cd_SL_Gl6olRPY-JfNeIQgDh1bxdP_duwjmWUVGkaoHII7rK3WZ_-8U9)
+    }
+.red-glow {
+    filter: drop-shadow(0 0 15px rgba(255, 26, 26, 0.4))
+    }
+.mask-text {
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%)
+    }</style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-white overflow-x-hidden">
+<div class="film-grain"></div>
+<!-- Shared Component: TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-4 bg-black/30 backdrop-blur-md border-b border-red-600/30">
+<div class="text-2xl font-black italic tracking-tighter text-white uppercase font-headline">Wheelify</div>
+<div class="hidden md:flex gap-10">
+<a class="font-headline uppercase tracking-tighter font-bold text-sm text-red-600 border-b-2 border-red-600 pb-1" href="#">Vehicles</a>
+<a class="font-headline uppercase tracking-tighter font-bold text-sm text-gray-400 hover:text-white transition-colors" href="#">Performance</a>
+<a class="font-headline uppercase tracking-tighter font-bold text-sm text-gray-400 hover:text-white transition-colors" href="#">Engineering</a>
+<a class="font-headline uppercase tracking-tighter font-bold text-sm text-gray-400 hover:text-white transition-colors" href="#">Editorial</a>
+</div>
+<button class="bg-primary text-white font-headline uppercase tracking-tighter font-bold text-sm px-6 py-2 rounded-sm hover:scale-95 transition-transform active:scale-90">
+            Configure
+        </button>
+</nav>
+<!-- Hero Section: Cinematic X -->
+<section class="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-20">
+<!-- Giant Ghosted Background Word -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+<h1 class="text-[35vw] font-black text-white/[0.03] tracking-tighter uppercase font-headline mask-text">WHEELIFY</h1>
+</div>
+<div class="container mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
+<!-- Staggered Typography -->
+<div class="lg:col-span-7 flex flex-col justify-center">
+<div class="space-y-[-1rem] md:space-y-[-2rem]">
+<span class="block font-headline text-4xl md:text-6xl font-light tracking-tight text-secondary">MAKE</span>
+<span class="block font-headline text-7xl md:text-[10rem] font-black tracking-tighter leading-none text-outline-red">SMARTER</span>
+<span class="block font-headline text-5xl md:text-8xl font-bold tracking-tighter text-white ml-8 md:ml-16">DECISIONS</span>
+</div>
+<div class="mt-12 max-w-md">
+<p class="text-secondary body-md leading-relaxed border-l-2 border-primary pl-6">
+                        Engineered for the decisive. Wheelify Kinetic platforms use neural-mapped performance data to ensure every acquisition is a masterstroke of engineering logic.
+                    </p>
+<div class="mt-8 flex gap-6 items-center">
+<button class="bg-primary text-white font-headline uppercase tracking-tighter font-black px-10 py-4 rounded-sm hover:brightness-125 transition-all">Explore Fleet</button>
+<span class="font-label text-xs tracking-[0.2em] text-secondary uppercase cursor-pointer hover:text-white transition-colors">Technical Specs →</span>
+</div>
+</div>
+</div>
+<!-- Asymmetric Floating SUV -->
+<div class="lg:col-span-5 relative flex items-center justify-center min-h-[500px]">
+<img class="w-full h-auto object-contain z-20 scale-125 lg:scale-150 -rotate-3 hover:rotate-0 transition-transform duration-1000 red-glow" data-alt="High detail metallic black luxury SUV from dynamic low angle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwWNMmUWCbCHD3vQk-0ZV7BHFzbvOjs470AOvj_eEuItx1qTE-cxICkZWSdzg2cdHj3mNuF2MkvawlwjHU6LSyCiYvz1y5dKO72-KcQTnbP1or-LwfyiOSfqQmT80lbERhhMgmqTHOzRZ275jqRRxlYyJXYm-OfN96yINEHcz-I1vJZMsofsTRfBUJW4CqgYhxhDF2eZMFNy3D_daO1gqJ0VUYLJ3uZNgPM77LfqmfzmmAiNVPzNCXcGjQLlayzb4cia3_wHZ5oVdQ"/>
+<!-- Orbiting Data Chips - Starfield Scatter -->
+<div class="absolute top-10 right-0 glass-card p-3 rounded-sm rotate-12 z-30 flex flex-col items-center">
+<span class="font-label text-[10px] text-secondary tracking-widest uppercase">Aerodynamics</span>
+<span class="font-headline text-lg font-bold text-primary">0.24 cd</span>
+</div>
+<div class="absolute bottom-20 left-10 glass-card p-3 rounded-sm -rotate-6 z-30 flex flex-col items-center">
+<span class="font-label text-[10px] text-secondary tracking-widest uppercase">Torque</span>
+<span class="font-headline text-lg font-bold text-white">950 NM</span>
+</div>
+<div class="absolute top-1/2 -right-4 glass-card p-2 rounded-sm z-30 flex flex-col items-center">
+<span class="font-headline text-xs font-bold text-primary">KINETIC+</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Showcase Section: Asymmetric Bento Grid -->
+<section class="py-24 px-8 bg-surface-container-lowest">
+<div class="container mx-auto">
+<div class="flex flex-col mb-16">
+<span class="font-label text-primary tracking-[0.3em] uppercase mb-2">Inventory System 01</span>
+<h2 class="font-headline text-4xl md:text-6xl font-black uppercase tracking-tighter text-white">THE KINETIC SELECTION</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6 auto-rows-[300px]">
+<!-- Large Item -->
+<div class="md:col-span-2 md:row-span-2 glass-card relative overflow-hidden group">
+<img class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-110 transition-transform duration-700" data-alt="Dark red sports car rear lights in motion" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxlORog6V1xrWI7426UZ2DdmDo-1BGxMGLlgQzZQOxtvKacLhT3HFUxph64qSRWbbKQtd7yB6PT4DmorUcWlUD54tJ3em4QVwdglWZxzjtUDr9nII9CT0JLV7UPJc1QLZfo7Asx93_Jp8hXLX-JYIj2Usn9H-GUT_aWD56P8_Lao1duZxWivj-3hqafub7RGilYN1eW_srPMz8_cVfHjjcEfNfdHPyLjoX1BeUlZOZ2Lt1G1zPoZRsXqqTRuUYoMIFXFeaUD0pai0N"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+<div class="absolute bottom-6 left-6 z-10">
+<h3 class="font-headline text-3xl font-black uppercase text-white">Hypercars</h3>
+<p class="text-secondary text-sm font-label tracking-wider">0-100 IN <span class="text-primary">1.9S</span></p>
+</div>
+</div>
+<!-- Stat Breaking Item -->
+<div class="md:col-span-2 glass-card flex items-center justify-center relative p-8">
+<div class="text-center z-10">
+<span class="font-label text-xs uppercase tracking-widest text-secondary block mb-2">Max Power Output</span>
+<div class="font-headline text-8xl md:text-9xl font-black text-primary leading-none tracking-tighter opacity-80 select-none">1200</div>
+</div>
+<div class="absolute bottom-4 right-4 text-white font-headline text-2xl font-bold uppercase">BHP</div>
+</div>
+<!-- Secondary Category -->
+<div class="md:col-span-2 glass-card relative overflow-hidden group">
+<img class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:scale-110 transition-transform duration-700" data-alt="Classic performance car interior steering wheel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0NQne3H3qwqD11YO3LR_KVXtcKSw8hSODy8XCHpMf8JykzA-WibB8IGffYxAfcH9TdQyUrzX939dVjJ4RW3g-NvAg2RjoqNVm-BkperZTFHeNu2buDJg6mDKLCpa-q17VP1aTzrpTs2_jDQLmXQ-hM2n6lAKDHntmrDWn5kdJFt0aC2VBnPFAH56eu3SGLk2xzbRs-6eYtXWV48KwcjW_B_4TkfRcvFu3y8bWt2cLETqYSYG8AgUKHxRgqotk_sEiPSLELk1x8MPC"/>
+<div class="absolute inset-0 bg-gradient-to-tr from-black to-transparent"></div>
+<div class="absolute bottom-6 left-6">
+<h3 class="font-headline text-2xl font-black uppercase text-white">Track Ready</h3>
+<span class="bg-primary px-2 py-0.5 text-[10px] font-black text-white uppercase mt-2 inline-block">Special Edition</span>
+</div>
+</div>
+<!-- Technical Spec Grid -->
+<div class="md:col-span-2 glass-card p-8 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary text-4xl">precision_manufacturing</span>
+<div class="text-right">
+<span class="font-headline text-3xl font-bold text-white">4.0L</span>
+<span class="block font-label text-[10px] text-secondary uppercase">Twin Turbo</span>
+</div>
+</div>
+<p class="text-xs text-secondary leading-relaxed font-body">Hand-assembled V8 engines with zirconium-coated exhaust manifolds for maximum thermal efficiency.</p>
+</div>
+<!-- Aesthetic Shot -->
+<div class="md:col-span-2 lg:col-span-4 glass-card relative overflow-hidden">
+<div class="absolute inset-0 flex items-center justify-around px-12 opacity-50 grayscale hover:grayscale-0 transition-all">
+<img class="h-full w-auto object-cover" data-alt="Sleek silver car wheel detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATVfeTuHqfDHrLuY-SkMOis9cF1sMKvztwf6Fw7aAkbg-Zd9fGDvTwBRzKKwQNQ0vgwZZrYCrafkg1jVI9sWKWqvcxt_FIqo0Xgup36-zGIoLfQaX0OhsgIYtWMWcnbadHwyUUMNcyo82jKnbAT_Nui2kr82iFs0AmxNZiUHz3_NIMBM8tlwwM87SQCDBNDPwx1m2LTT294DdEdnrMV_RLvRdUDgyYiGcc4ihY-eOMTk8sbKvv_iw_5p8w4oAjr0DN0nVsapIzcQMN"/>
+<img class="h-full w-auto object-cover" data-alt="Aggressive car front grill view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVTTiQtaf3PrJXCO3TrOARXtE-i4b4nQxy0CeMtRWzVAiYUhzsynm_zZ30AotNV0K0Nu7y3LxOmEYmhN1JytXQWmr8TPFk8FTtk9gC6TXCBVLBhHBsXwLtOX3ZApZiSnnu12siPYd9TgVk4L-v-G4QlkohQEkgFdStn_EUD8wI5jBPvm3xpPuIGa-FcAqR7gk2ULquYr557pBuRH-go-jALKmBs_KbvCKhvuPO-2aTL3tDuuLwTM45uDwgiGkM3EHs1BxpX7tLBvPZ"/>
+</div>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+<button class="bg-white/5 border border-white/20 hover:bg-white/10 px-8 py-3 font-headline font-black uppercase tracking-widest text-white backdrop-blur-sm transition-all">View Gallery</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Comparison Section: Horizontal Arena -->
+<section class="py-24 bg-background relative overflow-hidden">
+<div class="container mx-auto px-8">
+<div class="text-center mb-20">
+<h2 class="font-headline text-5xl md:text-7xl font-black uppercase tracking-tighter text-white inline-block relative">
+                    THE ARENA
+                    <div class="absolute -bottom-4 left-0 w-full h-1 bg-primary/30 animate-pulse"></div>
+</h2>
+</div>
+<div class="relative flex flex-col md:flex-row items-stretch justify-center gap-4 md:gap-0">
+<!-- Competitor A -->
+<div class="flex-1 glass-card p-12 text-center relative group">
+<span class="font-label text-xs text-secondary tracking-widest uppercase mb-4 block">Candidate 01</span>
+<h3 class="font-headline text-4xl font-bold text-white mb-8">W-KINETIC GTS</h3>
+<div class="space-y-6">
+<div class="spec-row py-4 border-b border-white/5">
+<span class="block font-label text-[10px] text-secondary uppercase">Top Speed</span>
+<span class="font-headline text-2xl font-bold text-white">342 KM/H</span>
+</div>
+<div class="spec-row py-4 border-b border-white/5">
+<span class="block font-label text-[10px] text-secondary uppercase">Braking 100-0</span>
+<span class="font-headline text-2xl font-bold text-white">28.5 M</span>
+</div>
+<div class="spec-row py-4">
+<span class="block font-label text-[10px] text-secondary uppercase">Downforce</span>
+<span class="font-headline text-2xl font-bold text-white">450 KG</span>
+</div>
+</div>
+</div>
+<!-- Laser Divider -->
+<div class="w-1 bg-primary relative hidden md:block z-10 shadow-[0_0_20px_rgba(255,26,26,0.8)]">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-primary border-4 border-black flex items-center justify-center font-black text-black italic">VS</div>
+</div>
+<!-- Competitor B (The Winner with Volumetric Glow) -->
+<div class="flex-1 bg-surface-container-high p-12 text-center relative overflow-hidden group">
+<!-- Subtle volumetric glow -->
+<div class="absolute inset-0 bg-primary opacity-5 mix-blend-screen pointer-events-none"></div>
+<div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,26,26,0.15)_0%,transparent_70%)] animate-pulse"></div>
+<span class="font-label text-xs text-primary tracking-widest uppercase mb-4 block">Kinetic Champion</span>
+<h3 class="font-headline text-4xl font-bold text-white mb-8">W-KINETIC X</h3>
+<div class="space-y-6">
+<div class="spec-row py-4 border-b border-primary/20 bg-primary/5">
+<span class="block font-label text-[10px] text-primary uppercase font-bold">Top Speed</span>
+<span class="font-headline text-3xl font-black text-white">355 KM/H</span>
+</div>
+<div class="spec-row py-4 border-b border-primary/20 bg-primary/5">
+<span class="block font-label text-[10px] text-primary uppercase font-bold">Braking 100-0</span>
+<span class="font-headline text-3xl font-black text-white">26.2 M</span>
+</div>
+<div class="spec-row py-4 bg-primary/5">
+<span class="block font-label text-[10px] text-primary uppercase font-bold">Downforce</span>
+<span class="font-headline text-3xl font-black text-white">620 KG</span>
+</div>
+</div>
+<button class="mt-12 bg-primary w-full py-4 font-headline font-black uppercase tracking-widest text-white hover:brightness-125 transition-all">Configure Victory</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Shared Component: Footer -->
+<footer class="w-full px-8 flex flex-col items-start gap-12 bg-[#050505] relative overflow-hidden pt-20 pb-10">
+<!-- Architectural Typography Background -->
+<div class="text-[15vw] leading-none opacity-5 font-black text-white absolute bottom-0 left-0 font-headline pointer-events-none select-none">WHEELIFY</div>
+<div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
+<div>
+<span class="font-headline text-2xl font-black italic tracking-tighter text-white uppercase mb-4 block">Wheelify</span>
+<p class="text-secondary font-label text-sm tracking-widest text-primary uppercase">Drive Smarter. Decide Better.</p>
+<div class="mt-8 flex gap-4">
+<span class="material-symbols-outlined text-secondary hover:text-primary transition-colors cursor-pointer">share</span>
+<span class="material-symbols-outlined text-secondary hover:text-primary transition-colors cursor-pointer">public</span>
+<span class="material-symbols-outlined text-secondary hover:text-primary transition-colors cursor-pointer">mail</span>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-headline font-black uppercase tracking-tighter text-white mb-2">Platform</span>
+<a class="font-label text-xs uppercase tracking-widest text-gray-600 hover:text-red-600 transition-colors duration-500" href="#">Inventory</a>
+<a class="font-label text-xs uppercase tracking-widest text-gray-600 hover:text-red-600 transition-colors duration-500" href="#">Tech Specs</a>
+<a class="font-label text-xs uppercase tracking-widest text-gray-600 hover:text-red-600 transition-colors duration-500" href="#">Comparison Engine</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-headline font-black uppercase tracking-tighter text-white mb-2">Company</span>
+<a class="font-label text-xs uppercase tracking-widest text-gray-600 hover:text-red-600 transition-colors duration-500" href="#">Press Kit</a>
+<a class="font-label text-xs uppercase tracking-widest text-gray-600 hover:text-red-600 transition-colors duration-500" href="#">Contact</a>
+<a class="font-label text-xs uppercase tracking-widest text-gray-600 hover:text-red-600 transition-colors duration-500" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-headline font-black uppercase tracking-tighter text-white mb-2">Legal</span>
+<a class="font-label text-xs uppercase tracking-widest text-white underline decoration-red-600" href="#">Privacy Policy</a>
+<p class="text-xs text-secondary/40 font-label mt-4">KINETIC INDUSTRIES EST. 2024. ALL PERFORMANCE FIGURES ARE BASED ON CONTROLLED TESTING ENVIRONMENTS.</p>
+</div>
+</div>
+<div class="w-full mt-20 border-t border-white/5 pt-8 flex justify-between items-center relative z-10">
+<span class="font-label text-[10px] tracking-widest text-secondary uppercase">© 2024 WHEELIFY KINETIC INDUSTRIES. ALL RIGHTS RESERVED.</span>
+<span class="font-label text-[10px] tracking-widest text-secondary uppercase">Built for Performance.</span>
+</div>
+</footer>
+</body></html>
