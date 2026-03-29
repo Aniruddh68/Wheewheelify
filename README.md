@@ -52,7 +52,8 @@ wheelify/
 
 - **Aniruddh Gupta** — Enrollment No. 0002CD221006
 - **Khushbu Jain** — Enrollment No. 0002CD221031
-- **Guide:** Mrs. Ratna Singh Shrivastava (Professor, SoIT RGPV)
+- ** vinamerata - Enrollment No. 0002CD221070 **
+  
 
 **School of Information Technology, RGPV Bhopal — B.Tech CSEDS (Jan–June 2026)**
 
