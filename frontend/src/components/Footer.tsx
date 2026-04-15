@@ -64,7 +64,7 @@ const Footer = () => {
           </span>
           <div className="absolute bottom-12 md:bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center">
             <span className="text-primary font-black tracking-[0.3em] text-sm md:text-lg whitespace-nowrap">
-              Drive Smarter. Decide Better.
+              Decide Better. Drive Smarter.
             </span>
           </div>
         </motion.div>
