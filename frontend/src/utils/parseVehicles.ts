@@ -48,6 +48,23 @@ export interface Vehicle {
   isEV: boolean;
 }
 
+export interface VehicleGroup {
+  id: string;              // unique group id
+  brand: string;
+  model: string;           // Base Model Name
+  variants: Vehicle[];     // all variants belonging to this base model
+  fuels: string[];         // unique fuels across variants
+  transmissions: string[]; // unique transmissions across variants
+  carTypes: string[];      // unique car types
+  minPrice: number;
+  maxPrice: number;
+  priceLabel: string;      // generated e.g., "5.5 Lakh - 8.0 Lakh" or "5.5 Lakh"
+  ncapRating: string;      // assume highest severity/best rating or just first variant's
+  imageSrc: string;        // representative image (first valid one)
+  isEV: boolean;           // true if there's any EV variant
+  seatingCapacities: number[];
+}
+
 // Resolve image path – images are in /assets/vehicles/
 function resolveImage(rawFilename: string): string {
   if (!rawFilename || rawFilename === '—' || rawFilename.trim() === '') {
@@ -82,7 +99,7 @@ export async function fetchVehicles(): Promise<Vehicle[]> {
   if (cachedVehicles) return cachedVehicles;
 
   return new Promise((resolve, reject) => {
-    Papa.parse('/vehicles.csv', {
+    Papa.parse('/Vehical Dataset updated final.csv', {
       download: true,
       header: true,
       skipEmptyLines: true,
@@ -155,13 +172,93 @@ export async function fetchVehicles(): Promise<Vehicle[]> {
 }
 
 // Get unique brands/types from all vehicles
-export function getFilterOptions(vehicles: Vehicle[]) {
-  const brands = [...new Set(vehicles.map((v) => v.brand))].sort();
-  const carTypes = [...new Set(vehicles.map((v) => v.carType).filter(Boolean))].sort();
-  const fuelTypes = [...new Set(vehicles.map((v) => v.fuelType).filter(Boolean))].sort();
-  const transmissions = [...new Set(vehicles.map((v) => v.transmission).filter(Boolean))].sort();
-  const prices = vehicles.map((v) => v.price).filter((p) => p > 0);
-  const minPrice = Math.floor(Math.min(...prices));
-  const maxPrice = Math.ceil(Math.max(...prices));
+export function getFilterOptions(items: any[]) {
+  const isGroup = items.length > 0 && 'variants' in items[0];
+  const brands = [...new Set(items.map((v) => v.brand))].sort();
+  let carTypes, fuelTypes, transmissions, minPrice, maxPrice;
+  if (isGroup) {
+      carTypes = [...new Set(items.flatMap((v) => v.carTypes))].sort();
+      fuelTypes = [...new Set(items.flatMap((v) => v.fuels))].sort();
+      transmissions = [...new Set(items.flatMap((v) => v.transmissions))].sort();
+      const prices = items.map((v) => v.minPrice).filter((p) => p > 0);
+      minPrice = prices.length ? Math.floor(Math.min(...prices)) : 0;
+      maxPrice = prices.length ? Math.ceil(Math.max(...items.map(v => v.maxPrice))) : 0;
+  } else {
+      carTypes = [...new Set(items.map((v) => v.carType).filter(Boolean))].sort();
+      fuelTypes = [...new Set(items.map((v) => v.fuelType).filter(Boolean))].sort();
+      transmissions = [...new Set(items.map((v) => v.transmission).filter(Boolean))].sort();
+      const prices = items.map((v) => v.price).filter((p) => p > 0);
+      minPrice = prices.length ? Math.floor(Math.min(...prices)) : 0;
+      maxPrice = prices.length ? Math.ceil(Math.max(...prices)) : 0;
+  }
   return { brands, carTypes, fuelTypes, transmissions, minPrice, maxPrice };
+}
+
+export function groupVehicles(vehicles: Vehicle[]): VehicleGroup[] {
+  const groups = new Map<string, VehicleGroup>();
+
+  vehicles.forEach((v) => {
+    // Generate a unique ID for the group (Brand + Base Model)
+    const groupId = `${v.brand}-${v.model}`.toLowerCase().replace(/\s+/g, '-');
+    
+    if (!groups.has(groupId)) {
+      groups.set(groupId, {
+        id: groupId,
+        brand: v.brand,
+        model: v.model,
+        variants: [],
+        fuels: [],
+        transmissions: [],
+        carTypes: [],
+        minPrice: Infinity,
+        maxPrice: -Infinity,
+        priceLabel: '',
+        ncapRating: v.ncapRating !== '—' ? v.ncapRating : '',
+        imageSrc: '', // We'll find a valid one
+        isEV: false,
+        seatingCapacities: [],
+      });
+    }
+
+    const g = groups.get(groupId)!;
+    g.variants.push(v);
+    
+    if (v.fuelType && !g.fuels.includes(v.fuelType)) g.fuels.push(v.fuelType);
+    if (v.transmission && v.transmission !== '—' && !g.transmissions.includes(v.transmission)) g.transmissions.push(v.transmission);
+    if (v.carType && !g.carTypes.includes(v.carType)) g.carTypes.push(v.carType);
+    if (v.price > 0 && v.price < g.minPrice) g.minPrice = v.price;
+    if (v.price > 0 && v.price > g.maxPrice) g.maxPrice = v.price;
+    
+    if (v.ncapRating !== '—' && !g.ncapRating) g.ncapRating = v.ncapRating;
+    if (v.isEV) g.isEV = true;
+    if (!g.seatingCapacities.includes(v.seatingCapacity)) g.seatingCapacities.push(v.seatingCapacity);
+    
+    // Pick the first valid image we encounter (fall back placeholder)
+    if (!g.imageSrc && !v.imageSrc.includes('placeholder')) {
+      g.imageSrc = v.imageSrc;
+    }
+  });
+
+  return Array.from(groups.values()).map((g) => {
+    // Post-process the group
+    if (g.minPrice === Infinity) {
+      g.minPrice = 0;
+      g.maxPrice = 0;
+      g.priceLabel = 'TBA';
+    } else if (g.minPrice === g.maxPrice) {
+      g.priceLabel = `₹${g.minPrice} Lakh`;
+    } else {
+      g.priceLabel = `₹${g.minPrice}L - ₹${g.maxPrice}L`;
+    }
+    
+    if (!g.imageSrc) {
+      g.imageSrc = '/placeholder.svg';
+    }
+    
+    if (!g.ncapRating) {
+      g.ncapRating = '—';
+    }
+    
+    return g;
+  });
 }

@@ -4,8 +4,8 @@ import {
   Fuel, Zap, Gauge, Star, ChevronLeft, ChevronRight,
   Users, Cog, Battery, Route, RotateCcw,
 } from 'lucide-react';
-import { fetchVehicles, getFilterOptions } from '@/utils/parseVehicles';
-import type { Vehicle } from '@/utils/parseVehicles';
+import { fetchVehicles, getFilterOptions, groupVehicles } from '@/utils/parseVehicles';
+import type { Vehicle, VehicleGroup } from '@/utils/parseVehicles';
 import VehicleDetailModal from './VehicleDetailModal';
 import './VehicleBrowser.css';
 
@@ -38,7 +38,7 @@ function FuelBadge({ fuel }: { fuel: string }) {
 }
 
 // ─── 3D Modal (full-screen glassmorphic overlay) ───────────────────────────────
-function SplineModal({ vehicle, onClose }: { vehicle: Vehicle; onClose: () => void }) {
+function SplineModal({ vehicle, onClose }: { vehicle: VehicleGroup; onClose: () => void }) {
   const [sceneLoaded, setSceneLoaded] = useState(false);
 
   // Close on Escape key
@@ -113,7 +113,7 @@ function VehicleCard({
   onClick,
   onView3D,
 }: {
-  vehicle: Vehicle;
+  vehicle: VehicleGroup;
   onClick: () => void;
   onView3D: (e: React.MouseEvent) => void;
 }) {
@@ -137,7 +137,7 @@ function VehicleCard({
           loading="lazy"
         />
         <div className="card-image-overlay" />
-        <FuelBadge fuel={vehicle.fuelType} />
+        <div className="fuel-badge">{vehicle.fuels.join(" / ") || "TBA"}</div>
 
         {vehicle.ncapRating && vehicle.ncapRating !== '—' && (
           <div className="card-ncap">
@@ -162,7 +162,7 @@ function VehicleCard({
       <div className="card-body">
         <p className="card-brand">{vehicle.brand}</p>
         <h3 className="card-model">{vehicle.model}</h3>
-        <p className="card-variant">{vehicle.variant}</p>
+        <p className="card-variant">{vehicle.variants.length} Variants</p>
 
         {/* Icon-based specs row */}
         <div className="card-stats">
@@ -173,8 +173,8 @@ function VehicleCard({
             </span>
             <span className="stat-value">
               {vehicle.isEV
-                ? vehicle.range !== '—' ? `${vehicle.range} km` : '—'
-                : vehicle.mileage !== '—' ? `${vehicle.mileage}` : '—'}
+                ? "Up to " + (Math.max(...vehicle.variants.map(v => parseFloat(v.range) || 0)) || "—") + " km"
+                : "Up to " + (Math.max(...vehicle.variants.map(v => parseFloat(v.mileage) || 0)) || "—")}
             </span>
             <span className="stat-label">{vehicle.isEV ? 'Range' : 'Mileage'}</span>
           </div>
@@ -182,14 +182,14 @@ function VehicleCard({
           {/* Seats */}
           <div className="card-stat">
             <span className="stat-icon"><Users size={14} /></span>
-            <span className="stat-value">{vehicle.seatingCapacity}</span>
+            <span className="stat-value">{vehicle.seatingCapacities.join("/")}</span>
             <span className="stat-label">Seats</span>
           </div>
 
           {/* Transmission */}
           <div className="card-stat">
             <span className="stat-icon"><Cog size={14} /></span>
-            <span className="stat-value">{vehicle.transmission || '—'}</span>
+            <span className="stat-value">{vehicle.transmissions.join(" / ") || '—'}</span>
             <span className="stat-label">Trans.</span>
           </div>
         </div>
@@ -286,7 +286,7 @@ function PriceRangeSlider({
 
 // ─── Main VehicleBrowser ───────────────────────────────────────────────────────
 export default function VehicleBrowser() {
-  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const [vehicles, setVehicles] = useState<VehicleGroup[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -300,17 +300,19 @@ export default function VehicleBrowser() {
   const [sortBy, setSortBy] = useState<'price-asc' | 'price-desc' | 'name' | 'rating'>('price-asc');
 
   const [page, setPage] = useState(1);
-  const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
+  const [selectedVehicle, setSelectedVehicle] = useState<VehicleGroup | null>(null);
 
   // 3D modal state
-  const [splineVehicle, setSplineVehicle] = useState<Vehicle | null>(null);
+  const [splineVehicle, setSplineVehicle] = useState<VehicleGroup | null>(null);
 
   // Load data
   useEffect(() => {
     fetchVehicles()
       .then((data) => {
-        setVehicles(data);
-        const opts = getFilterOptions(data);
+        const groupedData = groupVehicles(data);
+        setVehicles(groupedData);
+        // Important: compute options on groupedData, since we updated getFilterOptions!
+        const opts = getFilterOptions(groupedData);
         setPriceRange([opts.minPrice, opts.maxPrice]);
         setLoading(false);
       })
@@ -337,9 +339,8 @@ export default function VehicleBrowser() {
         (v) =>
           v.brand.toLowerCase().includes(q) ||
           v.model.toLowerCase().includes(q) ||
-          v.variant.toLowerCase().includes(q) ||
-          v.fuelType.toLowerCase().includes(q) ||
-          v.carType.toLowerCase().includes(q),
+          v.fuels.some(f => f.toLowerCase().includes(q)) ||
+          v.carTypes.some(t => t.toLowerCase().includes(q)),
       );
     }
 
@@ -354,28 +355,28 @@ export default function VehicleBrowser() {
     if (selectedFuels.length > 0) {
       // Case-insensitive match so 'Electric' === 'electric' etc.
       const fuelsLC = selectedFuels.map((f) => f.toLowerCase());
-      out = out.filter((v) => fuelsLC.includes(v.fuelType.toLowerCase()));
+      out = out.filter((v) => v.fuels.some(f => fuelsLC.includes(f.toLowerCase())));
     }
     if (selectedTypes.length > 0) {
-      out = out.filter((v) => selectedTypes.includes(v.carType));
+      out = out.filter((v) => v.carTypes.some(t => selectedTypes.includes(t)));
     }
     if (selectedTransmissions.length > 0) {
-      out = out.filter((v) => selectedTransmissions.includes(v.transmission));
+      out = out.filter((v) => v.transmissions.some(t => selectedTransmissions.includes(t)));
     }
 
     // 3. Price range — only filter when range is non-trivial (min !== max)
     if (priceRange && priceRange[0] !== priceRange[1]) {
       out = out.filter((v) => {
         // Vehicles with price === 0 are "Upcoming" — let them through
-        if (v.price === 0) return true;
-        return v.price >= priceRange[0] && v.price <= priceRange[1];
+        if (v.minPrice === 0) return true;
+        return v.minPrice >= priceRange[0] && v.minPrice <= priceRange[1];
       });
     }
 
     // 4. Sort
     return [...out].sort((a, b) => {
-      if (sortBy === 'price-asc') return a.price - b.price;
-      if (sortBy === 'price-desc') return b.price - a.price;
+      if (sortBy === 'price-asc') return a.minPrice - b.minPrice;
+      if (sortBy === 'price-desc') return b.maxPrice - a.maxPrice;
       if (sortBy === 'name') return `${a.brand} ${a.model}`.localeCompare(`${b.brand} ${b.model}`);
       if (sortBy === 'rating') return (b.ncapRating || '0').localeCompare(a.ncapRating || '0');
       return 0;
