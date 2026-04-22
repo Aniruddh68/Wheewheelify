@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 
 type NavLinkItem = {
   label: string;
   href?: string;
-  dropdown?: { label: string; href: string }[];
+  dropdown?: NavLinkItem[];
 };
 
 const navLinks: NavLinkItem[] = [
@@ -13,7 +13,13 @@ const navLinks: NavLinkItem[] = [
   {
     label: "Explore Vehicles",
     dropdown: [
-      { label: "Browse All", href: "/browse" },
+      {
+        label: "Browse Vehicles",
+        dropdown: [
+          { label: "Cars", href: "/browse?category=cars" },
+          { label: "Bikes & Scooters", href: "/browse?category=twowheelers" },
+        ]
+      },
       { label: "Upcoming Launches", href: "#" },
       { label: "Compare Vehicles", href: "#" },
     ],
@@ -35,6 +41,39 @@ const navLinks: NavLinkItem[] = [
   },
 ];
 
+const DesktopSubDropdown = ({ item }: { item: NavLinkItem }) => {
+  if (!item.dropdown) {
+    return (
+      <Link
+        to={item.href || "#"}
+        className="px-4 py-3 text-sm font-heading font-bold uppercase tracking-wide text-muted-foreground hover:text-primary-foreground hover:bg-white/5 transition-colors block"
+      >
+        {item.label}
+      </Link>
+    );
+  }
+
+  return (
+    <div className="relative group/sub w-full">
+      <button className="w-full text-left px-4 py-3 text-sm font-heading font-bold uppercase tracking-wide text-muted-foreground hover:text-primary-foreground hover:bg-white/5 transition-colors flex justify-between items-center">
+        {item.label}
+        <ChevronRight size={16} className="text-muted-foreground/50" />
+      </button>
+      <div className="absolute top-0 left-full ml-1 w-52 bg-background/95 backdrop-blur-xl border border-foreground/5 rounded-md shadow-xl opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible group-focus-within/sub:opacity-100 group-focus-within/sub:visible transition-all flex flex-col py-2 z-50">
+        {item.dropdown.map((sub) => (
+          <Link
+            key={sub.label}
+            to={sub.href || "#"}
+            className="px-4 py-3 text-sm font-heading font-bold uppercase tracking-wide text-muted-foreground hover:text-primary-foreground hover:bg-white/5 transition-colors block"
+          >
+            {sub.label}
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const DesktopDropdown = ({ item }: { item: NavLinkItem }) => {
   return (
     <div className="relative group">
@@ -43,15 +82,9 @@ const DesktopDropdown = ({ item }: { item: NavLinkItem }) => {
         {item.dropdown && <ChevronDown size={16} className="transition-transform group-hover:rotate-180" />}
       </button>
       {item.dropdown && (
-        <div className="absolute top-full left-0 mt-2 w-56 bg-background/95 backdrop-blur-xl border border-foreground/5 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col py-2 z-50">
+        <div className="absolute top-full left-0 mt-2 w-56 bg-background/95 backdrop-blur-xl border border-foreground/5 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible focus-within:opacity-100 focus-within:visible transition-all flex flex-col py-2 z-50">
           {item.dropdown.map((sub) => (
-            <Link
-              key={sub.label}
-              to={sub.href || "#"}
-              className="px-4 py-3 text-sm font-heading font-bold uppercase tracking-wide text-muted-foreground hover:text-primary-foreground hover:bg-white/5 transition-colors"
-            >
-              {sub.label}
-            </Link>
+            <DesktopSubDropdown key={sub.label} item={sub} />
           ))}
         </div>
       )}
@@ -66,7 +99,7 @@ const MobileDropdown = ({ item }: { item: NavLinkItem }) => {
     return (
       <Link
         to={item.href || "#"}
-        className="font-headline font-bold uppercase tracking-tighter text-muted-foreground hover:text-primary-foreground"
+        className="font-headline font-bold uppercase tracking-tighter text-muted-foreground hover:text-primary-foreground block py-1"
       >
         {item.label}
       </Link>
@@ -77,21 +110,15 @@ const MobileDropdown = ({ item }: { item: NavLinkItem }) => {
     <div className="flex flex-col gap-2">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center justify-between font-headline font-bold uppercase tracking-tighter text-muted-foreground hover:text-primary-foreground w-full text-left"
+        className="flex items-center justify-between font-headline font-bold uppercase tracking-tighter text-muted-foreground hover:text-primary-foreground w-full text-left py-1"
       >
         {item.label}
         <ChevronDown size={18} className={`transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
       {open && (
-        <div className="flex flex-col gap-3 pl-4 border-l-2 border-foreground/10 mt-2">
+        <div className="flex flex-col gap-3 pl-4 border-l-2 border-foreground/10 mt-1 pb-2">
           {item.dropdown.map((sub) => (
-            <Link
-              key={sub.label}
-              to={sub.href || "#"}
-              className="text-sm font-headline uppercase tracking-tighter text-muted-foreground hover:text-primary-foreground"
-            >
-              {sub.label}
-            </Link>
+            <MobileDropdown key={sub.label} item={sub} />
           ))}
         </div>
       )}

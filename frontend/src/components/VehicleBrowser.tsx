@@ -1,19 +1,17 @@
-import { useState, useEffect, useMemo, useRef, lazy, Suspense } from 'react';
+import { useState, useEffect, useMemo, lazy, Suspense } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
-  Search, SlidersHorizontal, X, ChevronDown,
+  Search, X,
   Fuel, Zap, Gauge, Star, ChevronLeft, ChevronRight,
   Users, Cog, Battery, Route, RotateCcw,
 } from 'lucide-react';
 import { fetchVehicles, getFilterOptions, groupVehicles } from '@/utils/parseVehicles';
-import type { Vehicle, VehicleGroup } from '@/utils/parseVehicles';
+import type { VehicleGroup } from '@/utils/parseVehicles';
+import { useCompare } from '@/context/CompareContext';
 import VehicleDetailModal from './VehicleDetailModal';
 import './VehicleBrowser.css';
 
-// ─── Lazy-load Spline (heavy ~500KB, skill best-practice) ─────────────────────
-const Spline = lazy(() => import('@splinetool/react-spline'));
 
-// Demo scene — replace with your own exported .splinecode URL from Spline.design
-const DEMO_SPLINE_SCENE = 'https://prod.spline.design/kZDDjO5HlWTxhgHv/scene.splinecode';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -26,167 +24,49 @@ const fuelIcons: Record<string, React.ReactNode> = {
   'flex fuel': <Fuel size={12} />,
 };
 
-// ─── Fuel Badge ────────────────────────────────────────────────────────────────
-function FuelBadge({ fuel }: { fuel: string }) {
-  const key = fuel.toLowerCase();
-  return (
-    <span className={`fuel-badge fuel-${key.replace(/\s+/g, '-')}`}>
-      {fuelIcons[key] || <Fuel size={12} />}
-      {fuel}
-    </span>
-  );
-}
-
-// ─── 3D Modal (full-screen glassmorphic overlay) ───────────────────────────────
-function SplineModal({ vehicle, onClose }: { vehicle: VehicleGroup; onClose: () => void }) {
-  const [sceneLoaded, setSceneLoaded] = useState(false);
-
-  // Close on Escape key
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
-    document.addEventListener('keydown', handler);
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.removeEventListener('keydown', handler);
-      document.body.style.overflow = '';
-    };
-  }, [onClose]);
-
-  return (
-    <div
-      className="spline-modal-overlay"
-      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
-      role="dialog"
-      aria-modal="true"
-      aria-label={`3D view of ${vehicle.brand} ${vehicle.model}`}
-    >
-      <div className="spline-modal-panel">
-        {/* Header */}
-        <div className="spline-modal-header">
-          <div>
-            <p className="spline-modal-eyebrow">{vehicle.brand}</p>
-            <h3 className="spline-modal-title">{vehicle.model}</h3>
-            <p className="spline-modal-sub">Interactive 3D Viewer — drag to rotate</p>
-          </div>
-          <button className="spline-modal-close" onClick={onClose} aria-label="Close 3D viewer">
-            <X size={20} />
-          </button>
-        </div>
-
-        {/* 3D Canvas */}
-        <div className="spline-modal-canvas">
-          {!sceneLoaded && (
-            <div className="spline-modal-loader">
-              <div className="spline-loader-ring" />
-              <p>Loading 3D scene…</p>
-            </div>
-          )}
-          <Suspense fallback={null}>
-            <Spline
-              scene={DEMO_SPLINE_SCENE}
-              onLoad={() => setSceneLoaded(true)}
-              style={{
-                width: '100%',
-                height: '100%',
-                opacity: sceneLoaded ? 1 : 0,
-                transition: 'opacity 0.6s ease',
-              }}
-            />
-          </Suspense>
-        </div>
-
-        {/* Footer hint */}
-        <div className="spline-modal-footer">
-          <span>🖱 Drag to rotate · Scroll to zoom · Right-click to pan</span>
-          <span style={{ opacity: 0.4, fontSize: '0.72rem' }}>
-            Replace DEMO_SPLINE_SCENE with your own scene URL
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 // ─── Vehicle Card ──────────────────────────────────────────────────────────────
 function VehicleCard({
   vehicle,
   onClick,
-  onView3D,
+  onExplore,
 }: {
   vehicle: VehicleGroup;
   onClick: () => void;
-  onView3D: (e: React.MouseEvent) => void;
+  onExplore: (e: React.MouseEvent) => void;
 }) {
   const [imgError, setImgError] = useState(false);
+  const { compareList, addToCompare, removeFromCompare } = useCompare();
+  const isCompared = compareList.some(v => v.id === vehicle.id);
 
   return (
-    <div
-      className="vehicle-card vehicle-card--premium"
-      onClick={onClick}
-      tabIndex={0}
-      role="button"
-      onKeyDown={(e) => e.key === 'Enter' && onClick()}
-    >
-      {/* ── Image ── */}
+    <div className="vehicle-card vehicle-card--premium" onClick={onClick} tabIndex={0} role="button" onKeyDown={(e) => e.key === 'Enter' && onClick()}>
       <div className="card-image-wrap">
-        <img
-          src={imgError ? '/placeholder.svg' : vehicle.imageSrc}
-          alt={`${vehicle.brand} ${vehicle.model}`}
-          className="card-image"
-          onError={() => setImgError(true)}
-          loading="lazy"
-        />
+        <img src={imgError ? '/placeholder.svg' : vehicle.imageSrc} alt={`${vehicle.brand} ${vehicle.model}`} className="card-image" onError={() => setImgError(true)} loading="lazy" />
         <div className="card-image-overlay" />
         <div className="fuel-badge">{vehicle.fuels.join(" / ") || "TBA"}</div>
-
         {vehicle.ncapRating && vehicle.ncapRating !== '—' && (
-          <div className="card-ncap">
-            <Star size={10} fill="currentColor" />
-            {vehicle.ncapRating}
-          </div>
+          <div className="card-ncap"><Star size={10} fill="currentColor" />{vehicle.ncapRating}</div>
         )}
 
-        {/* 3D button — top-right on hover */}
-        <button
-          className="card-3d-btn"
-          onClick={onView3D}
-          aria-label={`View ${vehicle.model} in 3D`}
-          title="View in 3D"
-        >
-          <RotateCcw size={13} />
-          3D
-        </button>
       </div>
 
-      {/* ── Content ── */}
       <div className="card-body">
         <p className="card-brand">{vehicle.brand}</p>
         <h3 className="card-model">{vehicle.model}</h3>
         <p className="card-variant">{vehicle.variants.length} Variants</p>
 
-        {/* Icon-based specs row */}
         <div className="card-stats">
-          {/* Mileage / Range */}
           <div className="card-stat">
-            <span className="stat-icon">
-              {vehicle.isEV ? <Battery size={14} /> : <Route size={14} />}
-            </span>
-            <span className="stat-value">
-              {vehicle.isEV
-                ? "Up to " + (Math.max(...vehicle.variants.map(v => parseFloat(v.range) || 0)) || "—") + " km"
-                : "Up to " + (Math.max(...vehicle.variants.map(v => parseFloat(v.mileage) || 0)) || "—")}
-            </span>
+            <span className="stat-icon">{vehicle.isEV ? <Battery size={14} /> : <Route size={14} />}</span>
+            <span className="stat-value">{vehicle.isEV ? "Up to " + (Math.max(...vehicle.variants.map(v => parseFloat(v.range) || 0)) || "—") + " km" : "Up to " + (Math.max(...vehicle.variants.map(v => parseFloat(v.mileage) || 0)) || "—")}</span>
             <span className="stat-label">{vehicle.isEV ? 'Range' : 'Mileage'}</span>
           </div>
-
-          {/* Seats */}
           <div className="card-stat">
             <span className="stat-icon"><Users size={14} /></span>
             <span className="stat-value">{vehicle.seatingCapacities.join("/")}</span>
             <span className="stat-label">Seats</span>
           </div>
-
-          {/* Transmission */}
           <div className="card-stat">
             <span className="stat-icon"><Cog size={14} /></span>
             <span className="stat-value">{vehicle.transmissions.join(" / ") || '—'}</span>
@@ -194,75 +74,71 @@ function VehicleCard({
           </div>
         </div>
 
-        <div className="card-footer">
+        <div className="card-footer flex justify-between items-center mt-4" onClick={(e) => e.stopPropagation()}>
           <span className="card-price">{vehicle.priceLabel}</span>
-          <button className="card-cta">Explore →</button>
+          <div className="flex gap-2">
+            <button 
+              className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded border transition-all ${
+                isCompared 
+                  ? 'border-red-500 text-red-500 bg-red-500/10 hover:bg-red-500/20' 
+                  : 'border-white/20 text-white/70 hover:border-white/60 hover:text-white bg-black/20'
+              }`}
+              onClick={(e) => {
+                e.stopPropagation();
+                isCompared ? removeFromCompare(vehicle.id) : addToCompare(vehicle);
+              }}
+            >
+              {isCompared ? '✓ Added' : '+ Compare'}
+            </button>
+            <button className="card-cta bg-white text-black hover:bg-gray-200 px-4 py-1.5 rounded text-sm font-bold tracking-wide transition-colors" onClick={onExplore}>Explore →</button>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-// ─── Multi-select Dropdown ─────────────────────────────────────────────────────
-function MultiSelect({
-  label, options, selected, onChange,
-}: {
-  label: string;
-  options: string[];
-  selected: string[];
-  onChange: (v: string[]) => void;
-}) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, []);
-
+// ─── Native Styled Checkbox List ───────────────────────────────────────────────
+function FilterCheckboxList({ options, selected, onChange }: { options: string[]; selected: string[]; onChange: (v: string[]) => void; }) {
   const toggle = (opt: string) => {
-    onChange(selected.includes(opt) ? selected.filter((s) => s !== opt) : [...selected, opt]);
+    onChange(selected.includes(opt) ? selected.filter(s => s !== opt) : [...selected, opt]);
   };
-
   return (
-    <div className="multi-select" ref={ref}>
-      <button className="ms-trigger" onClick={() => setOpen(!open)}>
-        <span>{selected.length ? `${label} (${selected.length})` : label}</span>
-        <ChevronDown size={14} className={open ? 'rotate-180' : ''} style={{ transition: 'transform 0.2s' }} />
-      </button>
-      {open && (
-        <div className="ms-dropdown">
-          {options.map((opt) => (
-            <label key={opt} className="ms-option">
-              <input
-                type="checkbox"
-                checked={selected.includes(opt)}
-                onChange={() => toggle(opt)}
-                className="ms-checkbox"
-              />
-              <span>{opt}</span>
-            </label>
-          ))}
-        </div>
-      )}
+    <div className="filter-checkbox-list">
+      {options.map((opt) => (
+        <label key={opt} className="filter-checkbox-label">
+          <input type="checkbox" checked={selected.includes(opt)} onChange={() => toggle(opt)} className="filter-checkbox-input" />
+          <span className="filter-checkbox-text">{opt}</span>
+        </label>
+      ))}
     </div>
   );
 }
 
-// ─── Price Range Slider ────────────────────────────────────────────────────────
-function PriceRangeSlider({
+// ─── Price Historgram Slider ───────────────────────────────────────────────────
+function PriceHistogramSlider({
   min, max, value, onChange,
 }: {
   min: number; max: number; value: [number, number]; onChange: (v: [number, number]) => void;
 }) {
+  // Generate random heights for histogram mock just for aesthetic rendering
+  const bars = useMemo(() => Array.from({ length: 40 }, () => Math.random() * 80 + 20), []);
+  const rangeWidth = max - min || 1;
+  
   return (
-    <div className="price-range">
-      <div className="price-labels">
-        <span>₹{value[0]}L</span>
-        <span>₹{value[1]}L</span>
+    <div className="price-histogram-wrap">
+      <div className="price-histogram-chart">
+        {bars.map((height, i) => {
+          const valAtPoint = min + (i / bars.length) * rangeWidth;
+          const isActive = valAtPoint >= value[0] && valAtPoint <= value[1];
+          return (
+            <div 
+              key={i} 
+              className={`histogram-bar ${isActive ? 'active' : ''}`} 
+              style={{ height: `${height}%` }}
+            />
+          );
+        })}
       </div>
       <div className="dual-slider">
         <input
@@ -276,9 +152,15 @@ function PriceRangeSlider({
           className="range-input range-high"
         />
       </div>
-      <div className="price-range-labels">
-        <span>₹{min}L</span>
-        <span>₹{max}L</span>
+      <div className="price-range-inputs">
+        <div className="price-input-box">
+          <span>FROM</span>
+          <strong>₹{value[0]}L</strong>
+        </div>
+        <div className="price-input-box">
+          <span>TO</span>
+          <strong>₹{value[1]}L</strong>
+        </div>
       </div>
     </div>
   );
@@ -286,32 +168,40 @@ function PriceRangeSlider({
 
 // ─── Main VehicleBrowser ───────────────────────────────────────────────────────
 export default function VehicleBrowser() {
+  const navigate = useNavigate();
   const [vehicles, setVehicles] = useState<VehicleGroup[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const [search, setSearch] = useState('');
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [selectedFuels, setSelectedFuels] = useState<string[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedTransmissions, setSelectedTransmissions] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<[number, number] | null>(null);
-  const [showFilters, setShowFilters] = useState(false);
   const [sortBy, setSortBy] = useState<'price-asc' | 'price-desc' | 'name' | 'rating'>('price-asc');
 
   const [page, setPage] = useState(1);
   const [selectedVehicle, setSelectedVehicle] = useState<VehicleGroup | null>(null);
 
-  // 3D modal state
-  const [splineVehicle, setSplineVehicle] = useState<VehicleGroup | null>(null);
+  const location = useLocation();
+  const searchParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
 
-  // Load data
+  useEffect(() => {
+    const cat = searchParams.get('category');
+    if (cat === 'cars') setSelectedCategories(['Cars']);
+    else if (cat === 'twowheelers') setSelectedCategories(['Bikes', 'Scooters']);
+    else if (cat === 'bikes') setSelectedCategories(['Bikes']);
+    else if (cat === 'scooters') setSelectedCategories(['Scooters']);
+    else setSelectedCategories([]);
+  }, [searchParams]);
+
   useEffect(() => {
     fetchVehicles()
       .then((data) => {
         const groupedData = groupVehicles(data);
         setVehicles(groupedData);
-        // Important: compute options on groupedData, since we updated getFilterOptions!
         const opts = getFilterOptions(groupedData);
         setPriceRange([opts.minPrice, opts.maxPrice]);
         setLoading(false);
@@ -324,56 +214,32 @@ export default function VehicleBrowser() {
 
   const filterOptions = useMemo(() => getFilterOptions(vehicles), [vehicles]);
 
-  // ─── Filter + Sort ────────────────────────────────────────────────────────
-  // Design: every filter dimension is optional — empty selection = "show all".
-  // Multiple active filters are ANDed (intersection), not ORed.
   const filtered = useMemo(() => {
-    if (!vehicles.length) return [];
-
+    if (!vehicles.length || selectedCategories.length === 0) return [];
     let out = vehicles;
-
-    // 1. Free-text search (OR across brand / model / variant / fuel / type)
     const q = search.trim().toLowerCase();
     if (q) {
-      out = out.filter(
-        (v) =>
-          v.brand.toLowerCase().includes(q) ||
-          v.model.toLowerCase().includes(q) ||
-          v.fuels.some(f => f.toLowerCase().includes(q)) ||
-          v.carTypes.some(t => t.toLowerCase().includes(q)),
+      out = out.filter((v) =>
+        v.brand.toLowerCase().includes(q) ||
+        v.model.toLowerCase().includes(q) ||
+        v.fuels.some(f => f.toLowerCase().includes(q)) ||
+        v.carTypes.some(t => t.toLowerCase().includes(q))
       );
     }
-
-    // 2. Multi-select filters (each dimension: empty = all pass)
-    // Test Case 1 — default load: all arrays empty → no filtering → full list
-    // Test Case 2 — single filter: only one array non-empty → narrow by that dimension
-    // Test Case 3 — multi filter: multiple arrays non-empty → AND intersection
-    // Test Case 4 — impossible combo: out.length === 0 → caught below in render
-    if (selectedBrands.length > 0) {
-      out = out.filter((v) => selectedBrands.includes(v.brand));
+    if (selectedCategories.length) out = out.filter((v) => selectedCategories.includes(v.vehicleCategory));
+    if (selectedBrands.length) out = out.filter((v) => selectedBrands.includes(v.brand));
+    if (selectedFuels.length) {
+      const lc = selectedFuels.map(f => f.toLowerCase());
+      out = out.filter(v => v.fuels.some(f => lc.includes(f.toLowerCase())));
     }
-    if (selectedFuels.length > 0) {
-      // Case-insensitive match so 'Electric' === 'electric' etc.
-      const fuelsLC = selectedFuels.map((f) => f.toLowerCase());
-      out = out.filter((v) => v.fuels.some(f => fuelsLC.includes(f.toLowerCase())));
-    }
-    if (selectedTypes.length > 0) {
-      out = out.filter((v) => v.carTypes.some(t => selectedTypes.includes(t)));
-    }
-    if (selectedTransmissions.length > 0) {
-      out = out.filter((v) => v.transmissions.some(t => selectedTransmissions.includes(t)));
-    }
-
-    // 3. Price range — only filter when range is non-trivial (min !== max)
+    if (selectedTypes.length) out = out.filter(v => v.carTypes.some(t => selectedTypes.includes(t)));
+    if (selectedTransmissions.length) out = out.filter(v => v.transmissions.some(t => selectedTransmissions.includes(t)));
     if (priceRange && priceRange[0] !== priceRange[1]) {
       out = out.filter((v) => {
-        // Vehicles with price === 0 are "Upcoming" — let them through
         if (v.minPrice === 0) return true;
-        return v.minPrice >= priceRange[0] && v.minPrice <= priceRange[1];
+        return v.minPrice <= priceRange[1] && v.maxPrice >= priceRange[0];
       });
     }
-
-    // 4. Sort
     return [...out].sort((a, b) => {
       if (sortBy === 'price-asc') return a.minPrice - b.minPrice;
       if (sortBy === 'price-desc') return b.maxPrice - a.maxPrice;
@@ -381,17 +247,15 @@ export default function VehicleBrowser() {
       if (sortBy === 'rating') return (b.ncapRating || '0').localeCompare(a.ncapRating || '0');
       return 0;
     });
-  }, [vehicles, search, selectedBrands, selectedFuels, selectedTypes, selectedTransmissions, priceRange, sortBy]);
+  }, [vehicles, search, selectedCategories, selectedBrands, selectedFuels, selectedTypes, selectedTransmissions, priceRange, sortBy]);
 
-  // Reset page when filters change
-  useEffect(() => { setPage(1); }, [search, selectedBrands, selectedFuels, selectedTypes, selectedTransmissions, priceRange, sortBy]);
+  useEffect(() => { setPage(1); }, [search, selectedCategories, selectedBrands, selectedFuels, selectedTypes, selectedTransmissions, priceRange, sortBy]);
 
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
   const paginated = filtered.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
 
-  const hasActiveFilters = selectedBrands.length || selectedFuels.length || selectedTypes.length || selectedTransmissions.length;
-
   function clearAllFilters() {
+    setSelectedCategories([]);
     setSelectedBrands([]);
     setSelectedFuels([]);
     setSelectedTypes([]);
@@ -402,211 +266,148 @@ export default function VehicleBrowser() {
 
   return (
     <section className="vehicle-browser" id="browse-all">
-      {/* Section header */}
       <div className="vb-header">
         <p className="vb-eyebrow">Explore the Fleet</p>
         <h2 className="vb-title">Browse All Vehicles</h2>
-        <p className="vb-subtitle">
-          Discover, filter, and compare {vehicles.length}+ vehicles across every segment —{' '}
-          from budget hatchbacks to flagship EVs.
-        </p>
       </div>
 
-      {/* ── Sticky glassmorphic controls bar ── */}
-      <div className="vb-sticky-bar">
-        <div className="vb-controls">
-          <div className="search-bar">
-            <Search size={16} className="search-icon" />
-            <input
-              type="text"
-              placeholder="Search brand, model, or type…"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="search-input"
-            />
-            {search && (
-              <button onClick={() => setSearch('')} className="search-clear">
-                <X size={14} />
-              </button>
+      <div className="vb-layout-wrapper">
+        {/* ── Sidebar Filters ── */}
+        <aside className="vb-sidebar">
+          <div className="vb-sidebar-header">
+            <h3>Filter by</h3>
+            <button onClick={clearAllFilters} className="clear-reset-btn">Reset all <X size={12} /></button>
+          </div>
+
+          <div className="filter-section">
+            <h4 className="filter-section-title">Vehicle Category</h4>
+            {filterOptions && <FilterCheckboxList options={filterOptions.categories} selected={selectedCategories} onChange={setSelectedCategories} />}
+          </div>
+
+          <div className="filter-section">
+            <h4 className="filter-section-title">Price Range / Lakh</h4>
+            {priceRange && (
+              <PriceHistogramSlider
+                min={filterOptions.minPrice}
+                max={filterOptions.maxPrice}
+                value={priceRange}
+                onChange={setPriceRange}
+              />
             )}
           </div>
 
-          <div className="controls-right">
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
-              className="sort-select"
-            >
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-              <option value="name">Name A–Z</option>
-              <option value="rating">NCAP Rating</option>
-            </select>
-
-            <button
-              className={`filter-toggle ${showFilters ? 'active' : ''}`}
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              <SlidersHorizontal size={16} />
-              Filters
-              {hasActiveFilters ? <span className="filter-badge">{(selectedBrands.length + selectedFuels.length + selectedTypes.length + selectedTransmissions.length)}</span> : null}
-            </button>
+          <div className="filter-section">
+            <h4 className="filter-section-title">Body Type</h4>
+            <FilterCheckboxList options={filterOptions.carTypes} selected={selectedTypes} onChange={setSelectedTypes} />
           </div>
-        </div>
 
-        {/* Filters Panel */}
-        {showFilters && (
-          <div className="filter-panel">
-            <div className="filter-row">
-              <MultiSelect label="Brand" options={filterOptions.brands} selected={selectedBrands} onChange={setSelectedBrands} />
-              <MultiSelect label="Fuel Type" options={filterOptions.fuelTypes} selected={selectedFuels} onChange={setSelectedFuels} />
-              <MultiSelect label="Car Type" options={filterOptions.carTypes} selected={selectedTypes} onChange={setSelectedTypes} />
-              <MultiSelect label="Transmission" options={filterOptions.transmissions} selected={selectedTransmissions} onChange={setSelectedTransmissions} />
-              {priceRange && (
-                <div className="filter-group">
-                  <label className="filter-label">Price Range</label>
-                  <PriceRangeSlider
-                    min={filterOptions.minPrice}
-                    max={filterOptions.maxPrice}
-                    value={priceRange}
-                    onChange={setPriceRange}
-                  />
+          <div className="filter-section">
+            <h4 className="filter-section-title">Car Brand</h4>
+            <FilterCheckboxList options={filterOptions.brands} selected={selectedBrands} onChange={setSelectedBrands} />
+          </div>
+
+          <div className="filter-section">
+            <h4 className="filter-section-title">Transmission</h4>
+            <FilterCheckboxList options={filterOptions.transmissions} selected={selectedTransmissions} onChange={setSelectedTransmissions} />
+          </div>
+
+          <div className="filter-section">
+            <h4 className="filter-section-title">Fuel Type</h4>
+            <FilterCheckboxList options={filterOptions.fuelTypes} selected={selectedFuels} onChange={setSelectedFuels} />
+          </div>
+        </aside>
+
+        {/* ── Main Canvas ── */}
+        <div className="vb-main">
+          <div className="vb-topbar">
+            <div className="search-box">
+              <Search size={16} className="text-white/40" />
+              <input type="text" placeholder="Search brand, model, or type…" value={search} onChange={e => setSearch(e.target.value)} />
+              {search && <button onClick={() => setSearch('')}><X size={14} /></button>}
+            </div>
+            <div className="sort-box">
+              <select value={sortBy} onChange={(e) => setSortBy(e.target.value as any)}>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="name">Name A–Z</option>
+                <option value="rating">NCAP Rating</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="results-info">
+            {!loading && selectedCategories.length > 0 && <span>{filtered.length} vehicle{filtered.length !== 1 ? 's' : ''} found</span>}
+          </div>
+
+          {loading && (
+            <div className="vb-loading">
+              <div className="loading-spinner" />
+              <p>Loading vehicles…</p>
+            </div>
+          )}
+
+          {error && <div className="vb-error"><p>{error}</p></div>}
+
+          {!loading && !error && (
+            <>
+              {selectedCategories.length === 0 ? (
+                <div className="vb-empty select-category-prompt py-24 flex flex-col items-center text-center">
+                  <div className="illustration-wrapper mb-8 relative group">
+                    <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full transition-all duration-700 group-hover:bg-blue-400/30"></div>
+                    <svg className="w-32 h-32 text-blue-400 drop-shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-transform duration-500 hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                  </div>
+                  <h4 className="text-2xl font-bold text-white mb-3">Select a Category to Explore</h4>
+                  <p className="text-white/50 max-w-md mx-auto leading-relaxed">
+                    Please choose Cars, Bikes, or Scooters from the filter panel to view and compare available vehicles.
+                  </p>
+                </div>
+              ) : paginated.length === 0 ? (
+                <div className="vb-empty">
+                  <span>🔍</span>
+                  <h4>No vehicles found</h4>
+                  <p>Your active filters returned no results. Try expanding or clearing your selection.</p>
+                  <button onClick={clearAllFilters} className="btn-clear-large">Reset All Filters</button>
+                </div>
+              ) : (
+                <div className="vehicle-grid">
+                  {paginated.map((vehicle) => (
+                    <VehicleCard
+                      key={vehicle.id}
+                      vehicle={vehicle}
+                      onClick={() => setSelectedVehicle(vehicle)}
+                      onExplore={(e) => { e.stopPropagation(); navigate(`/vehicle/${vehicle.id}`); }}
+                    />
+                  ))}
                 </div>
               )}
-            </div>
-            {hasActiveFilters ? (
-              <button className="clear-filters" onClick={clearAllFilters}>
-                <X size={13} /> Clear all filters
-              </button>
-            ) : null}
-          </div>
-        )}
 
-        {/* Quick-filter pills (fuel) */}
-        <div className="quick-pills">
-          {['All', 'Petrol', 'Diesel', 'Electric', 'Hybrid', 'Flex Fuel'].map((f) => (
-            <button
-              key={f}
-              className={`pill ${f === 'All' ? (selectedFuels.length === 0 ? 'pill-active' : '') : selectedFuels.includes(f) ? 'pill-active' : ''}`}
-              onClick={() => {
-                if (f === 'All') setSelectedFuels([]);
-                else setSelectedFuels((prev) => prev.includes(f) ? prev.filter((x) => x !== f) : [...prev, f]);
-              }}
-            >
-              {f === 'Electric' && <Zap size={12} />}
-              {f === 'Petrol' && <Fuel size={12} />}
-              {f === 'Diesel' && <Fuel size={12} />}
-              {f === 'Hybrid' && <Battery size={12} />}
-              {f}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Results info */}
-      <div className="results-info">
-        {!loading && (
-          <span>{filtered.length} vehicle{filtered.length !== 1 ? 's' : ''} found</span>
-        )}
-      </div>
-
-      {/* Loading */}
-      {loading && (
-        <div className="vb-loading">
-          <div className="loading-spinner" />
-          <p>Loading vehicles…</p>
-        </div>
-      )}
-
-      {/* Error */}
-      {error && (
-        <div className="vb-error">
-          <p>{error}</p>
-        </div>
-      )}
-
-      {/* Grid */}
-      {!loading && !error && (
-        <>
-          {paginated.length === 0 ? (
-            <div className="vb-empty">
-              <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>🔍</div>
-              <p style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.4rem', color: 'hsl(var(--primary-foreground))' }}>
-                No vehicles found
-              </p>
-              <p style={{ fontSize: '0.85rem', maxWidth: 380, lineHeight: 1.6 }}>
-                {search.trim()
-                  ? `No results for "${search.trim()}". Try a different search term.`
-                  : 'Your active filters returned no results. Try expanding or clearing your selection.'}
-              </p>
-              <button onClick={clearAllFilters} className="btn-clear" style={{ marginTop: '1rem' }}>Reset All Filters</button>
-            </div>
-          ) : (
-            <div className="vehicle-grid">
-              {paginated.map((vehicle) => (
-                <VehicleCard
-                  key={vehicle.id}
-                  vehicle={vehicle}
-                  onClick={() => setSelectedVehicle(vehicle)}
-                  onView3D={(e) => { e.stopPropagation(); setSplineVehicle(vehicle); }}
-                />
-              ))}
-            </div>
+              {totalPages > 1 && (
+                <div className="pagination">
+                  <button className="page-btn" onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}><ChevronLeft size={16} /></button>
+                  {Array.from({ length: Math.min(7, totalPages) }, (_, i) => {
+                    let pageNum: number;
+                    if (totalPages <= 7) pageNum = i + 1;
+                    else if (page <= 4) pageNum = i + 1;
+                    else if (page >= totalPages - 3) pageNum = totalPages - 6 + i;
+                    else pageNum = page - 3 + i;
+                    return (
+                      <button key={pageNum} className={`page-num ${page === pageNum ? 'page-active' : ''}`} onClick={() => setPage(pageNum)}>
+                        {pageNum}
+                      </button>
+                    );
+                  })}
+                  <button className="page-btn" onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}><ChevronRight size={16} /></button>
+                </div>
+              )}
+            </>
           )}
 
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="pagination">
-              <button
-                className="page-btn"
-                onClick={() => setPage((p) => Math.max(1, p - 1))}
-                disabled={page === 1}
-              >
-                <ChevronLeft size={16} />
-              </button>
-              {Array.from({ length: Math.min(7, totalPages) }, (_, i) => {
-                let pageNum: number;
-                if (totalPages <= 7) { pageNum = i + 1; }
-                else if (page <= 4) { pageNum = i + 1; }
-                else if (page >= totalPages - 3) { pageNum = totalPages - 6 + i; }
-                else { pageNum = page - 3 + i; }
-                return (
-                  <button
-                    key={pageNum}
-                    className={`page-num ${page === pageNum ? 'page-active' : ''}`}
-                    onClick={() => setPage(pageNum)}
-                  >
-                    {pageNum}
-                  </button>
-                );
-              })}
-              <button
-                className="page-btn"
-                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                disabled={page === totalPages}
-              >
-                <ChevronRight size={16} />
-              </button>
-            </div>
-          )}
-        </>
-      )}
+          {selectedVehicle && <VehicleDetailModal vehicle={selectedVehicle} onClose={() => setSelectedVehicle(null)} />}
 
-      {/* Detail Modal */}
-      {selectedVehicle && (
-        <VehicleDetailModal
-          vehicle={selectedVehicle}
-          onClose={() => setSelectedVehicle(null)}
-        />
-      )}
-
-      {/* Spline 3D Modal */}
-      {splineVehicle && (
-        <SplineModal
-          vehicle={splineVehicle}
-          onClose={() => setSplineVehicle(null)}
-        />
-      )}
+        </div>
+      </div>
     </section>
   );
 }

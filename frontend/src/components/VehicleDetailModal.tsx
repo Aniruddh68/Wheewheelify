@@ -1,11 +1,6 @@
-import { Suspense, lazy, useState } from 'react';
-import { X, RotateCcw, Loader2 } from 'lucide-react';
+import { useState } from 'react';
+import { X } from 'lucide-react';
 import type { VehicleGroup, Vehicle } from '@/utils/parseVehicles';
-
-const Spline = lazy(() => import('@splinetool/react-spline'));
-
-// A public demo Spline car scene – swap with your own exported .splinecode URL
-const DEMO_SPLINE_SCENE = 'https://prod.spline.design/kZDDjO5HlWTxhgHv/scene.splinecode';
 
 interface VehicleDetailModalProps {
   vehicle: VehicleGroup;
@@ -13,8 +8,6 @@ interface VehicleDetailModalProps {
 }
 
 export default function VehicleDetailModal({ vehicle, onClose }: VehicleDetailModalProps) {
-  const [show3D, setShow3D] = useState(false);
-  const [splineLoaded, setSplineLoaded] = useState(false);
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -29,16 +22,7 @@ export default function VehicleDetailModal({ vehicle, onClose }: VehicleDetailMo
             <p className="modal-price mt-2 text-md text-white/70">{vehicle.priceLabel}</p>
           </div>
           <div className="modal-actions flex items-center gap-3">
-            {!show3D && (
-              <button className="btn-3d px-4 py-2 bg-white/10 hover:bg-white/20 rounded font-medium text-white transition-all" onClick={() => setShow3D(true)}>
-                ⟳ View in 3D
-              </button>
-            )}
-            {show3D && (
-              <button className="btn-3d-back px-4 py-2 bg-white/10 hover:bg-white/20 rounded font-medium text-white flex items-center gap-2 transition-all" onClick={() => { setShow3D(false); setSplineLoaded(false); }}>
-                <RotateCcw size={14} /> Back to Image
-              </button>
-            )}
+
             <button className="modal-close p-2 hover:bg-white/10 rounded-full text-white transition-all" onClick={onClose}>
               <X size={20} />
             </button>
@@ -49,30 +33,12 @@ export default function VehicleDetailModal({ vehicle, onClose }: VehicleDetailMo
         <div className="flex-1 overflow-y-auto no-scrollbar">
             {/* Visual area – Image or 3D */}
             <div className="modal-visual relative w-full h-[300px] sm:h-[400px] flex items-center justify-center bg-black/40 overflow-hidden">
-              {!show3D ? (
                 <img
                   src={vehicle.imageSrc}
                   alt={`${vehicle.brand} ${vehicle.model}`}
                   className="object-cover w-full h-full mix-blend-screen scale-110"
                   onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder.svg'; }}
                 />
-              ) : (
-                <div className="spline-wrapper w-full h-full absolute inset-0">
-                  {!splineLoaded && (
-                    <div className="spline-loading absolute inset-0 flex flex-col items-center justify-center text-white/50">
-                      <Loader2 className="animate-spin mb-3" size={32} />
-                      <p>Loading 3D scene…</p>
-                    </div>
-                  )}
-                  <Suspense fallback={null}>
-                    <Spline
-                      scene={DEMO_SPLINE_SCENE}
-                      onLoad={() => setSplineLoaded(true)}
-                      style={{ opacity: splineLoaded ? 1 : 0, transition: 'opacity 0.6s', width: '100%', height: '100%' }}
-                    />
-                  </Suspense>
-                </div>
-              )}
             </div>
 
             {/* Variants Table */}

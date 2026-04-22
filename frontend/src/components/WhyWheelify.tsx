@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import techDashboard from "@/assets/tech-dashboard.jpg";
 
 const Speedometer = ({ active }: { active: boolean }) => {
-  const needleRotation = active ? 130 : -40;
+  const needleRotation = active ? 75 : -67;
   return (
     <svg viewBox="0 0 100 60" className="w-full h-full" fill="none">
       <path
@@ -23,7 +23,7 @@ const Speedometer = ({ active }: { active: boolean }) => {
         strokeDasharray="126"
         initial={{ strokeDashoffset: 126 }}
         animate={{ strokeDashoffset: active ? 10 : 110 }}
-        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ type: "spring", bounce: 0.35, duration: 1.2 }}
       />
       {[...Array(7)].map((_, i) => {
         const angle = -180 + i * 30;
@@ -41,10 +41,10 @@ const Speedometer = ({ active }: { active: boolean }) => {
         stroke="hsl(var(--primary))"
         strokeWidth="2"
         strokeLinecap="round"
-        style={{ originX: "50px", originY: "55px" }}
-        initial={{ rotate: -40 }}
+        style={{ originX: 0.5, originY: 1 }}
+        initial={{ rotate: -67 }}
         animate={{ rotate: needleRotation }}
-        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+        transition={{ type: "spring", bounce: 0.35, duration: 1.2 }}
       />
       <circle cx="50" cy="55" r="3" fill="hsl(var(--primary))" />
     </svg>
