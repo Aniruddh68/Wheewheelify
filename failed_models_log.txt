@@ -1,0 +1,387 @@
+
+============================================================
+Run started: 2026-04-23 20:55:03.201223
+============================================================
+
+============================================================
+Run started: 2026-04-23 20:55:10.127668
+============================================================
+
+============================================================
+Run started: 2026-04-23 20:57:41.530322
+============================================================
+[FAILED] Honda Shine 100 | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda CD 110 Dream | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda Livo | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda Shine 125 | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda SP 125 | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda SP 160 | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda Hornet 2.0 | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda X-Blade | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda CBR 150R | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda CB300F | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda H'ness CB350 | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda CB350RS | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda CB350 | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda NX500 | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda CB500X | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda CB650R | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda CBR650R | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda XL750 Transalp | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda Africa Twin | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda Gold Wing | Removed: No India-specific listings found on trusted portals
+[FAILED] Honda Fireblade | Removed: Matched discontinued pattern list
+[FAILED] Honda CB1000R | Removed: Matched discontinued pattern list
+[FAILED] Hero Passion Pro | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Passion XPro | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Xtreme 200S | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Splendor Plus | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero HF 100 | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero HF Deluxe | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Passion Plus | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Passion XTEC | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Super Splendor | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Glamour | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Glamour XTEC | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Xtreme 125R | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Xtreme 160R | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Xtreme 160R 4V | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Xtreme 250R | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero XPulse 200 4V | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero XPulse 210 | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Karizma XMR | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Mavrick 440 | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero XPulse | Removed: No India-specific listings found on trusted portals
+[FAILED] TVS Sport | Removed: No India-specific listings found on trusted portals
+[FAILED] TVS Apache | Removed: No India-specific listings found on trusted portals
+[FAILED] TVS XL 100 | Removed: No India-specific listings found on trusted portals
+[FAILED] TVS Apache RR 310 | Removed: No India-specific listings found on trusted portals
+[FAILED] TVS Apache RTR 310 | Removed: No India-specific listings found on trusted portals
+[FAILED] TVS Ronin | Removed: No India-specific listings found on trusted portals
+[FAILED] TVS Apache RTR 200 4V | Removed: No India-specific listings found on trusted portals
+[FAILED] TVS Apache RTR 160 4V | Removed: No India-specific listings found on trusted portals
+[FAILED] TVS Apache RTR 160 2V | Removed: No India-specific listings found on trusted portals
+[FAILED] TVS Apache RTR | Removed: No India-specific listings found on trusted portals
+[FAILED] TVS Radeon | Removed: No India-specific listings found on trusted portals
+[FAILED] TVS Star City Plus | Removed: No India-specific listings found on trusted portals
+[FAILED] TVS Zeppelin | Removed: No India-specific listings found on trusted portals
+[FAILED] TVS Apache RR | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar P150 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Freedom 125 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj CT 110X | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj CT 125X | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Platina 100 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Platina 110 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar 125 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar 150 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar 220F | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar NS125 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar NS160 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar NS200 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar NS400Z | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar N125 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar N150 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar RS200 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Dominar 400 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Avenger Cruise 220 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Bullet 350 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Classic 350 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Goan Classic 350 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Classic 650 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Meteor 350 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Super Meteor | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Hunter 350 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Guerrilla 450 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Himalayan | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Scram 411 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Scram 440 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Interceptor 650 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Continental GT 650 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Shotgun 650 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Bear 650 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Bullet 650 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Interceptor | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha Raider 125 | Removed: Matched discontinued pattern list
+[FAILED] Yamaha SP 125 | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha FZ-FI | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha FZ-S FI | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha FZ-X | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha MT-15 | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha R15 | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha R15M | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha YZF-R3 | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha MT-03 | Removed: Matched discontinued pattern list
+[FAILED] Yamaha YZF-R1 | Removed: Matched discontinued pattern list
+[FAILED] Yamaha YZF-R1M | Removed: Matched discontinued pattern list
+[FAILED] Yamaha RX 100 | Removed: Matched discontinued pattern list
+[FAILED] Yamaha MT-07 | Removed: Matched discontinued pattern list
+[FAILED] Yamaha YZF-R7 | Removed: Matched discontinued pattern list
+[FAILED] Yamaha Tenere 700 | Removed: Matched discontinued pattern list
+[FAILED] Yamaha WR 155R | Removed: Matched discontinued pattern list
+[FAILED] Suzuki Gixxer 150 | Removed: No India-specific listings found on trusted portals
+[FAILED] Suzuki Gixxer SF | Removed: No India-specific listings found on trusted portals
+[FAILED] Suzuki Gixxer 250 | Removed: No India-specific listings found on trusted portals
+[FAILED] Suzuki Gixxer SF 250 | Removed: No India-specific listings found on trusted portals
+[FAILED] Suzuki GSX-8R | Removed: No India-specific listings found on trusted portals
+[FAILED] Suzuki Hayabusa | Removed: Matched discontinued pattern list
+[FAILED] Suzuki Katana | Removed: Matched discontinued pattern list
+[FAILED] Suzuki GSX-8S | Removed: No India-specific listings found on trusted portals
+[FAILED] Suzuki GSX-R1000R | Removed: Matched discontinued pattern list
+[FAILED] Suzuki Intruder | Removed: No India-specific listings found on trusted portals
+[FAILED] Suzuki SV650 | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 125 Duke | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 160 Duke | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 200 Duke | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 250 Duke | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 390 Duke | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 790 Duke | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 1390 Super Duke R | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM RC 125 | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM RC 160 | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM RC 200 | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM RC 390 | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 250 Adventure | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 390 Adventure | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 390 Adventure R | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 1290 Super Adv S | Removed: Matched discontinued pattern list
+[FAILED] KTM 1390 Super Adv S | Removed: Matched discontinued pattern list
+[FAILED] KTM 390 Enduro R | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 390 SMC R | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 250 SX-F | Removed: Matched discontinued pattern list
+[FAILED] KTM 350 SX-F | Removed: Matched discontinued pattern list
+[FAILED] KTM 450 SX-F | Removed: Matched discontinued pattern list
+[FAILED] KTM E-Duke | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM Duke 490 | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM RC 490 | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 650 Duke | Removed: No India-specific listings found on trusted portals
+[FAILED] Jawa Standard 350 | Removed: No India-specific listings found on trusted portals
+[FAILED] Jawa 350 | Removed: No India-specific listings found on trusted portals
+[FAILED] Jawa 42 | Removed: No India-specific listings found on trusted portals
+[FAILED] Jawa 42 (Standard) | Removed: No India-specific listings found on trusted portals
+[FAILED] Jawa 42 FJ | Removed: No India-specific listings found on trusted portals
+[FAILED] Jawa Perak | Removed: No India-specific listings found on trusted portals
+[FAILED] Jawa 42 Bobber | Removed: No India-specific listings found on trusted portals
+[FAILED] Yezdi Adventure | Removed: No India-specific listings found on trusted portals
+[FAILED] Yezdi Scrambler | Removed: No India-specific listings found on trusted portals
+[FAILED] Yezdi MTR 350 | Removed: No India-specific listings found on trusted portals
+[FAILED] Yezdi Roadking | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Ninja 400 | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Ninja 300 | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Ninja 500 | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Ninja 650 | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Ninja ZX-6R | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Ninja ZX-10R | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Ninja ZX-10RR | Removed: Matched discontinued pattern list
+[FAILED] Kawasaki Ninja 1000SX | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Ninja 1100SX | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Ninja H2 | Removed: Matched discontinued pattern list
+[FAILED] Kawasaki Ninja H2R | Removed: Matched discontinued pattern list
+[FAILED] Kawasaki Z1000 | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Z650 | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Z900 | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Z H2 | Removed: Matched discontinued pattern list
+[FAILED] Kawasaki Z650RS | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Z900RS | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Versys-X 300 | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Versys 1000 | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Versys 650 | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Versys 1100 | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Vulcan S | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Eliminator | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki W175 | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki W175 Street | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki W800 | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki KLX 230 | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki KLX 450R | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki Ninja 7 Hybrid | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki W230 | Removed: Matched discontinued pattern list
+[FAILED] Kawasaki Meguro | Removed: Matched discontinued pattern list
+[FAILED] Kawasaki Z500 | Removed: No India-specific listings found on trusted portals
+[FAILED] Kawasaki KLE500 | Removed: Matched discontinued pattern list
+[FAILED] BMW G 310 R | Removed: No India-specific listings found on trusted portals
+[FAILED] BMW G 310 RR | Removed: No India-specific listings found on trusted portals
+[FAILED] BMW F 750 GS | Removed: No India-specific listings found on trusted portals
+[FAILED] BMW F 850 GS | Removed: No India-specific listings found on trusted portals
+[FAILED] BMW F 800 GS | Removed: No India-specific listings found on trusted portals
+[FAILED] BMW F 900 GS | Removed: No India-specific listings found on trusted portals
+[FAILED] BMW F 900 R | Removed: No India-specific listings found on trusted portals
+[FAILED] BMW F 900 XR | Removed: No India-specific listings found on trusted portals
+[FAILED] BMW R 1250 GS | Removed: No India-specific listings found on trusted portals
+[FAILED] BMW R 12 | Removed: No India-specific listings found on trusted portals
+[FAILED] BMW R 1250 RT | Removed: Matched discontinued pattern list
+[FAILED] BMW R 1250 R | Removed: No India-specific listings found on trusted portals
+[FAILED] BMW R 18 | Removed: No India-specific listings found on trusted portals
+[FAILED] BMW S 1000 RR | Removed: No India-specific listings found on trusted portals
+[FAILED] BMW S 1000 R | Removed: No India-specific listings found on trusted portals
+[FAILED] BMW S 1000 XR | Removed: No India-specific listings found on trusted portals
+[FAILED] BMW M 1000 RR | Removed: Matched discontinued pattern list
+[FAILED] BMW M 1000 R | Removed: Matched discontinued pattern list
+[FAILED] BMW M 1000 XR | Removed: Matched discontinued pattern list
+[FAILED] BMW K 1600 | Removed: Matched discontinued pattern list
+[FAILED] BMW R nineT | Removed: No India-specific listings found on trusted portals
+[FAILED] BMW F 900 | Removed: No India-specific listings found on trusted portals
+[FAILED] BMW R 1300 | Removed: No India-specific listings found on trusted portals
+[FAILED] Triumph Speed 400 | Removed: No India-specific listings found on trusted portals
+[FAILED] Triumph Speed T4 | Removed: No India-specific listings found on trusted portals
+[FAILED] Triumph Thruxton 400 | Removed: No India-specific listings found on trusted portals
+[FAILED] Triumph Bonneville | Removed: No India-specific listings found on trusted portals
+[FAILED] Triumph Scrambler | Removed: No India-specific listings found on trusted portals
+[FAILED] Triumph Thruxton | Removed: No India-specific listings found on trusted portals
+[FAILED] Triumph Street Triple | Removed: No India-specific listings found on trusted portals
+[FAILED] Triumph Speed Triple | Removed: No India-specific listings found on trusted portals
+[FAILED] Triumph Trident | Removed: No India-specific listings found on trusted portals
+[FAILED] Triumph Tiger 850 | Removed: No India-specific listings found on trusted portals
+[FAILED] Triumph Tiger 900 | Removed: No India-specific listings found on trusted portals
+[FAILED] Triumph Tiger 1200 | Removed: No India-specific listings found on trusted portals
+[FAILED] Triumph Tiger | Removed: No India-specific listings found on trusted portals
+[FAILED] Triumph Rocket 3 | Removed: No India-specific listings found on trusted portals
+[FAILED] Triumph Daytona | Removed: No India-specific listings found on trusted portals
+[FAILED] Harley X440 | Removed: No India-specific listings found on trusted portals
+[FAILED] Harley Nightster | Removed: No India-specific listings found on trusted portals
+[FAILED] Harley Sportster | Removed: No India-specific listings found on trusted portals
+[FAILED] Harley Fat Boy | Removed: No India-specific listings found on trusted portals
+[FAILED] Harley Fat Bob | Removed: No India-specific listings found on trusted portals
+[FAILED] Harley Breakout | Removed: No India-specific listings found on trusted portals
+[FAILED] Harley Street Bob | Removed: No India-specific listings found on trusted portals
+[FAILED] Harley Low Rider | Removed: No India-specific listings found on trusted portals
+[FAILED] Harley Heritage | Removed: No India-specific listings found on trusted portals
+[FAILED] Harley Pan Am | Removed: No India-specific listings found on trusted portals
+[FAILED] Harley Road King | Removed: No India-specific listings found on trusted portals
+[FAILED] Harley Street Glide | Removed: No India-specific listings found on trusted portals
+[FAILED] Harley Road Glide | Removed: No India-specific listings found on trusted portals
+[FAILED] Harley Ultra | Removed: No India-specific listings found on trusted portals
+[FAILED] Harley CVO | Removed: No India-specific listings found on trusted portals
+[FAILED] Harley Trike | Removed: No India-specific listings found on trusted portals
+[FAILED] Harley X | Removed: No India-specific listings found on trusted portals
+[FAILED] Aprilia RS 457 | Removed: No India-specific listings found on trusted portals
+[FAILED] Aprilia Tuono | Removed: No India-specific listings found on trusted portals
+[FAILED] Aprilia Tuareg | Removed: No India-specific listings found on trusted portals
+[FAILED] Aprilia RSV4 | Removed: No India-specific listings found on trusted portals
+[FAILED] Aprilia Tuono V4 | Removed: No India-specific listings found on trusted portals
+[FAILED] Aprilia RS | Removed: No India-specific listings found on trusted portals
+[FAILED] Ducati Scrambler | Removed: No India-specific listings found on trusted portals
+[FAILED] Ducati Monster | Removed: No India-specific listings found on trusted portals
+[FAILED] Ducati Panigale | Removed: No India-specific listings found on trusted portals
+[FAILED] Ducati Streetfighter | Removed: No India-specific listings found on trusted portals
+[FAILED] Ducati Diavel | Removed: No India-specific listings found on trusted portals
+[FAILED] Ducati XDiavel | Removed: Matched discontinued pattern list
+[FAILED] Ducati Hypermotard | Removed: Matched discontinued pattern list
+[FAILED] Ducati DesertX | Removed: No India-specific listings found on trusted portals
+[FAILED] Ducati SuperSport | Removed: No India-specific listings found on trusted portals
+[FAILED] Ducati Superleggera | Removed: Matched discontinued pattern list
+[FAILED] Ducati Panigale V4 | Removed: Matched discontinued pattern list
+[FAILED] Ducati Desmo450 | Removed: Matched discontinued pattern list
+[FAILED] Benelli TRK | Removed: No India-specific listings found on trusted portals
+[FAILED] Benelli Leoncino | Removed: No India-specific listings found on trusted portals
+[FAILED] Benelli Imperiale | Removed: No India-specific listings found on trusted portals
+[FAILED] Benelli 502 | Removed: No India-specific listings found on trusted portals
+[FAILED] Benelli 402 | Removed: No India-specific listings found on trusted portals
+[FAILED] Benelli Tornado | Removed: No India-specific listings found on trusted portals
+[FAILED] Benelli 302S | Removed: No India-specific listings found on trusted portals
+[FAILED] Benelli 752 | Removed: No India-specific listings found on trusted portals
+[FAILED] Benelli 180 | Removed: No India-specific listings found on trusted portals
+[FAILED] Zontes 350 | Removed: No India-specific listings found on trusted portals
+[FAILED] Zontes V | Removed: No India-specific listings found on trusted portals
+[FAILED] Zontes S | Removed: No India-specific listings found on trusted portals
+[FAILED] Zontes GK | Removed: No India-specific listings found on trusted portals
+[FAILED] Zontes 703 | Removed: No India-specific listings found on trusted portals
+[FAILED] Zontes C | Removed: No India-specific listings found on trusted portals
+[FAILED] Brand *ALL* | Brand not active in India retail
+[FAILED] QJ Motor SRC | Removed: No India-specific listings found on trusted portals
+[FAILED] QJ Motor SRV | Removed: No India-specific listings found on trusted portals
+[FAILED] QJ Motor SRK | Removed: No India-specific listings found on trusted portals
+[FAILED] QJ Motor SRT | Removed: No India-specific listings found on trusted portals
+[FAILED] Keeway SR | Removed: No India-specific listings found on trusted portals
+[FAILED] Keeway K | Removed: No India-specific listings found on trusted portals
+[FAILED] Keeway RR | Removed: No India-specific listings found on trusted portals
+[FAILED] Keeway K-Light | Removed: No India-specific listings found on trusted portals
+[FAILED] Keeway V302C | Removed: No India-specific listings found on trusted portals
+[FAILED] Keeway-Benda LFS | Removed: No India-specific listings found on trusted portals
+[FAILED] Keeway-Benda Darkflag | Removed: No India-specific listings found on trusted portals
+
+============================================================
+Run started: 2026-04-25 22:21:01.972475
+============================================================
+[FAILED] Hero Passion Pro | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Passion XPro | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Splendor Plus | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero HF 100 | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero HF Deluxe | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Passion Plus | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Passion XTEC | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Super Splendor | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Glamour | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Glamour XTEC | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Xtreme 125R | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Xtreme 160R | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Xtreme 160R 4V | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Xtreme 250R | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero XPulse 200 4V | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero XPulse 210 | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Karizma XMR | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero Mavrick 440 | Removed: No India-specific listings found on trusted portals
+[FAILED] Hero XPulse | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Freedom 125 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj CT 110X | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj CT 125X | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Platina 100 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Platina 110 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar 125 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar 150 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar 220F | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar NS125 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar NS160 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar NS200 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar NS400Z | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar N125 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar N150 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar RS200 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Dominar 400 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Avenger Cruise 220 | Removed: No India-specific listings found on trusted portals
+[FAILED] Bajaj Pulsar | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Bullet 350 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Classic 350 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Goan Classic 350 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Classic 650 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Meteor 350 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Super Meteor | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Hunter 350 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Guerrilla 450 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Himalayan | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Scram 411 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Scram 440 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Interceptor 650 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Continental GT 650 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Shotgun 650 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Bear 650 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Bullet 650 | Removed: No India-specific listings found on trusted portals
+[FAILED] Royal Enfield Interceptor | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha Raider 125 | Removed: Matched discontinued pattern list
+[FAILED] Yamaha SP 125 | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha FZ-FI | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha FZ-S FI | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha FZ-X | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha MT-15 | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha R15 | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha R15M | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha YZF-R3 | Removed: No India-specific listings found on trusted portals
+[FAILED] Yamaha MT-03 | Removed: Matched discontinued pattern list
+[FAILED] Yamaha YZF-R1 | Removed: Matched discontinued pattern list
+[FAILED] Yamaha YZF-R1M | Removed: Matched discontinued pattern list
+[FAILED] Yamaha RX 100 | Removed: Matched discontinued pattern list
+[FAILED] Yamaha MT-07 | Removed: Matched discontinued pattern list
+[FAILED] Yamaha YZF-R7 | Removed: Matched discontinued pattern list
+[FAILED] Yamaha Tenere 700 | Removed: Matched discontinued pattern list
+[FAILED] Yamaha WR 155R | Removed: Matched discontinued pattern list
+[FAILED] KTM 200 Duke | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 250 Duke | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 390 Duke | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 790 Duke | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 1390 Super Duke R | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM RC 200 | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 250 Adventure | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 390 Adventure | Removed: No India-specific listings found on trusted portals
+[FAILED] KTM 1290 Super Adv S | Removed: Matched discontinued pattern list
+[FAILED] KTM 1390 Super Adv S | Removed: Matched discontinued pattern list
+[FAILED] KTM 390 Enduro R | Removed: No India-specific listings found on trusted portals

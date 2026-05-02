@@ -98,7 +98,7 @@ export default function VehicleDetailsPage() {
             </label>
             <div className="relative">
               <select 
-                className="w-full appearance-none bg-gradient-to-r from-white/10 to-transparent backdrop-blur-sm border border-white/20 rounded-2xl py-4 pl-4 pr-10 text-white font-semibold focus:outline-none focus:border-[var(--accent)] hover:border-white/30 transition-colors cursor-pointer text-lg"
+                className="w-full appearance-none bg-[#111] bg-gradient-to-r from-white/10 to-transparent backdrop-blur-sm border border-white/20 rounded-2xl py-4 pl-4 pr-10 text-white font-semibold focus:outline-none focus:border-[var(--accent)] hover:border-white/30 transition-colors cursor-pointer text-lg"
                 value={activeVariantIdx}
                 onChange={(e) => setActiveVariantIdx(Number(e.target.value))}
               >
@@ -183,6 +183,16 @@ export default function VehicleDetailsPage() {
                    { label: 'Infotainment', value: activeVariant.touchscreenSize !== '—' ? activeVariant.touchscreenSize : 'Standard Audio' },
                    { label: 'Connectivity', value: activeVariant.connectivity !== '—' ? activeVariant.connectivity : 'Bluetooth' },
                    { label: 'Parking Sensors', value: activeVariant.parkingSensors !== '—' ? activeVariant.parkingSensors : 'Standard' },
+                ]}
+              />
+              <FeatureHighlight 
+                icon={<Activity size={48} />} 
+                title="Dimensions & Space" 
+                items={[
+                   { label: 'Length', value: `${activeVariant.length} mm` },
+                   { label: 'Width', value: `${activeVariant.width} mm` },
+                   { label: 'Height', value: `${activeVariant.height} mm` },
+                   { label: 'Wheelbase', value: `${activeVariant.wheelbase} mm` },
                 ]}
               />
             </>

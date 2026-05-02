@@ -1,4 +1,5 @@
 import Papa from 'papaparse';
+import { formatLakhPrice, formatPriceRange, formatIndianPrice } from './formatCurrency';
 
 export type FuelType = 'Petrol' | 'Diesel' | 'Electric' | 'CNG' | 'Hybrid' | 'Flex Fuel' | string;
 export type CarType = 'Hatchback' | 'Sedan' | 'SUV' | 'MPV' | 'Coupe' | 'Pickup' | string;
@@ -45,6 +46,10 @@ export interface Vehicle {
   power: string;
   torque: string;
   fuelTankCapacity: string;
+  length: string;
+  width: string;
+  height: string;
+  wheelbase: string;
   isEV: boolean;
   vehicleCategory: string; // 'Cars' | 'Bikes' | 'Scooters'
 }
@@ -135,8 +140,9 @@ export async function fetchVehicles(): Promise<Vehicle[]> {
           const model = row['Model Name']?.trim() || '';
           const variant = row['Variant']?.trim() || '';
           const priceRaw = row['Price']?.trim() || '0';
-          const price = toNum(priceRaw);
-          const priceLabel = row['Ex-showroom price']?.trim() || `${price} Lakh`;
+          const price = normalizePriceRaw(priceRaw);
+          const rawExShowroom = row['Ex-showroom price']?.trim();
+          const priceLabel = rawExShowroom ? formatIndianPrice(rawExShowroom) : formatLakhPrice(price);
           const fuelType = row['Fuel type']?.trim() || 'Petrol';
           const imageFile = row['Car images']?.trim() || '';
 
@@ -177,6 +183,10 @@ export async function fetchVehicles(): Promise<Vehicle[]> {
             power: row['Power']?.trim() || '—',
             torque: row['Torque']?.trim() || '—',
             fuelTankCapacity: row['Fuel Tank Capacity']?.trim() || '—',
+            length: row['Length (mm)']?.toString().trim() || '—',
+            width: row['Width (mm)']?.toString().trim() || '—',
+            height: row['Height (mm)']?.toString().trim() || '—',
+            wheelbase: row['Wheelbase (mm)']?.toString().trim() || '—',
             isEV: fuelType.toLowerCase() === 'electric',
             vehicleCategory: 'Cars'
           };
@@ -188,7 +198,7 @@ export async function fetchVehicles(): Promise<Vehicle[]> {
           const variant = row['Variant']?.trim() || '';
           const rawPriceOutput = row['Price (Ex-Showroom)']?.toString().trim() || '0';
           const price = normalizePriceRaw(rawPriceOutput);
-          const priceLabel = `₹${price} Lakh`;
+          const priceLabel = formatLakhPrice(price);
           const fuelType = row['Fuel Type']?.trim() || 'Petrol';
           const imageFile = row['Images']?.trim() || '';
 
@@ -227,6 +237,7 @@ export async function fetchVehicles(): Promise<Vehicle[]> {
               power: row['Power (bhp)']?.toString().trim() || '—',
               torque: row['Torque (Nm)']?.toString().trim() || '—',
               fuelTankCapacity: row['Fuel Tank (L)']?.toString().trim() || '—',
+              length: '—', width: '—', height: '—', wheelbase: '—',
               isEV: fuelType.toLowerCase().includes('electric'),
               vehicleCategory: 'Bikes'
           };
@@ -236,9 +247,9 @@ export async function fetchVehicles(): Promise<Vehicle[]> {
           const brand = row['Brand']?.trim() || '';
           const model = row['Model']?.trim() || '';
           const variant = row['Variant']?.trim() || '';
-          const rawPriceOutput = row['Price ()']?.toString().trim() || '0';
+          const rawPriceOutput = row['Price (₹)']?.toString().trim() || '0';
           const price = normalizePriceRaw(rawPriceOutput);
-          const priceLabel = `₹${price} Lakh`;
+          const priceLabel = formatLakhPrice(price);
           const fuelType = row['Fuel Type']?.trim() || 'Petrol';
           const imageFile = row['Images']?.toString().trim() || '';
 
@@ -277,6 +288,7 @@ export async function fetchVehicles(): Promise<Vehicle[]> {
               power: row['Power (bhp)']?.toString().trim() || '—',
               torque: row['Torque (Nm)']?.toString().trim() || '—',
               fuelTankCapacity: row['Fuel Tank (L)']?.toString().trim() || '—',
+              length: '—', width: '—', height: '—', wheelbase: '—',
               isEV: fuelType.toLowerCase().includes('electric'),
               vehicleCategory: 'Scooters'
           };
@@ -296,12 +308,13 @@ export async function fetchVehicles(): Promise<Vehicle[]> {
 export function getFilterOptions(items: any[]) {
   const isGroup = items.length > 0 && 'variants' in items[0];
   const brands = [...new Set(items.map((v) => v.brand))].sort();
-  let carTypes, fuelTypes, transmissions, categories, minPrice, maxPrice;
+  let carTypes, fuelTypes, transmissions, categories, minPrice, maxPrice, seatingCapacities;
   if (isGroup) {
       carTypes = [...new Set(items.flatMap((v) => v.carTypes))].sort();
       fuelTypes = [...new Set(items.flatMap((v) => v.fuels))].sort();
       transmissions = [...new Set(items.flatMap((v) => v.transmissions))].sort();
       categories = [...new Set(items.map((v) => v.vehicleCategory))].sort();
+      seatingCapacities = [...new Set(items.flatMap((v) => v.seatingCapacities))].sort((a, b) => a - b);
       const prices = items.map((v) => v.minPrice).filter((p) => p > 0);
       minPrice = prices.length ? Math.floor(Math.min(...prices)) : 0;
       maxPrice = prices.length ? Math.ceil(Math.max(...items.map(v => v.maxPrice))) : 0;
@@ -310,11 +323,12 @@ export function getFilterOptions(items: any[]) {
       fuelTypes = [...new Set(items.map((v) => v.fuelType).filter(Boolean))].sort();
       transmissions = [...new Set(items.map((v) => v.transmission).filter(Boolean))].sort();
       categories = [...new Set(items.map((v) => v.vehicleCategory).filter(Boolean))].sort();
+      seatingCapacities = [...new Set(items.map((v) => v.seatingCapacity).filter(Boolean))].sort((a, b) => a - b);
       const prices = items.map((v) => v.price).filter((p) => p > 0);
       minPrice = prices.length ? Math.floor(Math.min(...prices)) : 0;
       maxPrice = prices.length ? Math.ceil(Math.max(...prices)) : 0;
   }
-  return { brands, carTypes, fuelTypes, transmissions, categories, minPrice, maxPrice };
+  return { brands, carTypes, fuelTypes, transmissions, categories, minPrice, maxPrice, seatingCapacities };
 }
 
 export function groupVehicles(vehicles: Vehicle[]): VehicleGroup[] {
@@ -379,10 +393,8 @@ export function groupVehicles(vehicles: Vehicle[]): VehicleGroup[] {
       g.minPrice = 0;
       g.maxPrice = 0;
       g.priceLabel = 'TBA';
-    } else if (g.minPrice === g.maxPrice) {
-      g.priceLabel = `₹${g.minPrice.toFixed(2)} Lakh`;
     } else {
-      g.priceLabel = `₹${g.minPrice.toFixed(2)}L - ₹${g.maxPrice.toFixed(2)}L`;
+      g.priceLabel = formatPriceRange(g.minPrice, g.maxPrice);
     }
     
     if (!g.imageSrc) {

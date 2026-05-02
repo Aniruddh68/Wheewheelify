@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { fetchVehicles, getFilterOptions, groupVehicles } from '@/utils/parseVehicles';
 import type { VehicleGroup } from '@/utils/parseVehicles';
+import { formatLakhPrice } from '@/utils/formatCurrency';
 import { useCompare } from '@/context/CompareContext';
 import VehicleDetailModal from './VehicleDetailModal';
 import './VehicleBrowser.css';
@@ -143,23 +144,23 @@ function PriceHistogramSlider({
       <div className="dual-slider">
         <input
           type="range" min={min} max={max} value={value[0]}
-          onChange={(e) => { const v = Number(e.target.value); if (v < value[1]) onChange([v, value[1]]); }}
+          onChange={(e) => { const v = Number(e.target.value); if (v <= value[1]) onChange([v, value[1]]); }}
           className="range-input range-low"
         />
         <input
           type="range" min={min} max={max} value={value[1]}
-          onChange={(e) => { const v = Number(e.target.value); if (v > value[0]) onChange([value[0], v]); }}
+          onChange={(e) => { const v = Number(e.target.value); if (v >= value[0]) onChange([value[0], v]); }}
           className="range-input range-high"
         />
       </div>
       <div className="price-range-inputs">
         <div className="price-input-box">
           <span>FROM</span>
-          <strong>₹{value[0]}L</strong>
+          <strong>{value[0] === 0 ? '₹0 Lakh' : formatLakhPrice(value[0])}</strong>
         </div>
         <div className="price-input-box">
           <span>TO</span>
-          <strong>₹{value[1]}L</strong>
+          <strong>{formatLakhPrice(value[1])}</strong>
         </div>
       </div>
     </div>
@@ -180,6 +181,7 @@ export default function VehicleBrowser() {
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedTransmissions, setSelectedTransmissions] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<[number, number] | null>(null);
+  const [selectedSeating, setSelectedSeating] = useState<number[]>([]);
   const [sortBy, setSortBy] = useState<'price-asc' | 'price-desc' | 'name' | 'rating'>('price-asc');
 
   const [page, setPage] = useState(1);
@@ -212,7 +214,31 @@ export default function VehicleBrowser() {
       });
   }, []);
 
-  const filterOptions = useMemo(() => getFilterOptions(vehicles), [vehicles]);
+  const allFilterOptions = useMemo(() => getFilterOptions(vehicles), [vehicles]);
+
+  const categoryVehicles = useMemo(() => {
+    if (selectedCategories.length === 0) return vehicles;
+    return vehicles.filter(v => selectedCategories.includes(v.vehicleCategory));
+  }, [vehicles, selectedCategories]);
+
+  const dynamicOptions = useMemo(() => getFilterOptions(categoryVehicles), [categoryVehicles]);
+
+  const filterOptions = useMemo(() => ({
+    ...dynamicOptions,
+    categories: allFilterOptions.categories
+  }), [dynamicOptions, allFilterOptions.categories]);
+
+  // Reset other filters when categories change
+  useEffect(() => {
+    setSelectedBrands([]);
+    setSelectedFuels([]);
+    setSelectedTypes([]);
+    setSelectedTransmissions([]);
+    setSelectedSeating([]);
+    if (dynamicOptions.minPrice !== undefined) {
+      setPriceRange([dynamicOptions.minPrice, dynamicOptions.maxPrice]);
+    }
+  }, [selectedCategories]);
 
   const filtered = useMemo(() => {
     if (!vehicles.length || selectedCategories.length === 0) return [];
@@ -234,11 +260,18 @@ export default function VehicleBrowser() {
     }
     if (selectedTypes.length) out = out.filter(v => v.carTypes.some(t => selectedTypes.includes(t)));
     if (selectedTransmissions.length) out = out.filter(v => v.transmissions.some(t => selectedTransmissions.includes(t)));
-    if (priceRange && priceRange[0] !== priceRange[1]) {
-      out = out.filter((v) => {
-        if (v.minPrice === 0) return true;
-        return v.minPrice <= priceRange[1] && v.maxPrice >= priceRange[0];
-      });
+    if (selectedSeating.length) out = out.filter(v => v.seatingCapacities.some(s => selectedSeating.includes(s)));
+    if (priceRange) {
+      const [minV, maxV] = priceRange;
+      const isDefaultRange = minV === filterOptions.minPrice && maxV === filterOptions.maxPrice;
+      
+      if (!isDefaultRange) {
+        out = out.filter((v) => {
+          // If price is TBA (0), only show it if the user is looking at the very bottom of the range
+          if (v.minPrice === 0) return minV === filterOptions.minPrice;
+          return v.minPrice <= maxV && v.maxPrice >= minV;
+        });
+      }
     }
     return [...out].sort((a, b) => {
       if (sortBy === 'price-asc') return a.minPrice - b.minPrice;
@@ -260,6 +293,7 @@ export default function VehicleBrowser() {
     setSelectedFuels([]);
     setSelectedTypes([]);
     setSelectedTransmissions([]);
+    setSelectedSeating([]);
     setSearch('');
     if (filterOptions) setPriceRange([filterOptions.minPrice, filterOptions.maxPrice]);
   }
@@ -285,7 +319,7 @@ export default function VehicleBrowser() {
           </div>
 
           <div className="filter-section">
-            <h4 className="filter-section-title">Price Range / Lakh</h4>
+            <h4 className="filter-section-title">Price Range</h4>
             {priceRange && (
               <PriceHistogramSlider
                 min={filterOptions.minPrice}
@@ -296,25 +330,56 @@ export default function VehicleBrowser() {
             )}
           </div>
 
-          <div className="filter-section">
-            <h4 className="filter-section-title">Body Type</h4>
-            <FilterCheckboxList options={filterOptions.carTypes} selected={selectedTypes} onChange={setSelectedTypes} />
-          </div>
+          {selectedCategories.length > 0 && filterOptions.carTypes.length > 0 && (
+            <div className="filter-section">
+              <h4 className="filter-section-title">
+                {selectedCategories.includes('Cars') ? 'Body Type' : 'Vehicle Style'}
+              </h4>
+              <FilterCheckboxList 
+                options={filterOptions.carTypes} 
+                selected={selectedTypes} 
+                onChange={setSelectedTypes} 
+              />
+            </div>
+          )}
 
-          <div className="filter-section">
-            <h4 className="filter-section-title">Car Brand</h4>
-            <FilterCheckboxList options={filterOptions.brands} selected={selectedBrands} onChange={setSelectedBrands} />
-          </div>
+          {selectedCategories.includes('Cars') && filterOptions.seatingCapacities.length > 0 && (
+            <div className="filter-section">
+              <h4 className="filter-section-title">Seating Capacity</h4>
+              <div className="filter-checkbox-list">
+                {filterOptions.seatingCapacities.map((s: number) => (
+                  <label key={s} className="filter-checkbox-label">
+                    <input 
+                      type="checkbox" 
+                      checked={selectedSeating.includes(s)} 
+                      onChange={() => setSelectedSeating(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s])} 
+                      className="filter-checkbox-input" 
+                    />
+                    <span className="filter-checkbox-text">{s} Seater</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          )}
 
-          <div className="filter-section">
-            <h4 className="filter-section-title">Transmission</h4>
-            <FilterCheckboxList options={filterOptions.transmissions} selected={selectedTransmissions} onChange={setSelectedTransmissions} />
-          </div>
+          {selectedCategories.length > 0 && (
+            <>
+              <div className="filter-section">
+                <h4 className="filter-section-title">Brand</h4>
+                <FilterCheckboxList options={filterOptions.brands} selected={selectedBrands} onChange={setSelectedBrands} />
+              </div>
 
-          <div className="filter-section">
-            <h4 className="filter-section-title">Fuel Type</h4>
-            <FilterCheckboxList options={filterOptions.fuelTypes} selected={selectedFuels} onChange={setSelectedFuels} />
-          </div>
+              <div className="filter-section">
+                <h4 className="filter-section-title">Transmission</h4>
+                <FilterCheckboxList options={filterOptions.transmissions} selected={selectedTransmissions} onChange={setSelectedTransmissions} />
+              </div>
+
+              <div className="filter-section">
+                <h4 className="filter-section-title">Fuel Type</h4>
+                <FilterCheckboxList options={filterOptions.fuelTypes} selected={selectedFuels} onChange={setSelectedFuels} />
+              </div>
+            </>
+          )}
         </aside>
 
         {/* ── Main Canvas ── */}

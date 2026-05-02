@@ -1,0 +1,747 @@
+/* ═══════════════════════════════════════════════════════════════════
+   FuelCalculator.css
+   Scoped styles for the Fuel Cost Calculator feature.
+   Uses the Wheelify design system tokens:
+     --primary (red accent), --background, --foreground, Space Grotesk
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Page shell ─────────────────────────────────────────────────── */
+.fc-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 8rem 1.5rem 4rem;
+  max-width: 860px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* Ambient red glow behind the card */
+.fc-bg-glow {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(0 100% 55% / 0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Page header ─────────────────────────────────────────────────── */
+.fc-header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.fc-badge {
+  display: inline-block;
+  padding: 0.25rem 0.85rem;
+  background: hsl(0 100% 55% / 0.1);
+  border: 1px solid hsl(0 100% 55% / 0.25);
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: hsl(0 100% 60%);
+}
+
+.fc-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: hsl(30 6% 89%);
+  margin: 0;
+}
+
+.fc-title-accent {
+  color: hsl(0 100% 55%);
+}
+
+.fc-subtitle {
+  font-size: 1rem;
+  color: hsl(0 0% 53%);
+  max-width: 500px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Mode toggle ──────────────────────────────────────────────────── */
+.fc-mode-toggle {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 0.3rem;
+  background: hsl(0 0% 6%);
+  border: 1px solid hsl(0 0% 12%);
+  border-radius: 999px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fc-mode-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1.25rem;
+  border: none;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  background: transparent;
+  color: hsl(0 0% 53%);
+  transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.fc-mode-btn--active {
+  background: hsl(0 100% 55%);
+  color: #fff;
+  box-shadow: 0 0 18px hsl(0 100% 55% / 0.35);
+}
+
+.fc-mode-btn:not(.fc-mode-btn--active):hover {
+  color: hsl(30 6% 89%);
+  background: hsl(0 0% 11%);
+}
+
+/* ── Main card ───────────────────────────────────────────────────── */
+.fc-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(16px);
+  border: 1px solid hsl(0 0% 12%);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px hsl(0 100% 55% / 0.05),
+    0 24px 64px rgba(0, 0, 0, 0.6);
+}
+
+/* ── Section inside card ─────────────────────────────────────────── */
+.fc-section {
+  padding: 2rem 2.25rem;
+}
+
+.fc-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: hsl(0 0% 45%);
+  margin: 0 0 1.5rem;
+}
+
+.fc-section-title svg {
+  color: hsl(0 100% 55%);
+}
+
+/* ── Divider ─────────────────────────────────────────────────────── */
+.fc-divider {
+  height: 1px;
+  background: hsl(0 0% 10%);
+  margin: 0;
+}
+
+/* ── Input grid ──────────────────────────────────────────────────── */
+/* 6 fields: 3×2 on desktop, 2×3 on tablet, 1 col on mobile */
+.fc-inputs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 700px) {
+  .fc-inputs-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .fc-inputs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ── Individual field ────────────────────────────────────────────── */
+.fc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fc-label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: hsl(0 0% 50%);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* ── Tooltip anchor (the ℹ button) ──────────────────────────────── */
+.fc-tt-anchor {
+  /* Inline-flex so it sits neatly beside the label text */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  /* Sizes: just big enough for the icon with a subtle tap target */
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+
+  color: hsl(0 0% 38%);
+  background: hsl(0 0% 10%);
+  border: 1px solid hsl(0 0% 16%);
+
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s, border-color 0.15s, box-shadow 0.15s;
+
+  /* Keyboard focus ring */
+  outline: none;
+}
+
+.fc-tt-anchor:hover,
+.fc-tt-anchor:focus-visible {
+  color: hsl(30 6% 85%);
+  background: hsl(0 0% 14%);
+  border-color: hsl(0 100% 55% / 0.3);
+  box-shadow: 0 0 0 3px hsl(0 100% 55% / 0.1);
+}
+
+/* Active / open state — icon turns red */
+.fc-tt-anchor--open {
+  color: hsl(0 100% 60%);
+  background: hsl(0 100% 55% / 0.1);
+  border-color: hsl(0 100% 55% / 0.4);
+  box-shadow: 0 0 0 3px hsl(0 100% 55% / 0.12);
+}
+
+/* ── Keyframe: fade + scale-up ───────────────────────────────────── */
+@keyframes fc-tt-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+/* ── Tooltip bubble ──────────────────────────────────────────────── */
+.fc-tt-bubble {
+  /* Position above the anchor */
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* Clamp width: 220px on desktop, but never wider than 90vw on mobile */
+  width: max-content;
+  max-width: clamp(200px, 80vw, 260px);
+
+  /* Dark glass panel */
+  background: hsl(0 0% 10%);
+  border: 1px solid hsl(0 0% 20%);
+  border-radius: 0.6rem;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.55),
+    0 0 0 1px hsl(0 100% 55% / 0.06);
+
+  /* Typography */
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: hsl(30 6% 80%);
+  letter-spacing: 0.01em;
+
+  padding: 0.55rem 0.75rem;
+  z-index: 100;
+  pointer-events: none;
+
+  /* Run the enter animation */
+  animation: fc-tt-enter 0.18s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Downward-pointing arrow / notch ─────────────────────────────── */
+.fc-tt-arrow {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: hsl(0 0% 10%);
+  border-right: 1px solid hsl(0 0% 20%);
+  border-bottom: 1px solid hsl(0 0% 20%);
+  border-radius: 0 0 2px 0;
+}
+
+/* ── Edge-clamp on very small screens ───────────────────────────── */
+/*
+   When the anchor is near the left edge (first column), the bubble
+   would overflow left. We flip it right-aligned in that case via a
+   sibling-targeted rule in the grid's first child.
+*/
+.fc-inputs-grid .fc-field:nth-child(odd) .fc-tt-bubble {
+  left: 0;
+  transform: translateX(0);
+}
+.fc-inputs-grid .fc-field:nth-child(odd) .fc-tt-bubble {
+  animation: fc-tt-enter-left 0.18s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes fc-tt-enter-left {
+  from { opacity: 0; transform: translateX(0) translateY(4px) scale(0.94); }
+  to   { opacity: 1; transform: translateX(0) translateY(0)   scale(1); }
+}
+.fc-inputs-grid .fc-field:nth-child(odd) .fc-tt-arrow {
+  left: 0.65rem;
+  transform: translateX(0) rotate(45deg);
+}
+
+.fc-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.fc-input {
+  width: 100%;
+  background: hsl(0 0% 6%);
+  border: 1px solid hsl(0 0% 12%);
+  border-radius: 0.65rem;
+  padding: 0.75rem 3.5rem 0.75rem 1rem;
+  color: hsl(30 6% 89%);
+  font-size: 1rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  -moz-appearance: textfield;
+}
+
+.fc-input::-webkit-outer-spin-button,
+.fc-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.fc-input::placeholder {
+  color: hsl(0 0% 28%);
+}
+
+.fc-input:focus {
+  border-color: hsl(0 100% 55% / 0.5);
+  box-shadow: 0 0 0 3px hsl(0 100% 55% / 0.1);
+  background: hsl(0 0% 8%);
+}
+
+.fc-unit {
+  position: absolute;
+  right: 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: hsl(0 0% 35%);
+  letter-spacing: 0.04em;
+  pointer-events: none;
+  white-space: nowrap;
+  max-width: 3.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── SelectField (Days per Month dropdown) ───────────────────────── */
+.fc-select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.fc-select {
+  /* Fill the field, exact same sizing as fc-input */
+  width: 100%;
+  background: hsl(0 0% 6%);
+  border: 1px solid hsl(0 0% 12%);
+  border-radius: 0.65rem;
+  padding: 0.75rem 2.75rem 0.75rem 1rem; /* right padding for chevron */
+  color: hsl(30 6% 89%);
+  font-size: 1rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+
+  /* Hide the browser's default select arrow */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.fc-select:focus {
+  border-color: hsl(0 100% 55% / 0.5);
+  box-shadow: 0 0 0 3px hsl(0 100% 55% / 0.1);
+  background: hsl(0 0% 8%);
+}
+
+.fc-select:hover:not(:focus) {
+  border-color: hsl(0 0% 20%);
+}
+
+/* Option elements inherit from select; force dark bg in browsers that support it */
+.fc-select option {
+  background: hsl(0 0% 8%);
+  color: hsl(30 6% 89%);
+}
+
+/* Custom chevron icon — absolutely positioned inside the wrapper */
+.fc-select-chevron {
+  position: absolute;
+  right: 0.85rem;
+  color: hsl(0 0% 40%);
+  pointer-events: none; /* click passes through to select */
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+
+.fc-select-wrap:focus-within .fc-select-chevron {
+  color: hsl(0 100% 55%);
+}
+
+/* ── Locked / disabled state (e.g. Fuel Type when EV mode is active) ─ */
+.fc-select-wrap--locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.fc-select-wrap--locked .fc-select {
+  cursor: not-allowed;
+  border-color: hsl(0 0% 10%);
+  border-style: dashed;
+  color: hsl(0 0% 45%);
+  pointer-events: none;
+}
+
+/* Dim the chevron on locked selects */
+.fc-select-wrap--locked .fc-select-chevron {
+  opacity: 0.35;
+}
+
+/* Lock icon next to label */
+.fc-label--locked {
+  opacity: 0.7;
+}
+
+.fc-label-lock {
+  font-size: 0.65rem;
+  opacity: 0.5;
+  margin-left: 0.1rem;
+  line-height: 1;
+}
+
+
+/* ── Breakdown stats row ─────────────────────────────────────────── */
+.fc-stats-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+}
+
+@media (min-width: 600px) {
+  .fc-stats-row {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.fc-stat-pill {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  background: hsl(0 0% 6%);
+  border: 1px solid hsl(0 0% 11%);
+  border-radius: 0.75rem;
+  padding: 0.9rem 1rem;
+  transition: border-color 0.2s;
+}
+
+.fc-stat-pill:hover {
+  border-color: hsl(0 0% 18%);
+}
+
+.fc-stat-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: hsl(0 0% 40%);
+}
+
+.fc-stat-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: hsl(30 6% 89%);
+}
+
+/* ── Results grid ────────────────────────────────────────────────── */
+.fc-results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .fc-results-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fc-result-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  background: hsl(0 0% 7%);
+  border: 1px solid hsl(0 0% 12%);
+  border-radius: 1rem;
+  padding: 1.25rem 1.4rem;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.fc-result-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border-color: hsl(0 0% 18%);
+}
+
+/* Primary result cards get the red glow treatment */
+.fc-result-card--highlight {
+  background: linear-gradient(135deg, hsl(0 100% 55% / 0.08) 0%, hsl(0 0% 7%) 100%);
+  border-color: hsl(0 100% 55% / 0.2);
+  box-shadow: 0 0 24px hsl(0 100% 55% / 0.08);
+}
+
+.fc-result-card--highlight:hover {
+  border-color: hsl(0 100% 55% / 0.35);
+  box-shadow: 0 8px 32px hsl(0 100% 55% / 0.15);
+}
+
+.fc-result-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: hsl(0 0% 45%);
+}
+
+.fc-result-card--highlight .fc-result-label {
+  color: hsl(0 100% 65%);
+}
+
+.fc-result-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: hsl(30 6% 89%);
+  line-height: 1;
+}
+
+.fc-result-card--highlight .fc-result-value {
+  color: #fff;
+}
+
+.fc-result-sub {
+  font-size: 0.72rem;
+  color: hsl(0 0% 35%);
+  font-weight: 500;
+}
+
+/* ── Chart section ───────────────────────────────────────────────── */
+
+/* Extra bottom padding so the chart has breathing room */
+.fc-section--chart {
+  padding-bottom: 1.5rem;
+}
+
+/* Recharts wrapper — clips any overflow safely */
+.fc-chart-wrap {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  /* Subtle inner border so the chart feels framed */
+  background: hsl(0 0% 5%);
+  border: 1px solid hsl(0 0% 10%);
+  padding: 1rem 0.5rem 0.25rem;
+}
+
+/* Empty-state placeholder */
+.fc-chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 160px;
+  border-radius: 0.75rem;
+  border: 1px dashed hsl(0 0% 14%);
+  background: hsl(0 0% 5%);
+  font-size: 0.82rem;
+  color: hsl(0 0% 38%);
+  letter-spacing: 0.02em;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Subtle horizontal axis label */
+.fc-chart-xlabel {
+  text-align: center;
+  font-size: 0.68rem;
+  color: hsl(0 0% 32%);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0.25rem 0 0;
+  padding-bottom: 0.5rem;
+}
+
+/* ── Chart legend ─────────────────────────────────────────────────── */
+.fc-chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.fc-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.73rem;
+  font-weight: 500;
+  color: hsl(0 0% 50%);
+  letter-spacing: 0.02em;
+}
+
+.fc-legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Standard line — slate grey dashed */
+.fc-legend-item--standard .fc-legend-dot {
+  background: #64748b;
+  border: 2px dashed #94a3b8;
+  box-sizing: border-box;
+}
+
+/* Predicted line — neon sky-blue with glow */
+.fc-legend-item--predicted .fc-legend-dot {
+  background: #38bdf8;
+  box-shadow: 0 0 6px #38bdf888;
+}
+
+
+/* ── Disclaimer ──────────────────────────────────────────────────── */
+.fc-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 1rem 2.25rem 1.5rem;
+  font-size: 0.73rem;
+  color: hsl(0 0% 35%);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.fc-disclaimer svg {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  color: hsl(0 0% 28%);
+}
+
+/* ── Tip card ────────────────────────────────────────────────────── */
+.fc-tip-card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background: hsl(0 0% 6%);
+  border: 1px solid hsl(0 0% 11%);
+  border-radius: 1rem;
+}
+
+.fc-tip-icon {
+  color: hsl(0 100% 55%);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.fc-tip-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: hsl(30 6% 89%);
+  margin: 0 0 0.35rem;
+}
+
+.fc-tip-body {
+  font-size: 0.83rem;
+  color: hsl(0 0% 48%);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.fc-tip-body strong {
+  color: hsl(30 6% 75%);
+}
+
+/* ── Responsive padding ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .fc-page {
+    padding-top: 6rem;
+  }
+
+  .fc-section {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .fc-disclaimer {
+    padding: 0.75rem 1.25rem 1.25rem;
+  }
+}

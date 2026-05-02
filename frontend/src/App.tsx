@@ -9,6 +9,7 @@ import BrowseVehicles from "./pages/BrowseVehicles.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import VehicleDetailsPage from "./pages/VehicleDetailsPage.tsx";
 import ComparePage from "./pages/ComparePage.tsx";
+import FuelCalculatorPage from "./pages/FuelCalculatorPage.jsx";
 import ComparisonTray from "./components/ComparisonTray.tsx";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
             <Route path="/browse" element={<BrowseVehicles />} />
             <Route path="/vehicle/:id" element={<VehicleDetailsPage />} />
             <Route path="/compare" element={<ComparePage />} />
+            <Route path="/fuel-calculator" element={<FuelCalculatorPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
+import { useCompare } from "@/context/CompareContext";
+
 
 type NavLinkItem = {
   label: string;
@@ -21,13 +23,12 @@ const navLinks: NavLinkItem[] = [
         ]
       },
       { label: "Upcoming Launches", href: "#" },
-      { label: "Compare Vehicles", href: "#" },
     ],
   },
   {
     label: "Analysis Tools",
     dropdown: [
-      { label: "Fuel Cost Calculator", href: "#" },
+      { label: "Fuel Cost Calculator", href: "/fuel-calculator" },
       { label: "5-Year TCO", href: "#" },
       { label: "Break-Even Analysis", href: "#" },
     ],
@@ -40,6 +41,8 @@ const navLinks: NavLinkItem[] = [
     ],
   },
 ];
+
+
 
 const DesktopSubDropdown = ({ item }: { item: NavLinkItem }) => {
   if (!item.dropdown) {
@@ -128,6 +131,18 @@ const MobileDropdown = ({ item }: { item: NavLinkItem }) => {
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
+  const { compareList } = useCompare();
+
+  const handleCompareClick = () => {
+    if (compareList.length >= 2) {
+      // Already have vehicles selected — go straight to compare
+      navigate('/compare');
+    } else {
+      // Go to browse so user can pick vehicles
+      navigate('/browse');
+    }
+  };
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-background/70 backdrop-blur-xl border-b border-foreground/5 flex justify-between items-center px-8 h-20 shadow-2xl">
@@ -135,7 +150,8 @@ const Navbar = () => {
         Wheelify<span className="text-primary">.</span>
       </Link>
 
-      <div className="hidden md:flex items-center gap-10">
+      {/* Desktop nav links */}
+      <div className="hidden md:flex items-center gap-8">
         {navLinks.map((link) => (
           link.dropdown ? (
             <DesktopDropdown key={link.label} item={link} />
@@ -149,6 +165,19 @@ const Navbar = () => {
             </Link>
           )
         ))}
+
+        {/* Compare Vehicles — Smart button with badge */}
+        <button
+          onClick={handleCompareClick}
+          className="relative flex items-center gap-2 font-heading font-bold uppercase tracking-wide transition-colors text-muted-foreground hover:text-primary-foreground py-2"
+        >
+          Compare Vehicles
+          {compareList.length >= 1 && (
+            <span className="absolute -top-1 -right-4 bg-yellow-400 text-black text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">
+              {compareList.length}
+            </span>
+          )}
+        </button>
       </div>
 
       <button className="hidden md:block bg-primary text-primary-foreground px-6 py-2 font-headline font-bold uppercase tracking-tighter rounded-sm active:scale-95 transition-transform hover:brightness-90">

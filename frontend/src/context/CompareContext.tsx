@@ -7,6 +7,7 @@ interface CompareContextType {
   addToCompare: (vehicle: VehicleGroup) => void;
   removeFromCompare: (vehicleId: string) => void;
   clearCompare: () => void;
+  setCompareList: (vehicles: VehicleGroup[]) => void;
 }
 
 const CompareContext = createContext<CompareContextType | undefined>(undefined);
@@ -36,7 +37,7 @@ export const CompareProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <CompareContext.Provider value={{ compareList, addToCompare, removeFromCompare, clearCompare }}>
+    <CompareContext.Provider value={{ compareList, addToCompare, removeFromCompare, clearCompare, setCompareList }}>
       {children}
     </CompareContext.Provider>
   );

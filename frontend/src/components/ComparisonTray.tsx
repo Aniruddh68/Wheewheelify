@@ -76,7 +76,7 @@ export default function ComparisonTray() {
 
           <div className="shrink-0 w-full md:w-auto flex flex-col items-center">
             <button
-              onClick={() => navigate('/compare')}
+              onClick={() => navigate('/compare', { state: { selectedVehicles: compareList } })}
               disabled={compareList.length < 2}
               className={`w-full md:w-auto px-8 py-3 rounded uppercase tracking-wider font-bold text-sm transition-all shadow-lg ${
                 compareList.length >= 2 
