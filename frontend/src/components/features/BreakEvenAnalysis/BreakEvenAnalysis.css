@@ -1,0 +1,549 @@
+/* BreakEvenAnalysis.css
+   Advanced Predictive TCO Engine Theme (Red, White, Black)
+   ──────────────────────────────────────────────────────── */
+
+.tco-page {
+  min-height: 100vh;
+  background: #000000;
+  color: #E5E5E5;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  position: relative;
+  overflow: hidden;
+  padding: 0 0 80px 0;
+}
+
+/* Ambient background glows */
+.tco-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(140px);
+  opacity: 0.15;
+  z-index: 0;
+}
+.tco-glow--red {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #FF3B30 0%, transparent 70%);
+  top: -100px;
+  left: -150px;
+}
+.tco-glow--white {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #FFFFFF 0%, transparent 70%);
+  bottom: 100px;
+  right: -120px;
+}
+
+.tco-page > *:not(.tco-glow) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────────── */
+.tco-header {
+  text-align: center;
+  padding: 72px 24px 32px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.tco-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  margin-bottom: 20px;
+}
+
+.tco-title {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: #FFF;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0 0 16px;
+}
+
+.tco-title-red {
+  color: #FF3B30;
+}
+
+.tco-subtitle {
+  font-size: 1rem;
+  color: #888;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Presets ────────────────────────────────────────────────────────────────── */
+.tco-presets {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  padding: 0 24px;
+}
+
+.tco-preset-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #CCC;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tco-preset-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.tco-preset-btn--active {
+  background: #FFF;
+  color: #000;
+  border-color: #FFF;
+}
+
+/* ── Main Grid ──────────────────────────────────────────────────────────────── */
+.tco-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 992px) {
+  .tco-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Controls (Left) ────────────────────────────────────────────────────────── */
+.tco-controls {
+  background: #0A0A0A;
+  border: 1px solid #222;
+  border-radius: 16px;
+  height: fit-content;
+  overflow: hidden;
+}
+
+.tco-collapse-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: #111;
+  border: none;
+  border-bottom: 1px solid #222;
+  color: #FFF;
+  padding: 16px 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.tco-collapse-btn span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tco-controls-body {
+  padding: 24px 20px;
+}
+
+.tco-section-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+  color: #888;
+}
+
+.tco-section-head--ev { color: #FFF; }
+.tco-section-head--petrol { color: #FF3B30; }
+
+.tco-divider {
+  height: 1px;
+  background: #222;
+  margin: 28px 0;
+}
+
+/* Sliders */
+.tco-slider-field {
+  margin-bottom: 20px;
+}
+
+.tco-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.82rem;
+  color: #CCC;
+}
+
+.tco-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    var(--accent) 0%,
+    var(--accent) var(--pct),
+    #333 var(--pct),
+    #333 100%
+  );
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.tco-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid #000;
+  cursor: pointer;
+}
+
+.tco-slider-bounds {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 0.7rem;
+  color: #666;
+}
+
+/* Toggles */
+.tco-toggle {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 0;
+  cursor: pointer;
+  margin-bottom: 16px;
+  color: #888;
+}
+
+.tco-toggle--on {
+  color: #FFF;
+}
+
+.tco-toggle-icon {
+  margin-top: 2px;
+  color: inherit;
+}
+
+.tco-toggle-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.tco-toggle-sub {
+  display: block;
+  font-size: 0.75rem;
+  color: #666;
+}
+
+/* ── Chart & ROI (Right) ────────────────────────────────────────────────────── */
+
+/* KPI Strip */
+.tco-kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 640px) {
+  .tco-kpi-strip { grid-template-columns: repeat(2, 1fr); }
+}
+
+.tco-stat {
+  background: #0A0A0A;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tco-stat-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: #888;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.tco-stat-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.tco-stat-sub {
+  font-size: 0.75rem;
+  color: #555;
+}
+
+/* Banner */
+.tco-banner {
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.tco-banner--warn {
+  background: rgba(255, 59, 48, 0.1);
+  color: #FF3B30;
+  border: 1px solid rgba(255, 59, 48, 0.2);
+}
+
+.tco-banner--ok {
+  background: rgba(255, 255, 255, 0.05);
+  color: #FFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Chart */
+.tco-chart-wrap {
+  background: #0A0A0A;
+  border: 1px solid #222;
+  border-radius: 16px;
+  padding: 24px 8px 16px;
+  margin-bottom: 24px;
+}
+
+.tco-chart-legend {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-top: 16px;
+}
+
+.tco-cl-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.tco-cl-line {
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.tco-cl-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* Custom Tooltip */
+.tco-tooltip {
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 12px 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  min-width: 220px;
+}
+
+.tco-tt-year {
+  font-size: 0.75rem;
+  color: #888;
+  margin: 0 0 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tco-tt-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+
+.tco-tt-row span:nth-child(2) {
+  flex: 1;
+  color: #CCC;
+}
+
+.tco-tt-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.tco-tt-diff {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #333;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.tco-tt-diff.pos { color: #FFF; }
+.tco-tt-diff.neg { color: #FF3B30; }
+
+.tco-tt-be {
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: #facc15;
+  font-weight: 600;
+}
+
+/* Green ROI Card */
+.tco-green-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: rgba(74, 222, 128, 0.05);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.tco-green-icon {
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.1);
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.tco-green-body {
+  flex: 1;
+}
+
+.tco-green-headline {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  color: #FFF;
+  font-weight: 600;
+}
+
+.tco-green-stat {
+  margin: 0 0 4px;
+  font-size: 0.85rem;
+  color: #4ade80;
+}
+
+.tco-green-sub {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* Data Table */
+.tco-table-wrap {
+  overflow-x: auto;
+  background: #0A0A0A;
+  border: 1px solid #222;
+  border-radius: 16px;
+}
+
+.tco-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.tco-table th {
+  text-align: left;
+  padding: 16px 20px;
+  color: #888;
+  font-weight: 600;
+  border-bottom: 1px solid #222;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tco-tr td {
+  padding: 14px 20px;
+  border-bottom: 1px solid #1A1A1A;
+  color: #CCC;
+}
+
+.tco-tr:last-child td {
+  border-bottom: none;
+}
+
+.tco-tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.tco-tr--be td {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tco-tr--bump td {
+  background: rgba(250, 204, 21, 0.05);
+}
+
+.tco-badge-sm {
+  margin-left: 8px;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.tco-badge-sm--be {
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFF;
+}
+
+.tco-badge-sm--bump {
+  background: rgba(250, 204, 21, 0.2);
+  color: #facc15;
+}
+
+.tco-pos { color: #FFF; font-weight: 600; }
+.tco-neg { color: #FF3B30; font-weight: 600; }
+
+.tco-diff-lbl {
+  font-size: 0.7rem;
+  font-weight: 400;
+  opacity: 0.6;
+  margin-left: 4px;
+}
