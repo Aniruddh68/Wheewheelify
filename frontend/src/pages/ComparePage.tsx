@@ -479,13 +479,26 @@ export default function ComparePage() {
 
         {/* Bottom CTA */}
         <div className="mt-16 text-center border-t border-white/5 pt-12 pb-8">
-          <p className="text-white/40 mb-6 text-sm">Want to compare a different segment?</p>
-          <div className="flex justify-center gap-4">
+          <p className="text-white/40 mb-2 text-sm">Want to compare a different segment?</p>
+          <p className="text-white/25 mb-8 text-xs">Or let our AI find the perfect vehicle for you</p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4 items-center">
             <button
               onClick={() => navigate('/browse')}
               className="bg-white text-black hover:bg-gray-200 px-8 py-4 font-bold uppercase tracking-widest transition-all hover:scale-105 active:scale-95 rounded-full text-sm shadow-[0_0_30px_rgba(255,255,255,0.1)]"
             >
               Browse All Vehicles
+            </button>
+
+            {/* AI Recommender CTA */}
+            <button
+              onClick={() => navigate('/ai-recommender')}
+              className="relative group px-8 py-4 font-bold uppercase tracking-widest text-sm rounded-full transition-all hover:scale-105 active:scale-95 bg-gradient-to-r from-red-600 to-red-500 text-white shadow-[0_0_30px_rgba(239,68,68,0.35)] hover:shadow-[0_0_50px_rgba(239,68,68,0.55)]"
+            >
+              {/* Animated pulse ring */}
+              <span className="absolute inset-0 rounded-full bg-red-500/30 animate-ping" style={{ animationDuration: '2s' }} />
+              <span className="relative flex items-center gap-2">
+                🤖 Try AI Recommender
+              </span>
             </button>
           </div>
         </div>

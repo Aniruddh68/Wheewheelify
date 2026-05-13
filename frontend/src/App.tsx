@@ -12,6 +12,7 @@ import ComparePage from "./pages/ComparePage.tsx";
 import FuelCalculatorPage from "./pages/FuelCalculatorPage.jsx";
 import BreakEvenPage from "./pages/BreakEvenPage.jsx";
 import TCOPage from "./pages/TCOPage.jsx";
+import AIRecommenderPage from "./pages/AIRecommenderPage.jsx";
 import ComparisonTray from "./components/ComparisonTray.tsx";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/fuel-calculator" element={<FuelCalculatorPage />} />
             <Route path="/break-even" element={<BreakEvenPage />} />
             <Route path="/tco" element={<TCOPage />} />
+            <Route path="/ai-recommender" element={<AIRecommenderPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

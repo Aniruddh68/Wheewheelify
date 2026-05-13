@@ -1,4 +1,4 @@
-import { Play } from "lucide-react";
+import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import heroCar from "@/assets/hero-car.jpg";
@@ -69,13 +69,21 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.65 }}
           className="flex flex-wrap gap-4"
         >
-          <button className="px-8 py-4 bg-primary text-primary-foreground font-headline font-bold uppercase tracking-tighter rounded-sm hover:shadow-[0_0_30px_hsl(var(--primary)/0.5)] hover:scale-105 transition-all duration-300">
+          <Link
+            to="/browse"
+            className="px-8 py-4 bg-primary text-primary-foreground font-headline font-bold uppercase tracking-tighter rounded-sm hover:shadow-[0_0_30px_hsl(var(--primary)/0.5)] hover:scale-105 transition-all duration-300"
+          >
             Compare Vehicles
-          </button>
-          <button className="px-8 py-4 bg-transparent border border-muted-foreground/30 text-primary-foreground font-headline font-bold uppercase tracking-tighter rounded-sm hover:border-primary hover:scale-105 transition-all duration-300 flex items-center gap-2">
-            <Play size={14} />
-            Watch Demo
-          </button>
+          </Link>
+          <Link
+            to="/ai-recommender"
+            className="relative px-8 py-4 bg-transparent border border-primary/50 text-primary-foreground font-headline font-bold uppercase tracking-tighter rounded-sm hover:border-primary hover:bg-primary/10 hover:scale-105 transition-all duration-300 flex items-center gap-2"
+          >
+            <span className="text-base">🤖</span>
+            <span>AI Recommender</span>
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-primary animate-ping opacity-75" />
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-primary" />
+          </Link>
         </motion.div>
       </motion.div>
 

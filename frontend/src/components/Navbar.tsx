@@ -28,6 +28,7 @@ const navLinks: NavLinkItem[] = [
   {
     label: "Analysis Tools",
     dropdown: [
+      { label: "🤖 AI Vehicle Recommender", href: "/ai-recommender" },
       { label: "Fuel Cost Calculator", href: "/fuel-calculator" },
       { label: "15-Year TCO", href: "/tco" },
       { label: "Break-Even Analysis", href: "/break-even" },

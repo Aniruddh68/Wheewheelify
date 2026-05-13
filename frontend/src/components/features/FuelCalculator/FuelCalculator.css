@@ -1,4 +1,4 @@
-/* ═══════════════════════════════════════════════════════════════════
+﻿/* ═══════════════════════════════════════════════════════════════════
    FuelCalculator.css
    Scoped styles for the Fuel Cost Calculator feature.
    Uses the Wheelify design system tokens:
@@ -55,7 +55,7 @@
 }
 
 .fc-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(2.2rem, 5vw, 3.2rem);
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -103,7 +103,7 @@
   border-radius: 999px;
   font-size: 0.82rem;
   font-weight: 600;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-display);
   letter-spacing: 0.02em;
   cursor: pointer;
   background: transparent;
@@ -145,7 +145,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-display);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -203,7 +203,7 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: hsl(0 0% 50%);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-display);
 }
 
 /* ── Tooltip anchor (the ℹ button) ──────────────────────────────── */
@@ -345,7 +345,7 @@
   padding: 0.75rem 3.5rem 0.75rem 1rem;
   color: hsl(30 6% 89%);
   font-size: 1rem;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-display);
   font-weight: 500;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
@@ -398,7 +398,7 @@
   padding: 0.75rem 2.75rem 0.75rem 1rem; /* right padding for chevron */
   color: hsl(30 6% 89%);
   font-size: 1rem;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-display);
   font-weight: 500;
   outline: none;
   cursor: pointer;
@@ -509,7 +509,7 @@
 }
 
 .fc-stat-value {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 700;
   color: hsl(30 6% 89%);
@@ -570,7 +570,7 @@
 }
 
 .fc-result-value {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(1.6rem, 3vw, 2.1rem);
   font-weight: 800;
   letter-spacing: -0.02em;

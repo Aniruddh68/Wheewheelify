@@ -1,0 +1,800 @@
+﻿/* ═══════════════════════════════════════════════════════════════════
+   AIRecommender.css
+   Scoped styles for the Smart AI Vehicle Recommender feature.
+   Design tokens: --primary red (hsl 0 100% 55%), dark OLED bg,
+   Space Grotesk typography — matches Wheelify design system.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Page shell ─────────────────────────────────────────────────── */
+.air-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 8rem 1.5rem 5rem;
+  max-width: 920px;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+/* Ambient red glow */
+.air-bg-glow {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(0 100% 55% / 0.06) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Page header ─────────────────────────────────────────────────── */
+.air-header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.air-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.9rem;
+  background: hsl(0 100% 55% / 0.1);
+  border: 1px solid hsl(0 100% 55% / 0.25);
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: hsl(0 100% 62%);
+}
+
+.air-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  color: hsl(30 6% 90%);
+  margin: 0;
+}
+
+.air-title-accent {
+  color: hsl(0 100% 55%);
+}
+
+.air-subtitle {
+  font-size: 1rem;
+  color: hsl(0 0% 50%);
+  max-width: 520px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.air-subtitle strong {
+  color: hsl(30 6% 75%);
+  font-weight: 600;
+}
+
+/* ── Input panel (glass card) ────────────────────────────────────── */
+.air-card-panel {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid hsl(0 0% 13%);
+  border-radius: 1.5rem;
+  padding: 2rem 2.5rem 2.5rem;
+  margin-bottom: 3rem;
+  box-shadow:
+    0 0 0 1px hsl(0 100% 55% / 0.04),
+    0 28px 72px rgba(0, 0, 0, 0.55);
+}
+
+.air-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 2rem;
+}
+
+.air-panel-icon {
+  color: hsl(0 100% 55%);
+}
+
+.air-panel-title {
+  font-family: var(--font-display);
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: hsl(0 0% 45%);
+  margin: 0;
+}
+
+/* ── Form field ──────────────────────────────────────────────────── */
+.air-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1.75rem;
+}
+
+.air-field:last-of-type {
+  margin-bottom: 0;
+}
+
+.air-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.79rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: hsl(0 0% 50%);
+  font-family: var(--font-display);
+}
+
+.air-label-val {
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: hsl(30 6% 85%);
+  letter-spacing: -0.01em;
+  background: hsl(0 0% 7%);
+  border: 1px solid hsl(0 0% 14%);
+  border-radius: 0.45rem;
+  padding: 0.15rem 0.6rem;
+}
+
+/* ── Slider ──────────────────────────────────────────────────────── */
+.air-slider-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.air-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    hsl(0 100% 55%) 0%,
+    hsl(0 100% 55%) var(--fill-pct, 20%),
+    hsl(0 0% 12%) var(--fill-pct, 20%),
+    hsl(0 0% 12%) 100%
+  );
+  outline: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.air-slider:hover {
+  opacity: 0.95;
+}
+
+/* Thumb — WebKit */
+.air-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: hsl(0 100% 55%);
+  box-shadow:
+    0 0 0 3px hsl(0 0% 8%),
+    0 0 12px hsl(0 100% 55% / 0.5);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.air-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow:
+    0 0 0 3px hsl(0 0% 8%),
+    0 0 20px hsl(0 100% 55% / 0.7);
+}
+
+/* Thumb — Firefox */
+.air-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: hsl(0 100% 55%);
+  box-shadow: 0 0 12px hsl(0 100% 55% / 0.5);
+  cursor: pointer;
+}
+
+/* Slider tick labels */
+.air-slider-ticks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.62rem;
+  color: hsl(0 0% 30%);
+  letter-spacing: 0.03em;
+  padding: 0 2px;
+}
+
+/* ── Toggle group (Primary Usage) ────────────────────────────────── */
+.air-toggle-group {
+  display: flex;
+  gap: 0.5rem;
+  background: hsl(0 0% 6%);
+  border: 1px solid hsl(0 0% 11%);
+  border-radius: 0.9rem;
+  padding: 0.3rem;
+}
+
+.air-toggle-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.65rem 1rem;
+  border: none;
+  border-radius: 0.65rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  font-family: var(--font-display);
+  cursor: pointer;
+  background: transparent;
+  color: hsl(0 0% 45%);
+  transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.air-toggle-btn--active {
+  background: hsl(0 100% 55%);
+  color: #fff;
+  box-shadow: 0 0 20px hsl(0 100% 55% / 0.3);
+}
+
+.air-toggle-btn:not(.air-toggle-btn--active):hover {
+  color: hsl(30 6% 85%);
+  background: hsl(0 0% 10%);
+}
+
+/* ── Select (dropdown) ───────────────────────────────────────────── */
+.air-select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.air-select {
+  width: 100%;
+  background: hsl(0 0% 6%);
+  border: 1px solid hsl(0 0% 12%);
+  border-radius: 0.75rem;
+  padding: 0.85rem 3rem 0.85rem 1.1rem;
+  color: hsl(30 6% 89%);
+  font-size: 0.95rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.air-select:focus {
+  border-color: hsl(0 100% 55% / 0.5);
+  box-shadow: 0 0 0 3px hsl(0 100% 55% / 0.1);
+}
+
+.air-select option {
+  background: hsl(0 0% 8%);
+  color: hsl(30 6% 89%);
+}
+
+.air-select-chevron {
+  position: absolute;
+  right: 1rem;
+  color: hsl(0 0% 40%);
+  pointer-events: none;
+  transition: color 0.15s;
+}
+
+.air-select-wrap:focus-within .air-select-chevron {
+  color: hsl(0 100% 55%);
+}
+
+/* ── CTA button ──────────────────────────────────────────────────── */
+.air-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  width: 100%;
+  margin-top: 2rem;
+  padding: 1rem 1.5rem;
+  background: hsl(0 100% 55%);
+  border: none;
+  border-radius: 0.9rem;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  box-shadow:
+    0 0 0 1px hsl(0 100% 55% / 0.3),
+    0 8px 32px hsl(0 100% 55% / 0.35);
+  transition: transform 0.18s, box-shadow 0.18s, background 0.18s, opacity 0.18s;
+}
+
+.air-cta:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px hsl(0 100% 55% / 0.4),
+    0 16px 48px hsl(0 100% 55% / 0.45);
+}
+
+.air-cta:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.air-cta:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+/* CTA loading dots */
+.air-cta-dots {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.air-cta-dots span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  animation: air-dot-bounce 1.2s ease-in-out infinite;
+}
+
+.air-cta-dots span:nth-child(2) { animation-delay: 0.2s; }
+.air-cta-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes air-dot-bounce {
+  0%, 80%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
+  40%           { transform: translateY(-6px) scale(1.1); opacity: 1; }
+}
+
+/* ── Processing overlay ──────────────────────────────────────────── */
+.air-processing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem 0;
+}
+
+.air-processing-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.air-processing-dots span {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: hsl(0 100% 55%);
+  box-shadow: 0 0 10px hsl(0 100% 55% / 0.6);
+  animation: air-dot-bounce 1.4s ease-in-out infinite;
+}
+
+.air-processing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.air-processing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+.air-processing-label {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: hsl(0 0% 45%);
+  text-transform: uppercase;
+  margin: 0;
+  animation: air-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes air-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1; }
+}
+
+/* ── Results section ─────────────────────────────────────────────── */
+.air-results-section {
+  position: relative;
+  z-index: 1;
+}
+
+.air-results-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.air-results-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+  font-weight: 800;
+  color: hsl(30 6% 90%);
+  margin: 0 0 0.4rem;
+}
+
+.air-results-icon {
+  color: hsl(0 100% 55%);
+  flex-shrink: 0;
+}
+
+.air-results-sub {
+  font-size: 0.85rem;
+  color: hsl(0 0% 42%);
+  margin: 0;
+}
+
+/* ── Results grid ────────────────────────────────────────────────── */
+.air-results-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 700px) {
+  .air-results-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ── Result card ─────────────────────────────────────────────────── */
+@keyframes air-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.air-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid hsl(0 0% 13%);
+  border-radius: 1.35rem;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  overflow: hidden;
+}
+
+.air-card--visible {
+  animation: air-card-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.air-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Card accent themes (Red / White / Gold) ─────────────────────── */
+.air-card--red {
+  border-color: hsl(0 100% 55% / 0.3);
+  box-shadow:
+    0 0 0 1px hsl(0 100% 55% / 0.06),
+    0 20px 60px hsl(0 100% 55% / 0.1);
+  background: linear-gradient(
+    145deg,
+    hsl(0 100% 55% / 0.07) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+}
+
+.air-card--red:hover {
+  border-color: hsl(0 100% 55% / 0.45);
+  box-shadow:
+    0 0 0 1px hsl(0 100% 55% / 0.1),
+    0 28px 72px hsl(0 100% 55% / 0.2);
+}
+
+.air-card--white {
+  border-color: hsl(0 0% 25% / 0.6);
+  background: linear-gradient(
+    145deg,
+    hsl(0 0% 100% / 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+}
+
+.air-card--white:hover {
+  border-color: hsl(0 0% 40%);
+}
+
+.air-card--gold {
+  border-color: hsl(35 90% 55% / 0.3);
+  box-shadow:
+    0 0 0 1px hsl(35 90% 55% / 0.06),
+    0 20px 60px hsl(35 90% 55% / 0.08);
+  background: linear-gradient(
+    145deg,
+    hsl(35 90% 55% / 0.07) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+}
+
+.air-card--gold:hover {
+  border-color: hsl(35 90% 55% / 0.45);
+  box-shadow:
+    0 0 0 1px hsl(35 90% 55% / 0.1),
+    0 28px 72px hsl(35 90% 55% / 0.18);
+}
+
+/* ── Rank badge ──────────────────────────────────────────────────── */
+.air-rank {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  /* margin-bottom removed — now handled by air-card-topbar */
+}
+
+.air-rank--red {
+  background: hsl(0 100% 55% / 0.12);
+  border: 1px solid hsl(0 100% 55% / 0.3);
+  color: hsl(0 100% 62%);
+}
+
+.air-rank--white {
+  background: hsl(0 0% 100% / 0.06);
+  border: 1px solid hsl(0 0% 30%);
+  color: hsl(0 0% 75%);
+}
+
+.air-rank--gold {
+  background: hsl(35 90% 55% / 0.12);
+  border: 1px solid hsl(35 90% 55% / 0.3);
+  color: hsl(35 90% 62%);
+}
+
+/* ── Card top bar (rank badge + circle) ─────────────────────────── */
+.air-card-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+/* ── Card identity block (emoji + name + tagline) ────────────────── */
+.air-card-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1.1rem;
+}
+
+.air-card-emoji {
+  font-size: 2.4rem;
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.45rem;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+}
+
+.air-card-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: hsl(30 6% 92%);
+  margin: 0 0 0.15rem;
+  line-height: 1.25;
+  /* No truncation — let the name wrap naturally */
+  word-break: break-word;
+}
+
+.air-card-tagline {
+  font-size: 0.74rem;
+  color: hsl(0 0% 42%);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── Circular progress ring ──────────────────────────────────────── */
+.air-circle-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+}
+
+.air-circle-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.air-circle-track {
+  fill: none;
+  stroke: hsl(0 0% 10%);
+  stroke-width: 7;
+}
+
+.air-circle-progress {
+  fill: none;
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+.air-circle-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.air-circle-pct {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.air-circle-sym {
+  font-size: 0.6rem;
+  font-weight: 700;
+  vertical-align: super;
+}
+
+.air-circle-sub {
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: hsl(0 0% 38%);
+  line-height: 1;
+  margin-top: 1px;
+}
+
+/* ── Attribute pills ─────────────────────────────────────────────── */
+.air-attrs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.9rem;
+}
+
+.air-attr-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: hsl(0 0% 50%);
+  background: hsl(0 0% 7%);
+  border: 1px solid hsl(0 0% 12%);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  white-space: nowrap;
+}
+
+.air-attr-pill svg {
+  color: hsl(0 0% 35%);
+  flex-shrink: 0;
+}
+
+/* Price pill stands out slightly */
+.air-attr-pill--price {
+  color: hsl(30 6% 75%);
+  border-color: hsl(0 0% 18%);
+  background: hsl(0 0% 9%);
+}
+
+/* ── AI Insight tag ──────────────────────────────────────────────── */
+.air-insight {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  background: hsl(0 0% 5%);
+  border: 1px solid hsl(0 0% 11%);
+  border-radius: 0.65rem;
+  padding: 0.65rem 0.8rem;
+  margin-top: auto;
+}
+
+.air-insight-icon {
+  color: hsl(0 100% 55%);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.air-card--white .air-insight-icon {
+  color: hsl(0 0% 65%);
+}
+
+.air-card--gold .air-insight-icon {
+  color: hsl(35 90% 55%);
+}
+
+.air-insight-text {
+  font-size: 0.76rem;
+  color: hsl(0 0% 55%);
+  line-height: 1.5;
+}
+
+/* ── Disclaimer ──────────────────────────────────────────────────── */
+.air-disclaimer {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  justify-content: center;
+  margin-top: 2rem;
+  font-size: 0.7rem;
+  color: hsl(0 0% 28%);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.air-disclaimer svg {
+  flex-shrink: 0;
+  color: hsl(0 0% 22%);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .air-page {
+    padding-top: 6rem;
+  }
+
+  .air-card-panel {
+    padding: 1.5rem 1.25rem 2rem;
+  }
+
+  .air-toggle-btn {
+    padding: 0.55rem 0.6rem;
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .air-card-topbar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .air-circle-wrap {
+    width: 52px;
+    height: 52px;
+  }
+}

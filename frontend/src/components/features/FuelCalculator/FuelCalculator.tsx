@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+﻿import { useState, useMemo, useEffect } from 'react';
 import { Fuel, Zap, TrendingUp, Calendar, Route, IndianRupee, Info } from 'lucide-react';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid,
@@ -875,7 +875,7 @@ export default function FuelCalculator() {
                       formatINR(value),
                       name === 'standardCost' ? 'Standard (flat)' : 'Predicted (real-world)',
                     ]}
-                    itemStyle={{ fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Space Grotesk, sans-serif', padding: '1px 0' }}
+                    itemStyle={{ fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Outfit, Inter, sans-serif', padding: '1px 0' }}
                   />
 
                   {/* ── Line 1: Standard (faded grey) ── */}

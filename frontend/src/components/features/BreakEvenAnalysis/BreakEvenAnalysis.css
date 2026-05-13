@@ -1,4 +1,4 @@
-/* BreakEvenAnalysis.css
+﻿/* BreakEvenAnalysis.css
    Advanced Predictive TCO Engine Theme (Red, White, Black)
    ──────────────────────────────────────────────────────── */
 
@@ -6,7 +6,7 @@
   min-height: 100vh;
   background: #000000;
   color: #E5E5E5;
-  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-family: var(--font-display);
   position: relative;
   overflow: hidden;
   padding: 0 0 80px 0;

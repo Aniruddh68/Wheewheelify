@@ -36,6 +36,11 @@ export default function ComparisonTray() {
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white/70">
             {isMinimized ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
             {compareList.length} Vehicle{compareList.length !== 1 ? 's' : ''} Selected
+            {compareList.length > 0 && (
+              <span className="ml-1 px-2 py-0.5 rounded-full bg-red-500/15 border border-red-500/30 text-red-400 text-[10px] font-bold tracking-widest uppercase">
+                {compareList[0].vehicleCategory} Only
+              </span>
+            )}
           </div>
         </div>
 
@@ -66,10 +71,12 @@ export default function ComparisonTray() {
               <button 
                 key={`empty-${i}`} 
                 onClick={() => navigate('/browse')}
-                className="hidden lg:flex border border-dashed border-white/20 rounded-lg p-3 items-center justify-center gap-2 text-white/30 hover:text-white/60 hover:bg-white/5 transition-all outline-none"
+                className="hidden lg:flex border border-dashed border-white/20 rounded-lg p-3 items-center justify-center gap-2 text-white/30 hover:text-white/60 hover:bg-white/5 transition-all outline-none flex-col"
               >
                 <Plus size={16} />
-                <span className="text-sm font-medium">Add Vehicle</span>
+                <span className="text-xs font-medium text-center leading-tight">
+                  Add {compareList[0]?.vehicleCategory ?? 'Vehicle'}
+                </span>
               </button>
             ))}
           </div>

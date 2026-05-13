@@ -4,6 +4,8 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, ReferenceLine, PieChart, Pie, Cell
 } from 'recharts';
+import { db } from '../../../../firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import './TotalCostOfOwnership.css';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -102,6 +104,8 @@ export default function TotalCostOfOwnership() {
   const [efficiency, setEfficiency] = useState<number | string>(15);
   const [isNCR, setIsNCR] = useState(false);
   const [viewMode, setViewMode] = useState<'chart'|'table'>('chart');
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState(false);
 
   // Step 1: Auto-Reset State on Fuel Type Change (Fix State Bleed)
   useEffect(() => {
@@ -225,6 +229,29 @@ export default function TotalCostOfOwnership() {
     { name: 'Maint & Ins', value: y15.maint, color: '#f97316' }
   ];
 
+  const saveReportToCloud = async () => {
+    setIsSaving(true);
+    try {
+      const reportData = {
+        fuelType,
+        purchasePrice: Number(purchasePrice),
+        monthlyRunning: Number(monthlyRunning),
+        efficiency: Number(efficiency),
+        final15YearTCO: totals.netTco,
+        createdAt: serverTimestamp()
+      };
+      await addDoc(collection(db, 'tco_reports'), reportData);
+      setIsSaving(false);
+      setSaveSuccess(true);
+      setTimeout(() => {
+        setSaveSuccess(false);
+      }, 3000);
+    } catch (error) {
+      console.error('Error saving TCO report:', error);
+      setIsSaving(false);
+    }
+  };
+
   return (
     <div className="vtco-page">
       <div className="vtco-glow vtco-glow--red" aria-hidden="true" />
@@ -344,10 +371,31 @@ export default function TotalCostOfOwnership() {
             </div>
           </div>
 
-          {/* View Toggle */}
-          <div className="vtco-view-toggle">
-            <button className={`vtco-vt-btn ${viewMode === 'chart' ? 'vtco-vt-btn--active' : ''}`} onClick={() => setViewMode('chart')}>📈 Visual Chart</button>
-            <button className={`vtco-vt-btn ${viewMode === 'table' ? 'vtco-vt-btn--active' : ''}`} onClick={() => setViewMode('table')}>📊 Detailed Table</button>
+          {/* View Toggle & Save Action */}
+          <div className="vtco-view-toggle-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+            <div className="vtco-view-toggle" style={{ marginBottom: 0 }}>
+              <button className={`vtco-vt-btn ${viewMode === 'chart' ? 'vtco-vt-btn--active' : ''}`} onClick={() => setViewMode('chart')}>📈 Visual Chart</button>
+              <button className={`vtco-vt-btn ${viewMode === 'table' ? 'vtco-vt-btn--active' : ''}`} onClick={() => setViewMode('table')}>📊 Detailed Table</button>
+            </div>
+            <button 
+              onClick={saveReportToCloud}
+              disabled={isSaving}
+              style={{
+                backgroundColor: saveSuccess ? 'rgba(74, 222, 128, 0.1)' : '#1A1A1A',
+                color: saveSuccess ? '#4ade80' : '#E0E0E0',
+                border: `1px solid ${saveSuccess ? '#4ade80' : '#333'}`,
+                padding: '8px 16px',
+                borderRadius: '8px',
+                cursor: isSaving ? 'not-allowed' : 'pointer',
+                opacity: isSaving ? 0.6 : 1,
+                fontSize: '0.9rem',
+                fontWeight: 600,
+                transition: 'all 0.2s ease',
+                boxShadow: saveSuccess ? '0 0 10px rgba(74, 222, 128, 0.2)' : 'none'
+              }}
+            >
+              {isSaving ? 'Saving...' : saveSuccess ? '✅ Saved Successfully!' : '☁️ Save Report to Cloud'}
+            </button>
           </div>
 
           {viewMode === 'chart' ? (

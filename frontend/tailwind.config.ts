@@ -14,11 +14,14 @@ export default {
     },
     extend: {
       fontFamily: {
-        headline: ["Space Grotesk", "sans-serif"],
-        body: ["Inter", "sans-serif"],
-        label: ["Inter", "sans-serif"],
-        sans: ['Inter', 'sans-serif'],
-        heading: ['Montserrat', 'sans-serif'],
+        // UI body: Inter — highly legible at small sizes, tabular nums for data tables
+        sans:    ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        body:    ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        label:   ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        // Display/headline: Outfit — geometric, confident, fintech-grade
+        display: ['Outfit', 'Inter', 'sans-serif'],
+        heading: ['Outfit', 'Inter', 'sans-serif'],
+        headline:['Outfit', 'Inter', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

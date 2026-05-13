@@ -16,14 +16,31 @@ export const CompareProvider = ({ children }: { children: ReactNode }) => {
   const [compareList, setCompareList] = useState<VehicleGroup[]>([]);
 
   const addToCompare = (vehicle: VehicleGroup) => {
+    // ── Duplicate guard ──
     if (compareList.find((v) => v.id === vehicle.id)) {
       toast.error('Vehicle already added to compare');
       return;
     }
+
+    // ── Same-category guard ──
+    // Only Cars vs Cars, Bikes vs Bikes, Scooters vs Scooters are permitted.
+    if (compareList.length > 0) {
+      const lockedCategory = compareList[0].vehicleCategory;
+      if (vehicle.vehicleCategory !== lockedCategory) {
+        toast.error(
+          `Cross-category comparison not allowed. You can only compare ${lockedCategory} with ${lockedCategory}.`,
+          { duration: 4000 }
+        );
+        return;
+      }
+    }
+
+    // ── Slot limit guard ──
     if (compareList.length >= 4) {
       toast.error('You can only compare up to 4 vehicles at a time');
       return;
     }
+
     setCompareList([...compareList, vehicle]);
     toast.success(`${vehicle.brand} ${vehicle.model} added to compare`);
   };
