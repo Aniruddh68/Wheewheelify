@@ -4,7 +4,7 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, ReferenceLine, PieChart, Pie, Cell
 } from 'recharts';
-import { db } from '../../../../firebase';
+import { db } from '../../../pages/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import './TotalCostOfOwnership.css';
 
