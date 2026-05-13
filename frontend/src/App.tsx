@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CompareProvider } from "@/context/CompareContext";
+import { AuthProvider } from "@/context/AuthContext";
 import Index from "./pages/Index.tsx";
 import BrowseVehicles from "./pages/BrowseVehicles.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -18,29 +19,31 @@ import ComparisonTray from "./components/ComparisonTray.tsx";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <CompareProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/browse" element={<BrowseVehicles />} />
-            <Route path="/vehicle/:id" element={<VehicleDetailsPage />} />
-            <Route path="/compare" element={<ComparePage />} />
-            <Route path="/fuel-calculator" element={<FuelCalculatorPage />} />
-            <Route path="/break-even" element={<BreakEvenPage />} />
-            <Route path="/tco" element={<TCOPage />} />
-            <Route path="/ai-recommender" element={<AIRecommenderPage />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <ComparisonTray />
-        </BrowserRouter>
-      </CompareProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <CompareProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/browse" element={<BrowseVehicles />} />
+              <Route path="/vehicle/:id" element={<VehicleDetailsPage />} />
+              <Route path="/compare" element={<ComparePage />} />
+              <Route path="/fuel-calculator" element={<FuelCalculatorPage />} />
+              <Route path="/break-even" element={<BreakEvenPage />} />
+              <Route path="/tco" element={<TCOPage />} />
+              <Route path="/ai-recommender" element={<AIRecommenderPage />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <ComparisonTray />
+          </BrowserRouter>
+        </CompareProvider>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </AuthProvider>
 );
 
 export default App;

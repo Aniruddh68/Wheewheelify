@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, LogOut } from "lucide-react";
 import { useCompare } from "@/context/CompareContext";
+import { useAuth } from "@/context/AuthContext";
 
 
 type NavLinkItem = {
@@ -134,6 +135,7 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
   const { compareList } = useCompare();
+  const { currentUser, loading, loginWithGoogle, logout } = useAuth();
 
   const handleCompareClick = () => {
     if (compareList.length >= 2) {
@@ -179,11 +181,43 @@ const Navbar = () => {
             </span>
           )}
         </button>
+        {/* Auth Desktop */}
+        <div className="ml-4 flex items-center">
+          {loading ? (
+            <div className="w-24 h-10 bg-foreground/10 animate-pulse rounded-sm"></div>
+          ) : currentUser ? (
+            <div className="relative group">
+              <button className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                <img 
+                  src={currentUser.photoURL || `https://ui-avatars.com/api/?name=${currentUser.displayName || 'User'}&background=random`} 
+                  alt="Profile" 
+                  className="w-10 h-10 rounded-full border border-primary/30 object-cover" 
+                />
+              </button>
+              <div className="absolute top-full right-0 mt-2 w-48 bg-background/95 backdrop-blur-xl border border-foreground/5 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col py-2 z-50">
+                <div className="px-4 py-2 border-b border-foreground/10 mb-1 text-sm overflow-hidden text-ellipsis whitespace-nowrap">
+                  <span className="font-bold block text-foreground">{currentUser.displayName || "User"}</span>
+                  <span className="text-muted-foreground text-xs">{currentUser.email}</span>
+                </div>
+                <button className="w-full text-left px-4 py-2 text-sm font-heading font-bold uppercase tracking-wide text-muted-foreground hover:text-primary-foreground hover:bg-white/5 transition-colors block">My Garage</button>
+                <button 
+                  onClick={logout} 
+                  className="w-full text-left px-4 py-2 text-sm font-heading font-bold uppercase tracking-wide text-red-400 hover:text-red-300 hover:bg-white/5 transition-colors flex items-center justify-between"
+                >
+                  Logout <LogOut size={14} />
+                </button>
+              </div>
+            </div>
+          ) : (
+            <button 
+              onClick={loginWithGoogle}
+              className="bg-primary text-primary-foreground px-6 py-2 font-headline font-bold uppercase tracking-tighter rounded-sm active:scale-95 transition-transform hover:brightness-90"
+            >
+              Sign In
+            </button>
+          )}
+        </div>
       </div>
-
-      <button className="hidden md:block bg-primary text-primary-foreground px-6 py-2 font-headline font-bold uppercase tracking-tighter rounded-sm active:scale-95 transition-transform hover:brightness-90">
-        Configure
-      </button>
 
       <button
         className="md:hidden text-primary-foreground"
@@ -197,9 +231,42 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <MobileDropdown key={link.label} item={link} />
           ))}
-          <button className="bg-primary text-primary-foreground px-6 py-2 font-headline font-bold uppercase tracking-tighter rounded-sm w-fit mt-4">
-            Configure
-          </button>
+          
+          <div className="mt-4 pt-4 border-t border-foreground/10">
+            {loading ? (
+              <div className="w-full h-10 bg-foreground/10 animate-pulse rounded-sm"></div>
+            ) : currentUser ? (
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center gap-3">
+                  <img 
+                    src={currentUser.photoURL || `https://ui-avatars.com/api/?name=${currentUser.displayName || 'User'}&background=random`} 
+                    alt="Profile" 
+                    className="w-10 h-10 rounded-full border border-primary/30 object-cover" 
+                  />
+                  <div className="flex flex-col overflow-hidden text-ellipsis whitespace-nowrap">
+                    <span className="font-bold text-sm">{currentUser.displayName || "User"}</span>
+                    <span className="text-muted-foreground text-xs">{currentUser.email}</span>
+                  </div>
+                </div>
+                <button className="bg-white/5 text-foreground px-6 py-2 font-headline font-bold uppercase tracking-tighter rounded-sm w-full text-left">
+                  My Garage
+                </button>
+                <button 
+                  onClick={logout}
+                  className="bg-red-500/10 text-red-400 px-6 py-2 font-headline font-bold uppercase tracking-tighter rounded-sm w-full flex items-center justify-between"
+                >
+                  Logout <LogOut size={16} />
+                </button>
+              </div>
+            ) : (
+              <button 
+                onClick={loginWithGoogle}
+                className="bg-primary text-primary-foreground px-6 py-2 font-headline font-bold uppercase tracking-tighter rounded-sm w-full"
+              >
+                Sign In with Google
+              </button>
+            )}
+          </div>
         </div>
       )}
     </nav>
